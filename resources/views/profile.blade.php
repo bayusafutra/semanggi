@@ -63,7 +63,7 @@
                             they took the effort to plant clover on vacant lots and city-owned property.
                             They grow clover on the bare ground behind the house as well."
                         </p>
-                        <img class="img-fluid w-50 float-left mr-4 mb-2" src="img/about-1.jpg">
+                        <img class="img-fluid mx-auto d-block float-left mr-4 mb-2" src="img/about-1.jpg">
                         <p>Saat itu, transportasi masih belum memadai dan membuat
                         para penjual semanggi menempati rumah singgah di daerah Petemon.
                         Mereka akan kembali ke Kendung setelah satu hingga dua minggu untuk pulang.

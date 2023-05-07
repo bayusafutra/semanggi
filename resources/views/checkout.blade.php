@@ -5,7 +5,8 @@
     <section class="checkout spad">
         <div class="container">
             <div class="checkout__form">
-                <h4>Detail Pengiriman</h4>
+                <h4><a type="button" class="btn p-0 ms-auto btn-lg me-md-2" href="/cart"><i class="bi bi-arrow-left"></i>
+                </a>Detail Pengiriman</h4>
                 <form action="#">
                     <div class="row">
                         <div class="col-lg-8">
@@ -16,7 +17,7 @@
                                           <h5 class="card-title">Alamat Pengiriman</h5>
                                           <a class="text-uppercase mt-3">Jl. Jaksa Agung Suprapto No.12, Kauman, Kab.Nganjuk</a>
                                           <p class="card-text"><span class="text-success fw-bold">Tasya Rania Arinastia</span>, Jl. Jaksa Agung Suprapto No.12, Kauman, Kec. Nganjuk, Kabupaten Nganjuk, Jawa Timur 64411, Nganjuk, Nganjuk, Jawa Timur, 64411</p>
-                                          <a href="/checkout/ubah-alamat" class="btn btn-primary">Ubah Alamat Pengiriman</a>
+                                          <a href="/ubahAlamat" class="btn btn-primary">Ubah Alamat Pengiriman</a>
                                         </div>
                                     </div>
                                     <div class="card mt-3">
@@ -58,7 +59,7 @@
                         <div class="col-lg-4 col-md-6">
                             <div class="checkout__order">
                                 <h4>Your Order</h4>
-                                <div class="checkout_order_products">Products<span>Total</span></div>
+                                <div class="checkout_order_products"><span>Total Produk</span></div>
                                 <ul>
                                     <li>Stik Semanggi <span>Rp 20.000</span></li>
                                     <li>Mie Semanggi <span>Rp 35.000</span></li>

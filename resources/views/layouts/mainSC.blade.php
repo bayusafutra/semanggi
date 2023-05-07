@@ -53,7 +53,7 @@
                 <div class="col-auto d-none d-lg-block">
                   <div class="d-flex align-items-center">
                     <form>
-                      <div class="input-group d-flex flex-end-center" style="width: 19cm">
+                      <div class="input-group d-flex flex-end-center" style="width: 16cm">
                         <input class="form-control form-eduprixsearch-control rounded-pill" id="formGroupExampleInput" type="text" placeholder="Apa yang anda cari hari ini?" />
                       </div>
                     </form>
@@ -61,7 +61,8 @@
                 </div>
               </div>
                 {{-- <button type="button" class="btn p-0 ms-auto"><i class="fa fa-search"></i></button> --}}
-                <a type="button" class="btn p-0 ms-auto" href="/cart"><i class="fa fa-shopping-cart"></i></a>
+                <a type="button" class="btn p-0 ms-auto" href="/cart"><i class="fa fa-shopping-cart"><span class="count">1</span></i>
+                </a>
             <div class="nav-item dropdown ms-auto">
                 @auth
                     <li class="nav-link dropdown-toggle" data-bs-toggle="dropdown" style="color: black">{{ auth()->user()->username }}</li>

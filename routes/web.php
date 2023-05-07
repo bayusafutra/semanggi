@@ -63,3 +63,7 @@ Route::get('/pembayaran/kode-unik', function () {
 Route::get('/admin/home', function () {
     return view('layouts.navbarAdm');
 });
+
+Route::get('/ubahAlamat', function () {
+    return view('ubahAlamatPengiriman');
+});

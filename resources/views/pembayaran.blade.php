@@ -6,51 +6,18 @@
     <section class="checkout spad">
         <div class="container">
             <div class="checkout__form">
-                <h4>Detail Pembayaran</h4>
+                <h4><a type="button" class="btn p-0 ms-auto btn-lg me-md-2" href="/checkout"><i class="bi bi-arrow-left"></i>
+                </a>Pilih Metode Pembayaran</h4>
                 <form action="#">
                     <div class="row">
                         <div class="col-lg-8">
-                            <div class="accordion accordion-flush" id="accordionFlushExample">
-                                <div class="accordion-item">
-                                  <h2 class="accordion-header" id="flush-headingOne">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                                        Bank BCA
-                                        {{-- <div class="left"><div class="image"><img data-src="https://images.soco.id/534885c4-1a4f-4077-93e1-d54d8e2897ac-49011772152-1611643388390.png" sizes="" alt="BCA Virtual Account" class="lazy-img payment-list__bca_virtual_account" style="background-color: transparent;" src="https://images.soco.id/534885c4-1a4f-4077-93e1-d54d8e2897ac-49011772152-1611643388390.png" data-loaded="true"></div><sup></sup></div> --}}
-                                    </button>
-                                  </h2>
-                                  <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                                    <div class="accordion-body">Panduan Pembayaran melalui ATM BCA</div>
-                                    <p>1. Masukkan kartu ke mesin ATM</p>
-                                    <p>2. Masukkan 6 digit PIN Anda</p>
-                                    <p>3. Pilih “Transaksi Lainnya”</p>
-                                    <p>4. Pilih “Transfer”</p>
-                                    <p>5. Pilih ke “ke Rekening BCA Virtual Account”</p>
-                                    <p>6. Masukkan nomor BCA Virtual Account Anda, kemudian tekan “Benar”</p>
-                                    <p>7. Masukkan jumlah yang akan dibayarkan, selanjutnya tekan “Benar”</p>
-                                    <p>8. Validasi pembayaran Anda. Pastikan semua detail transaksi yang ditampilkan sudah benar, kemudian pilih “Ya”</p>
-                                    <p>9. Pembayaran Anda telah selesai. Tekan “Tidak” untuk menyelesaikan transaksi, atau tekan “Ya” untuk melakukan transaksi lainnya</p>
-                                  </div>
-                                </div>
-                                <div class="accordion-item">
-                                  <h2 class="accordion-header" id="flush-headingTwo">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                                        ShopeePay
-                                    </button>
-                                  </h2>
-                                  <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-                                    <div class="accordion-body">Panduan pembayaran mengguakan ShopeePay</div>
-                                  </div>
-                                </div>
-                                <div class="accordion-item">
-                                  <h2 class="accordion-header" id="flush-headingThree">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                                        Gopay
-                                    </button>
-                                  </h2>
-                                  <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
-                                    <div class="accordion-body">Panduan pembayaran mengguakan ShopeePay</div>
-                                  </div>
-                                </div>
+                            <div class="list-group list-group-flush">
+                                <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                                  Bank BRI
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action">Bank BCA</a>
+                                <a href="#" class="list-group-item list-group-item-action">Bank Permata</a>
+                                <a href="#" class="list-group-item list-group-item-action">Bank Mandiri</a>
                               </div>
                         </div>
                         <div class="col-lg-4 col-md-6">

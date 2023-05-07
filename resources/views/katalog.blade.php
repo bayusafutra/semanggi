@@ -71,24 +71,30 @@
     <!-- Product Start -->
     <div class="container-xxl py-5">
         <div class="container">
-            <div class="row g-0 gx-5 align-items-center mb-5" style="margin-left: 250px">
+            <div class="row g-0 gx-5 align-items-center mb-5">
                 <div class="col-lg-6 text-start text-lg-end wow slideInCenter" data-wow-delay="0.1s">
-                    <ul class="produk nav nav-pills d-inline-flex justify-content-center mb-5" style="position: relative">
-                        <li class="nav-item me-2">
+                    <ul class="produk nav nav-pills d-flex mx-auto justify-content-center mb-5">
+                        {{-- <li class="nav-item me-2">
                             <div class="btn-group">
-                                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
                                     Makanan
                                 </button>
-                                <ul class="dropdown-menu">
+                                <ul class="dropdown-menu" >
                                     <li class="nav-item me-2"><a class="dropdown-item btn btn-outline-primary border-2" data-bs-toggle="pill" href="#tab-1">All</a></li>
                                     <li class="nav-item me-2"><a class="dropdown-item btn btn-outline-primary border-2" data-bs-toggle="pill" href="#tab-3">Frozen</a></li>
                                     <li class="nav-item me-2"><a class="dropdown-item btn btn-outline-primary border-2" data-bs-toggle="pill" href="#tab-2">Kering</a></li>
                                 </ul>
                             </div>
-                        </li>
-                        {{-- <li class="nav-item me-2">
-                            <a class="btn btn-outline-primary border-2 active" data-bs-toggle="pill" href="#tab-1">Makanan</a>
                         </li> --}}
+                        <li class="nav-item me-2">
+                            <a class="btn btn-outline-primary border-2 active" data-bs-toggle="pill" href="#tab-1">Semua</a>
+                        </li>
+                        <li class="nav-item me-2">
+                            <a class="btn btn-outline-primary border-2" data-bs-toggle="pill" href="#tab-2">Makanan Kering</a>
+                        </li>
+                        <li class="nav-item me-2">
+                            <a class="btn btn-outline-primary border-2" data-bs-toggle="pill" href="#tab-3">Makanan Frozen</a>
+                        </li>
                         <li class="nav-item me-2">
                             <a class="btn btn-outline-primary border-2" data-bs-toggle="pill" href="#tab-4">Minuman</a>
                         </li>
@@ -97,7 +103,6 @@
             </div>
 
             <div class="tab-content">
-
                 <div id="tab-1" class="tab-pane fade show p-0 active">
                     <div class="row g-4">
                         @foreach ($kering as $ker)
