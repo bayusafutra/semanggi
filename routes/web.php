@@ -21,9 +21,6 @@ use App\Http\Controllers\CatalogController;
 
 Route::get('/', [HomeController::class, 'index']);
 
-// Route::get('/home', function () {
-//     return view('home');
-// });
 
 Route::get('/catalog', [CatalogController::class, 'index']);
 
