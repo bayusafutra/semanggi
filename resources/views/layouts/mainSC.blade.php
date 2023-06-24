@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="det/css/style.css" type="text/css">
 
     <!-- Customized Bootstrap Stylesheet -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 
     <!-- Template Stylesheet -->
@@ -93,6 +94,23 @@
         @yield('content')
     </div>
     <!-- Shoping Cart Section End -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          const minusBtn = document.querySelector('.minus-btn');
+          const plusBtn = document.querySelector('.plus-btn');
+          const numericInput = document.querySelector('.numeric-input');
+
+          minusBtn.addEventListener('click', function() {
+            if (numericInput.value > 1) {
+              numericInput.value = parseInt(numericInput.value) - 1;
+            }
+          });
+
+          plusBtn.addEventListener('click', function() {
+            numericInput.value = parseInt(numericInput.value) + 1;
+          });
+        });
+    </script>
 
     <!-- Js Plugins -->
     <script src="det/js/jquery-3.3.1.min.js"></script>
@@ -103,6 +121,7 @@
     <script src="det/js/mixitup.min.js"></script>
     <script src="det/js/owl.carousel.min.js"></script>
     <script src="det/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </body>
 
 </html>

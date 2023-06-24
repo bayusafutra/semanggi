@@ -20,6 +20,12 @@ class CartController extends Controller
         ]);
     }
 
+    public function coba(){
+        return view('newcart', [
+            "items" => Cart::all()
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

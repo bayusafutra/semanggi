@@ -64,3 +64,5 @@ Route::get('/admin/home', function () {
 Route::get('/ubahAlamat', function () {
     return view('ubahAlamatPengiriman');
 });
+
+Route::get('/keranjang', [CartController::class, 'coba']);

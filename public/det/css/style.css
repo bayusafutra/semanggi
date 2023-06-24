@@ -2030,9 +2030,9 @@ ol {
 }
 
 .primary-btn.cart-btn {
-	color: #6f6f6f;
+	color: white;
 	padding: 14px 30px 12px;
-	background: #f5f5f5;
+	background: #5E9D7B
 }
 
 .primary-btn.cart-btn span {
@@ -2077,7 +2077,7 @@ ol {
 }
 
 .shoping__checkout {
-	background: #f5f5f5;
+	background: radial-gradient(#FFFCEB, #EBD875);
 	padding: 30px;
 	padding-top: 20px;
 	/* margin-top: 50px; */
@@ -2100,7 +2100,7 @@ ol {
 	font-weight: 700;
 	list-style: none;
 	overflow: hidden;
-	border-bottom: 1px solid #ebebeb;
+	border-bottom: 1px solid black;
 	padding-bottom: 13px;
 	margin-bottom: 18px;
 }
@@ -2113,7 +2113,7 @@ ol {
 
 .shoping__checkout ul li span {
 	font-size: 18px;
-	color: #dd2222;
+	color: #5E9D7B;
 	float: right;
 }
 
@@ -3523,5 +3523,5 @@ ol {
 	.blog__details__hero__text h2 {
 		font-size: 24px;
 	}
-    
+
 }
