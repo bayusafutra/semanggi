@@ -7,6 +7,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\SignupController;
 use App\Http\Controllers\CatalogController;
+use App\Http\Controllers\LupaPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,10 +22,9 @@ use App\Http\Controllers\CatalogController;
 
 Route::get('/', [HomeController::class, 'index']);
 
-
 Route::get('/catalog', [CatalogController::class, 'index']);
 
-Route::get('/profile', function () {
+Route::get('/profilkampungsemanggi', function () {
     return view('profile');
 });
 
@@ -34,14 +34,17 @@ Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
 
 Route::get('/signup', [SignupController::class, 'index'])->middleware('guest');
 Route::post('/signup', [SignupController::class, 'store'])->middleware('guest');
+Route::get('/verifikasi', [SignupController::class, 'verifikasi'])->middleware('guest');
+Route::get('/validasi', [SignupController::class, 'validasi'])->middleware('auth');
+
+Route::get('/lupapassword', [LupaPasswordController::class, 'index'])->middleware('guest');
+Route::get('/resetpassword', [LupaPasswordController::class, 'resetpassword'])->middleware('guest');
 
 Route::get('/detailproduk/{slug}', [BarangController::class, 'show']);
 
 Route::get('/cart', [CartController::class, 'index'])->middleware('auth');
 Route::post('/cart', [CartController::class, 'store'])->middleware('auth');
-
 Route::post('/update', [CartController::class, 'update'])->middleware('auth');
-
 Route::post('/remove', [CartController::class, 'destroy'])->middleware('auth');
 
 //tolong lebokno bayy ehehehe
