@@ -31,9 +31,11 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('img/kintil.svg') }}" rel="icon">
 
     <!-- Template Stylesheet -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    @yield('css')
 
 
 </head>
@@ -63,18 +65,25 @@
 
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top px-5">
-        <a href="/" class="navbar-brand d-flex align-items-center">
-            <h1 class="fw-bold text-primary mb-4">Kampung<span class="text-warning">Semanggi</span></h1>
-        </a>
-        {{-- <button type="button" class="navbar-toggler me-0" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-        </button> --}}
+        <div class="brand row d-flex align-items-center">
+            <div class="col-11">
+                <a href="/" class="navbar-brand d-flex align-items-center">
+                    <img src="img/logo1.png" class="img-fluid" style="height: 70px" alt="">
+                </a>
+            </div>
+            <div class="col-1">
+                <button type="button" class="navbar-toggler me-0" data-bs-toggle="collapse"
+                    data-bs-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+        </div>
         <div class="collapse navbar-collapse px-5" id="navbarCollapse">
             <div class="row justify-content-between">
-                <div class="col-auto order-2 d-none d-sm-block"><a class="nav-link" href="#!"></a></div>
                 <div class="col-auto d-none d-lg-block">
                     <div class="d-flex align-items-center">
-                        <form>
+                        <form action="">
+                            @csrf
                             <div class="input-group d-flex flex-end-center" style="width: 16cm">
                                 <input class="form-control form-eduprixsearch-control rounded-pill"
                                     id="formGroupExampleInput" type="text"
@@ -84,33 +93,35 @@
                     </div>
                 </div>
             </div>
-            <a type="button" class="btn p-0 ms-auto" href="/cart"><i class="fa fa-shopping-cart"><span
-                        class="count">1</span></i>
+            <a class="btn p-0 ms-auto position-relative"><i class="fa fa-shopping-cart fs-4"></i>
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill" style="background-color: #F68037">
+                    99+
+                    <span class="visually-hidden">unread messages</span>
+                </span>
             </a>
-
-
             <div class="nav-item dropdown">
                 @auth
-                    <li class="nav-link dropdown-toggle" data-bs-toggle="dropdown" style="color: black">
+                    <li class="nav-link dropdown-toggle fs-5" data-bs-toggle="dropdown" style="color: black">
                         {{ auth()->user()->username }}</li>
                     <li class="dropdown-menu rounded-0 rounded-bottom m-0">
                         @can('admin')
-                            <a href="/dashboard" class="dropdown-item">My Dashboard</a>
+                            <a href="/dashboard" class="dropdown-item py-2">Administrator</a>
+                            <hr style="border: 2px black">
                         @endcan
+                        <a class="dropdown-item py-2" href="/ubahpassword" style="text-decoration: none">Ubah Password</a>
                         <form action="/logout" method="post">
                             @csrf
-                            <button class="dropdown-item" style="color: black">Logout</button>
+                            <button class="dropdown-item py-2" style="color: black">Logout</button>
                         </form>
                     </li>
                 @else
-                    <li class="nav-link dropdown-toggle" data-bs-toggle="dropdown" style="color: black">User</li>
+                    <li class="nav-link dropdown-toggle fs-5" data-bs-toggle="dropdown" style="color: black">User</li>
                     <div class="dropdown-menu rounded-0 rounded-bottom m-0">
                         <a href="/login" class="dropdown-item">Login</a>
                         <a href="/signup" class="dropdown-item">Register</a>
                     </div>
                 @endauth
             </div>
-
         </div>
     </nav>
     <!-- Navbar End -->
@@ -120,39 +131,40 @@
     </div>
 
     <!-- Footer Start -->
-    <div class="container-fluid bg-dark footer mt-5 pt-5 wow fadeIn" data-wow-delay="0.1s">
+    <div class="container-fluid footer mt-5 pt-5 wow fadeIn" style="background-color: #C0E6B7; color: black; position: relative; bottom: 0"
+        data-wow-delay="0.1s">
         <div class="container py-5">
             <div class="row g-5">
                 <div class="col-lg-3 col-md-6">
-                    <h1 class="fw-bold text-primary mb-4">Kampung<span class="text-primary"
-                            style="color: rgb(255, 115, 0)">Semanggi</span></h1>
+                    {{-- <h1 class="fw-bold text-primary mb-4">Srikandi<span class="text-warning">Semanggi</span></h1> --}}
+                    <img src="img/logo1.png" class="img-fluid" alt="">
                     <p>Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed
                         stet lorem sit clita</p>
                     <div class="d-flex pt-2">
-                        <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i
+                        <a class="btn btn-square btn-outline-light rounded-circle me-1 text-dark" href=""><i
                                 class="fab fa-twitter"></i></a>
-                        <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i
+                        <a class="btn btn-square btn-outline-light rounded-circle me-1 text-dark" href=""><i
                                 class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i
+                        <a class="btn btn-square btn-outline-light rounded-circle me-1 text-dark" href=""><i
                                 class="fab fa-youtube"></i></a>
-                        <a class="btn btn-square btn-outline-light rounded-circle me-0" href=""><i
+                        <a class="btn btn-square btn-outline-light rounded-circle me-0 text-dark" href=""><i
                                 class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-9" style="margin-left: 145px">
-                    <h4 class="text-light mb-4">Address</h4>
+                    <h4 class="text-dark mb-4">Address</h4>
                     <p><i class="fa fa-map-marker-alt me-3"></i>Jalan Kendung IX, Sememi, Kec. Benowo,
                         Kota Surabaya, Jawa Timur</p>
                     <p><i class="fa fa-phone-alt me-3"></i>0838 5744 9383</p>
                     <p><i class="fab fa-instagram me-3"></i>@srikandi_semanggi</p>
                 </div>
                 <div class="col-lg-3 col-md-6" style="margin-left: 145px">
-                    <h4 class="text-light mb-4">Quick Links</h4>
-                    <a class="btn btn-link" href="">Home</a>
-                    <a class="btn btn-link" href="">Profile</a>
-                    <a class="btn btn-link" href="/catalog">Catalog</a>
-                    <a class="btn btn-link" href="">Login</a>
-                    <a class="btn btn-link" href="">Register</a>
+                    <h4 class="text-dark mb-4">Quick Links</h4>
+                    <a class="btn btn-link" style="color: black" href="">Home</a>
+                    <a class="btn btn-link" style="color: black" href="">Profile</a>
+                    <a class="btn btn-link" style="color: black" href="/catalog">Catalog</a>
+                    <a class="btn btn-link" style="color: black" href="">Login</a>
+                    <a class="btn btn-link" style="color: black" href="">Register</a>
                 </div>
             </div>
         </div>
@@ -161,15 +173,15 @@
 
 
     <!-- Copyright Start -->
-    <div class="container-fluid bg-secondary text-body copyright py-4">
+    <div class="container-fluid bg-primary text-body copyright py-4">
         <div class="container">
-            <div class="row">
+            <div class="row text-white">
                 <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                    &copy; <a class="fw-semi-bold" href="#">Kampoeng Semanggi 2022</a>, All Right Reserved.
+                    &copy; <a class="fw-semi-bold" style="color: #E7B10A" href="#"><span
+                            style="color:rgb(10, 67, 37)">Srikandi</span> Semanggi 2023</a>, All Right Reserved.
                 </div>
                 <div class="col-md-6 text-center text-md-end">
-                    <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                    Designed By SPSi KELOMPOK 3</a>
+                    Designed By <span style="font-style: italic">Gebang Software House</span></a>
                 </div>
             </div>
         </div>
@@ -192,7 +204,6 @@
     <script src="{{ asset('lib/counterup/counterup.min.js') }}"></script>
     <script src="{{ asset('lib/parallax/parallax.min.js') }}"></script>
     <script src="{{ asset('lib/lightbox/js/lightbox.min.js') }}"></script>
-
     <!-- Template Javascript -->
     <script src="{{ asset('js/main.js') }}"></script>
 </body>

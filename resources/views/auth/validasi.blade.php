@@ -1,5 +1,6 @@
 @extends('layouts.auth')
 @section('auth')
+
     <body>
         <div class="d-lg-flex half">
             <div class="bg order-1 order-md-2" style="background-image: url('images/login.jpg');"></div>
@@ -11,7 +12,31 @@
                                 <img class="img-fluid" src="img/logo1.png" alt="">
                             </div>
                             <h3 class="text-center">Validasi Akun</h3>
-                            <form action="" method="post">
+                            @if (session()->has('success'))
+                                <div class="alert alert-success alert-dismissible fade show col-md-12" role="alert">
+                                    {{ session('success') }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                            @endif
+
+                            @if (session()->has('message'))
+                                <div class="alert alert-success alert-dismissible fade show col-md-12" role="alert">
+                                    {{ session('message') }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                            @endif
+
+                            @if (session()->has('loginError'))
+                                <div class="alert alert-danger alert-dismissible fade show col-md-12"
+                                    style="margin-left: 100px" role="alert">
+                                    {{ session('loginError') }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                            @endif
+                            <form action="/validasi" method="post">
                                 @csrf
 
                                 <div class="form-floating mb-3">

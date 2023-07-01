@@ -12,8 +12,8 @@
                         <div class="container">
                             <div class="row justify-content-start">
                                 <div class="col-lg-8 text-start">
-                                    <h1 class="display-1 text-white mb-5 animated slideInRight">KAMPOENG SEMANGGI</h1>
-                                    <p class="fs-4 text-white">Website Resmi Kampung Semanggi</p>
+                                    <h1 class="display-1 text-white mb-5 animated slideInRight">SRIKANDI SEMANGGI</h1>
+                                    <p class="fs-4 text-white">Website Resmi Srikandi Semanggi</p>
                                 </div>
                             </div>
                         </div>
@@ -33,7 +33,7 @@
                     <div class="row g-2">
                         <div class="col-6 position-relative wow fadeIn" data-wow-delay="0.7s">
                             <div class="about-experience bg-secondary rounded">
-                                <small class="fs-5 fw-bold">Kampoeng Semanggi</small>
+                                <small class="fs-5 fw-bold">Srikandi Semanggi</small>
                             </div>
                         </div>
                         <div class="col-6 wow fadeIn" data-wow-delay="0.1s">
@@ -54,7 +54,7 @@
                         Sebagian besar penjual semanggi berasal dari Kendung, namun sebelum tahun 2016, banyak orang-orang yang mencari daun semanggi sampai ke daerah Sidoarjo, Mojokerto, Krian, Lamongan, bahkan sampai daerah Kediri hingga Bojonegoro.
                         Kemudian pada tahun 2017, mereka memiliki inisiatif untuk membudidayakan semanggi di lahan kavlingan dan lahan aset kota yang belum dibangun. Mereka juga memanfaatkan lahan-lahan kosong yang ada di belakang rumah sebagai tempat untuk menanam semanggi.
                     </p>
-                    <a class="btn btn-secondary rounded-pill py-3 px-5" href="/profile">Read More</a>
+                    <a class="btn btn-secondary rounded-pill py-3 px-5" href="/profilkampungsemanggi">Read More</a>
                 </div>
             </div>
         </div>

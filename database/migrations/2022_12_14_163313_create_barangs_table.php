@@ -17,11 +17,16 @@ return new class extends Migration
             $table->id();
             $table->string("nama");
             $table->foreignId("kategori_id");
+            $table->foreignId('user_id');
             $table->string("slug")->unique();
-            $table->integer("harga");
-            $table->integer("berat")->nullable();
+            $table->integer('minim')->default(0);
+            $table->bigInteger("harga");
+            $table->integer('stok')->default(100);
+            $table->string("quantity")->nullable();
+            $table->longText("deskripsi")->nullable();
             $table->string("gambar")->nullable();
-            $table->text("deskripsi")->nullable();
+            $table->bigInteger('terjual')->default(0);
+            $table->integer('status')->default(1);
             $table->timestamps();
         });
     }

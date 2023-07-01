@@ -5,9 +5,12 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\SignupController;
 use App\Http\Controllers\CatalogController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LupaPasswordController;
+use App\Http\Controllers\UbahPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,10 +38,20 @@ Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
 Route::get('/signup', [SignupController::class, 'index'])->middleware('guest');
 Route::post('/signup', [SignupController::class, 'store'])->middleware('guest');
 Route::get('/verifikasi', [SignupController::class, 'verifikasi'])->middleware('guest');
+Route::post('/verifikasi', [SignupController::class, 'postverifikasi'])->middleware('guest');
 Route::get('/validasi', [SignupController::class, 'validasi'])->middleware('auth');
+Route::post('/validasi', [SignupController::class, 'validasipost'])->middleware('auth');
 
 Route::get('/lupapassword', [LupaPasswordController::class, 'index'])->middleware('guest');
-Route::get('/resetpassword', [LupaPasswordController::class, 'resetpassword'])->middleware('guest');
+Route::post('/lupapassword', [LupaPasswordController::class, 'lupapassword'])->middleware('guest');
+Route::get('/resetpassword/{token}', [LupaPasswordController::class, 'resetpassword'])->name('reset.password.get')->middleware('guest');
+Route::post('/resetpassword', [LupaPasswordController::class, 'resetpass'])->middleware('guest');
+
+Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('google.login')->middleware('guest');
+Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback'])->name('google.callback')->middleware('guest');
+
+Route::get('/ubahpassword', [UbahPasswordController::class, 'index'])->middleware('auth');
+Route::post('/ubahpassword', [UbahPasswordController::class, 'store'])->middleware('auth');
 
 Route::get('/detailproduk/{slug}', [BarangController::class, 'show']);
 
@@ -69,3 +82,6 @@ Route::get('/ubahAlamat', function () {
 });
 
 Route::get('/keranjang', [CartController::class, 'coba']);
+
+//////////////////////////ADMIN////////////////////////////
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('admin');

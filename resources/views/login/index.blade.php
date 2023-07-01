@@ -6,26 +6,38 @@
             <div class="bg order-1 order-md-2" style="background-image: url('images/login.jpg');"></div>
             <div class="contents order-2 order-md-1">
                 <div class="container">
-                    @if (session()->has('success'))
-                        <div class="alert alert-success alert-dismissible fade show col-md-8" role="alert">
-                            {{ session('success') }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    @endif
-
-                    @if (session()->has('loginError'))
-                        <div class="alert alert-danger alert-dismissible fade show col-md-8" style="margin-left: 100px"
-                            role="alert">
-                            {{ session('loginError') }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    @endif
                     <div class="row align-items-center justify-content-center">
                         <div class="col-md-7">
                             <div class="logo">
                                 <img class="img-fluid" src="img/logo1.png" alt="">
                             </div>
                             <h3 class="text-center">Login</h3>
+
+                            @if (session()->has('success'))
+                                <div class="alert alert-success alert-dismissible fade show col-md-12" role="alert">
+                                    {{ session('success') }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                            @endif
+
+                            @if (session()->has('message'))
+                                <div class="alert alert-success alert-dismissible fade show col-md-12" role="alert">
+                                    {{ session('message') }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                            @endif
+
+                            @if (session()->has('loginError'))
+                                <div class="alert alert-danger alert-dismissible fade show col-md-12"
+                                    style="margin-left: 100px" role="alert">
+                                    {{ session('loginError') }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                            @endif
+
                             <form action="/login" method="post">
                                 @csrf
                                 <div class="form-floating mb-4 mt-4">
@@ -62,9 +74,11 @@
                                 </div>
                             </form>
                             <div class="social d-flex justify-content-center text-center">
-                                <a href="auth/google" class="py-2 px-5 mr-md-1 rounded fs-4 btn"
-                                    style="background-color: white; font-family: 'Trebuchet MS'; font-weight: 600; text-decoration: none; -moz-border-radius: 10px; border-radius: 10px; -webkit-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15); -moz-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15); box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);"><span
-                                        class="bi bi-google" style="color: #DB4639">+</span> Masuk dengan Google</a>
+                                <a href="auth/google" class="py-2 px-3 mr-md-1 rounded fs-4 btn"
+                                    style="background-color: white; font-family: 'Trebuchet MS'; font-weight: 600; text-decoration: none; -moz-border-radius: 10px; border-radius: 10px; -webkit-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15); -moz-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15); box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);"><img
+                                        class="img-fluid" src="img/google.png"
+                                        style="height: 30px; width: 30px; margin-right: 5px" alt=""> Masuk dengan
+                                    Google</a>
                             </div>
                         </div>
                     </div>
