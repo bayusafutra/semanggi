@@ -23,6 +23,7 @@ return new class extends Migration
             $table->bigInteger("harga");
             $table->integer('stok')->default(100);
             $table->string("quantity")->nullable();
+            $table->string("berat")->default("100 gram");
             $table->longText("deskripsi")->nullable();
             $table->string("gambar")->nullable();
             $table->bigInteger('terjual')->default(0);

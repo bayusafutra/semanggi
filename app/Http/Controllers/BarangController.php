@@ -3,86 +3,58 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barang;
+use App\Models\Kategori;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Http\Requests\StoreBarangRequest;
 use App\Http\Requests\UpdateBarangRequest;
 
 class BarangController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
+    public function index(){
+        return view('admin.produk.index', [
+            "title" => "Dashboard | Produk",
+            "produk" => Barang::paginate(10)
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function indexcreate(){
+        return view('admin.produk.createproduk', [
+            "title" => "Dashboard | Tambah Produk",
+            "kategori" => Kategori::where('status', 1)->get()
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreBarangRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreBarangRequest $request)
-    {
-        //
+    public function store (Request $request){
+        $validatedData = $request->validate([
+            "nama" => 'required|max:255',
+            "kategori_id" => 'required',
+            "deskripsi" => 'max:5000',
+            "gambar" => 'image|file|max:10240',
+            "minim" => 'required',
+            "quantity" => 'required',
+            "stok" => 'min:1',
+
+        ]);
+        $rupiah1 = str_replace('.', '', $request->harga);
+        $rupiah2 = str_replace('Rp', '', $rupiah1);
+        $rupiah3 = str_replace(',00', '', $rupiah2);
+        $validatedData['harga'] = $rupiah3;
+
+        if($request->file('gambar')){
+            $validatedData['gambar'] = $request->file('gambar')->store('produk');
+        }
+        $validatedData['slug'] = Str::random(30);
+        $validatedData['user_id'] = auth()->user()->id;
+        Barang::create($validatedData);
+        $produk = Barang::where('slug', $validatedData['slug'])->first();
+        return back()->with('success', "Produk: $produk->nama berhasil ditambahkan");
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Barang  $barang
-     * @return \Illuminate\Http\Response
-     */
     public function show($slug)
     {
         return view('detailproduk', [
             "produk" => Barang::where('slug', $slug)->get()
         ]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Barang  $barang
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Barang $barang)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateBarangRequest  $request
-     * @param  \App\Models\Barang  $barang
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateBarangRequest $request, Barang $barang)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Barang  $barang
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Barang $barang)
-    {
-        //
     }
 }

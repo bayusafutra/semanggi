@@ -8,15 +8,15 @@
             <div class="col-lg-6" data-wow-delay="0.1s">
                 <div class="rounded overflow-hidden">
                     <div class="row g-0" data-wow-delay="0.1s">
-                        <a data-wow-delay="0.1s"><img src="{{ asset('img/'.$produk[0]->gambar) }}" width="500" height="500" data-wow-delay="0.1s" alt=""></a>
+                        <a data-wow-delay="0.1s"><img src="{{ asset('storage/'.$produk[0]->gambar) }}" width="500" height="500" data-wow-delay="0.1s" alt=""></a>
                     </div>
                 </div>
             </div>
 
             <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                <h1 class="mb-2">{{ $produk[0]->nama }}</h1>
-                <p class="bg-white text-start text-primary ">{{ $produk[0]->berat }} gram</p>
-                <h4 class="mb-4"><b>Rp. {{ $produk[0]->harga }}</b></h4>
+                <h1 class="mb-2">{{ ucwords($produk[0]->nama) }}</h1>
+                <p class="bg-white text-start text-primary ">{{ $produk[0]->berat }}</p>
+                <h4 class="mb-4"><b>Rp {{ number_format($produk[0]->harga, 2, ',','.') }}</b></h4>
                     <p class="py-2">
                         <i class="fa fa-star text-warning"></i>
                         <i class="fa fa-star text-warning"></i>
@@ -27,8 +27,7 @@
                     </p>
                     <h6>Rincian Produk :</h6>
                     <ul class="list-unstyled pb-1">
-                        <li>Berat Bersih {{ $produk[0]->berat }} gr</li>
-                        <li>Berat Paket {{ $produk[0]->berat+100 }} gr</li>
+                        <li>Berat Bersih {{ $produk[0]->berat }}</li>
                     </ul>
 
                     <h6>Deskripsi Produk :</h6>

@@ -119,10 +119,9 @@
                     <div class="collapse" id="master">
                         <ul class="nav flex-column sub-menu">
                             <li class="nav-item"><a class="nav-link" href="/dash-user">User</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/dash-kategoriprogram">Kategori Program</a>
+                            <li class="nav-item"><a class="nav-link" href="/dash-kategori">Kategori Produk</a>
                             </li>
-                            <li class="nav-item"><a class="nav-link" href="/dash-program">Program</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/dash-blogspot">Berita</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/dash-produk">Produk</a></li>
                         </ul>
                     </div>
                 </li>

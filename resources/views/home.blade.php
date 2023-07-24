@@ -79,11 +79,11 @@
                                 <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
                                     <div class="product-item">
                                         <div class="position-relative bg-light overflow-hidden">
-                                            <img class="img-fluid w-100" src="img/{{ $item->gambar }}" style="width: 261px; height: 261px" alt="">
+                                            <img class="img-fluid w-100" src="{{ asset('storage/'.$item->gambar) }}" style="width: 261px; height: 261px" alt="">
                                         </div>
                                         <div class="text-center p-4">
-                                            <a class="d-block h5 mb-2" href="">{{ $item->nama }}</a>
-                                            <span class="text-primary me-1">Rp {{ $item->harga }}</span>
+                                            <a class="d-block h5 mb-2" href="">{{ ucwords($item->nama) }}</a>
+                                            <span class="text-primary me-1">Rp {{ number_format($item->harga, 2, ',','.') }}</span>
                                             {{-- <span class="text-body text-decoration-line-through">$29.00</span> --}}
                                         </div>
                                         <div class="d-flex border-top">

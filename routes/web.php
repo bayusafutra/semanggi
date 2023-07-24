@@ -9,6 +9,7 @@ use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\SignupController;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LupaPasswordController;
 use App\Http\Controllers\UbahPasswordController;
 
@@ -85,3 +86,18 @@ Route::get('/keranjang', [CartController::class, 'coba']);
 
 //////////////////////////ADMIN////////////////////////////
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('admin');
+
+Route::get('/dash-kategori', [KategoriController::class, 'index'])->middleware('admin');
+Route::get('/dash-buatkategori', [KategoriController::class, 'create'])->middleware('admin');
+Route::post('/dash-buatkategori', [KategoriController::class, 'store'])->middleware('admin');
+Route::get('/createslugkategori', [KategoriController::class, 'checkSlug'])->middleware('admin');
+Route::get('/dash-daftarproduk/{slug}', [KategoriController::class, 'listprogram'])->name('programkategori')->middleware('admin');
+Route::get('/dash-updatekategori/{slug}', [KategoriController::class, 'indexupdate'])->name('updatekategori')->middleware('admin');
+Route::post('/dash-updatekategori', [KategoriController::class, 'update'])->middleware('admin');
+Route::post('/dash-nonaktifkankategori', [KategoriController::class, 'nonaktif'])->middleware('admin');
+
+Route::get('/dash-produk', [BarangController::class, 'index'])->middleware('admin');
+Route::get('/dash-buatproduk', [BarangController::class, 'indexcreate'])->middleware('admin');
+Route::post('/dash-buatproduk', [BarangController::class, 'store'])->middleware('admin');
+
+

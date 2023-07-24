@@ -10,9 +10,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Barang extends Model
 {
     use HasFactory;
+    protected $guarded = ["id"];
 
-    public function Kategori(){
+    public function kategori(){
         return $this->belongsTo(Kategori::class, 'kategori_id');
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function Cart(){
