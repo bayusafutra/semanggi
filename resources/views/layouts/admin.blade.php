@@ -172,19 +172,19 @@
                                         </div>
                                     </div>
                                     <div class="preview-item-content">
-                                        <p class="preview-subject ellipsis mb-1">Kategori Program</p>
+                                        <p class="preview-subject ellipsis mb-1">Kategori Produk</p>
                                     </div>
                                 </a>
                                 <div class="dropdown-divider"></div>
 
-                                <a class="dropdown-item preview-item" href="/dash-buatprogram">
+                                <a class="dropdown-item preview-item" href="/dash-buatproduk">
                                     <div class="preview-thumbnail">
                                         <div class="preview-icon bg-dark rounded-circle">
                                             <i class="mdi mdi-file-outline text-primary"></i>
                                         </div>
                                     </div>
                                     <div class="preview-item-content">
-                                        <p class="preview-subject ellipsis mb-1">Program</p>
+                                        <p class="preview-subject ellipsis mb-1">Produk</p>
                                     </div>
                                 </a>
                                 <div class="dropdown-divider"></div>

@@ -41,14 +41,11 @@
 </head>
 
 <body>
-    <!-- Spinner Start -->
     <div id="spinner"
         class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;"></div>
     </div>
-    <!-- Spinner End -->
 
-    <!-- Topbar Start -->
     <div class="container-fluid bg-dark px-0">
         <div class="row g-0 d-none d-lg-flex">
             <div class="col-lg-6 ps-5 text-start">
@@ -61,14 +58,11 @@
             </div>
         </div>
     </div>
-    <!-- Topbar End -->
-
-    <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top px-5">
         <div class="brand row d-flex align-items-center">
             <div class="col-11">
                 <a href="/" class="navbar-brand d-flex align-items-center">
-                    <img src="img/logo1.png" class="img-fluid" style="height: 70px" alt="">
+                    <img src="{{ asset('img/logo1.png') }}" class="img-fluid" style="height: 70px" alt="">
                 </a>
             </div>
             <div class="col-1">
@@ -93,9 +87,13 @@
                     </div>
                 </div>
             </div>
-            <a class="btn p-0 ms-auto position-relative"><i class="fa fa-shopping-cart fs-4"></i>
+            <a href="/cart" class="btn p-0 ms-auto position-relative"><i class="fa fa-shopping-cart fs-4"></i>
                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill" style="background-color: #F68037">
-                    99+
+                    @php
+                        use App\Models\Cart;
+                        $cart = Cart::where("user_id", auth()->user()->id)->get();
+                        echo $cart->count()
+                    @endphp
                     <span class="visually-hidden">unread messages</span>
                 </span>
             </a>
@@ -124,7 +122,6 @@
             </div>
         </div>
     </nav>
-    <!-- Navbar End -->
 
     <div class="navbarAdm">
         @yield('content')

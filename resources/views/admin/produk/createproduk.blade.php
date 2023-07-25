@@ -85,7 +85,7 @@
                         <div class="form-group">
                             <label for="berat">Berat Satuan Produk</label>
                             <input type="text" class="form-control @error('berat') is-invalid @enderror"
-                            id="berat" name="berat" placeholder="berat produk" required
+                            id="berat" name="berat" placeholder="berat produk"
                                 value="{{ old('berat') }}">
                             @error('berat')
                                 <div class="invalid-feedback">

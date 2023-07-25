@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Kategori;
 use App\Models\Barang;
+use App\Models\Cart;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -21,5 +22,9 @@ class User extends Authenticatable
 
     public function barang(){
         return $this->hasMany(Barang::class, 'user_id');
+    }
+
+    public function cart(){
+        return $this->hasMany(Cart::class, 'user_id');
     }
 }

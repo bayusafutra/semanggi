@@ -1,5 +1,4 @@
 @extends('layouts.navbarHome')
-
 @section('content')
 <!-- Features Start -->
 <div class="container-xxl py-5">
@@ -8,7 +7,11 @@
             <div class="col-lg-6" data-wow-delay="0.1s">
                 <div class="rounded overflow-hidden">
                     <div class="row g-0" data-wow-delay="0.1s">
-                        <a data-wow-delay="0.1s"><img src="{{ asset('storage/'.$produk[0]->gambar) }}" width="500" height="500" data-wow-delay="0.1s" alt=""></a>
+                        @if ($produk[0]->gambar)
+                            <a data-wow-delay="0.1s"><img src="{{ asset('storage/'.$produk[0]->gambar) }}" width="500" height="500" data-wow-delay="0.1s" alt=""></a>
+                        @else
+                            <a data-wow-delay="0.1s"><img src="{{ asset('img/food.png') }}" width="500" height="500" data-wow-delay="0.1s" alt="{{ $produk[0]->nama }}"></a>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -37,17 +40,11 @@
                         <div class="col d-grid">
                             <button type="submit" class="btn btn-warning">Buy</button>
                         </div>
-                        {{-- <div class="col d-grid">
-                            <button type="submit" class="btn btn-warning btn-lg" name="submit" value="addtocard">Add To Cart</button>
-                        </div> --}}
                         <div class="col d-grid">
                             <form action="/cart" method="POST">
                                 @csrf
-                                <input type="hidden" value="{{ $produk[0]->nama }}" name="nama">
-                                <input type="hidden" value="{{ $produk[0]->harga }}" name="harga">
-                                <input type="hidden" value="{{ $produk[0]->gambar }}" name="gambar">
-                                <input type="hidden" value="1" name="quantity">
-                                <button type="submit" class="btn btn-warning" style="padding-left: 82px; padding-right: 82px">Add To Cart</button>
+                                <input type="hidden" name="barang" value="{{ $produk[0]->id }}">
+                                <button type="submit" class="btn btn-warning" style="padding-left: 82px; padding-right: 82px">Tambahkan ke keranjang</button>
                             </form>
                         </div>
                     </div>

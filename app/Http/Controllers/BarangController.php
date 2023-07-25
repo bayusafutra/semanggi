@@ -6,6 +6,7 @@ use App\Models\Barang;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreBarangRequest;
 use App\Http\Requests\UpdateBarangRequest;
 
@@ -34,6 +35,7 @@ class BarangController extends Controller
             "minim" => 'required',
             "quantity" => 'required',
             "stok" => 'min:1',
+            "berat" => "max:255"
 
         ]);
         $rupiah1 = str_replace('.', '', $request->harga);
@@ -56,5 +58,36 @@ class BarangController extends Controller
         return view('detailproduk', [
             "produk" => Barang::where('slug', $slug)->get()
         ]);
+    }
+
+    public function updatestok(Request $request){
+        $barang = Barang::where('id', $request->id)->first();
+        $validatedData["stok"] = $request->stok;
+        $barang->update($validatedData);
+        return back()->with('success', "Stok $barang->nama berhasil diubah");
+    }
+
+    public function update(Request $request){
+        $barang = Barang::where('id', $request->id)->first();
+        $validatedData = $request->validate([
+            "nama" => 'required|max:255',
+            "deskripsi" => 'max:5000',
+            "minim" => 'required',
+            "quantity" => 'required',
+            "stok" => 'min:1',
+            "gambar" => 'image|file|max:10240',
+        ]);
+        $rupiah1 = str_replace('.', '', $request->harga);
+        $rupiah2 = str_replace('Rp', '', $rupiah1);
+        $rupiah3 = str_replace(',00', '', $rupiah2);
+        $validatedData['harga'] = $rupiah3;
+        if ($request->file('gambar')) {
+            if ($request->oldImage) {
+                Storage::delete($request->oldImage);
+            }
+            $validatedData['gambar'] = $request->file('gambar')->store('produk');
+        }
+        $barang->update($validatedData);
+        return back()->with('success', "Data produk $barang->nama berhasil diubah");
     }
 }

@@ -12,11 +12,11 @@ class Cart extends Model
     use HasFactory;
     protected $guarded =['id'];
 
-    public function User(){
+    public function user(){
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function Barang(){
+    public function barang(){
         return $this->belongsTo(Barang::class, 'barang_id');
     }
 }

@@ -79,7 +79,13 @@
                                 <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
                                     <div class="product-item">
                                         <div class="position-relative bg-light overflow-hidden">
-                                            <img class="img-fluid w-100" src="{{ asset('storage/'.$item->gambar) }}" style="width: 261px; height: 261px" alt="">
+                                            @if ($item->gambar)
+                                                <img class="img-fluid w-100" src="{{ asset('storage/' . $item->gambar) }}"
+                                                    style="width: 261px; height: 261px" alt="{{ $item->nama }}">
+                                            @else
+                                                <img class="img-fluid w-100" src="img/food.png"
+                                                    style="width: 261px; height: 261px" alt="{{ $item->nama }}">
+                                            @endif
                                         </div>
                                         <div class="text-center p-4">
                                             <a class="d-block h5 mb-2" href="">{{ ucwords($item->nama) }}</a>
@@ -93,11 +99,8 @@
                                             <small class="w-50 text-center py-2">
                                                 <form action="/cart" method="POST">
                                                     @csrf
-                                                    <input type="hidden" value="{{ $item->nama }}" name="nama">
-                                                    <input type="hidden" value="{{ $item->harga }}" name="harga">
-                                                    <input type="hidden" value="{{ $item->gambar }}" name="gambar">
-                                                    <input type="hidden" value="1" name="quantity">
-                                                    <button type="submit" class="text-body border-0" style="background: none"><i class="fa fa-shopping-bag text-primary me-2"></i>Add To Cart</button>
+                                                    <input type="hidden" name="barang" value="{{ $item->id }}">
+                                                    <button type="submit" class="text-body border-0" style="background: none"><i class="fa fa-shopping-bag text-primary me-2"></i>Tambahkan ke keranjang</button>
                                                 </form>
                                             </small>
                                         </div>

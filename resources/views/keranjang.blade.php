@@ -1,7 +1,21 @@
 @extends('layouts.mainSC')
+@section('css')
+    <style>
+        .form-check-input.custom-checkbox {
+            width: 1.5em;
+            height: 1.5em;
+        }
 
+        .color-preview {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #5E9D7B;
+        }
+    </style>
+@endsection
 @section('content')
-    <section class="spad">
+    <section class="">
         @if (session()->has('success'))
             <div class="container alert alert-success col-lg-4" role="alert">
                 {{ session('success') }}
@@ -9,99 +23,139 @@
         @endif
         <div class="container">
             <div class="border-bottom">
-                <h4 class="mb-3">Keranjang Saya</h4>
+                <h4 class="mb-3 mt-3 text-center">KERANJANG SAYA</h4>
             </div>
             <div class="row mt-3">
                 <div class="col-lg-12">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th class="col-lg-3">Produk</th>
-                                    <th class="col-lg-2">Harga</th>
-                                    <th class="col-lg-3">Quantity</th>
-                                    <th class="col-lg-2">Action</th>
-                                    <th class="col-lg-2">Subtotal Produk</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                    <table>
+                        <tbody>
+                            @if ($items->count())
                                 @foreach ($items as $item)
-                                    <tr>
-                                        <td class="col-3">
-                                            {{-- <img src="img/cart/cart-1.jpg" alt=""> --}}
-                                            <h6>{{ $item->nama }}</h6>
-                                        </td>
-
-                                        <td class="">
-                                            Rp {{ $item->harga }}
-                                        </td>
-                                        <td class="col-2">
-                                            <div class="">
-                                                <form action="/update" method="POST">
-                                                    @csrf
-                                                    <input type="hidden" name="id" value="{{ $item->id}}" >
-                                                    <input type="number" name="quantity" value="{{ $item->quantity }}" min="1"/>
-                                                    <td class="">
-                                                        <button type="submit" class="btn btn-success">update</button>
-                                                    </td>
-                                                </form>
+                                    <div class="card mb-3">
+                                        <div class="card-body shadow-sm">
+                                            <div class="row align-items-center">
+                                                {{-- <div class="col">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input custom-checkbox" type="checkbox"
+                                                            value="" id="productCheckbox1">
+                                                    </div>
+                                                </div> --}}
+                                                <div class="col-md-2">
+                                                    @if ($item->barang->gambar)
+                                                        <img src="{{ asset('storage/'.$item->barang->gambar) }}" class="img-fluid"
+                                                            style="width: 100px; height: 100px" alt="">
+                                                    @else
+                                                        <img src="img/food.png" class="img-fluid"
+                                                        style="width: 100px; height: 100px" alt="">
+                                                    @endif
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <h5 class="card-title">{{ ucwords($item->barang->nama) }}</h5>
+                                                    <p class="card-text fw-bold" style="color: #5E9D7B">Rp
+                                                        {{ number_format($item->barang->harga, 2, ',', '.') }}</p>
+                                                    <div class="row">
+                                                        <div class="col-sm-3">
+                                                            <div class="input-group mb-3">
+                                                                <button class="btn btn-outline-secondary minus-btn"
+                                                                    type="button">-</button>
+                                                                <input type="number" class="form-control numeric-input text-center fs-5"
+                                                                    min="1" max="{{ $item->barang->stok }}" value="1">
+                                                                <button class="btn btn-outline-secondary plus-btn"
+                                                                    type="button">+</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="row">
+                                                        <div class="col-5">
+                                                            <button class="btn btn-warning" style="color: white">Update</button>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <form action="/cart-remove" method="POST">
+                                                                @csrf
+                                                                <input type="hidden" name="id" value="{{ $item->id }}">
+                                                                <button class="btn btn-danger">Hapus</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                    <h5 class="card-text mt-3" style="color: #5E9D7B">Total : Rp
+                                                        {{ number_format($item->barang->harga * $item->quantity) }}</h5>
+                                                </div>
                                             </div>
-                                        </td>
-                                        <td class="col-2">
-                                            Rp {{ $item->harga*$item->quantity }}
-                                        </td>
-                                        <td class="col-2">
-                                            <form action="/remove" method="POST">
-                                                @csrf
-                                                <input type="hidden" value="{{ $item->id }}" name="id">
-                                                <button onclick="return confirm('Apakah anda yakin untuk menghapus Cart {{ $item->nama }}?')"><span class="icon_close"></span></button>
-                                            </form>
-                                            {{-- <span class="icon_close"></span> --}}
-                                        </td>
-                                    </tr>
+                                        </div>
+                                    </div>
                                 @endforeach
-                            </tbody>
-                        </table>
+                            @else
+                                <div class="ket text-center">
+                                    Belum ada produk yang ditambahkan ke keranjang
+                                </div>
+                            @endif
+                        </tbody>
+                    </table>
                 </div>
 
                 <div class="col-lg-12 mt-5">
-                    <div class="shoping__checkout">
-                        <h5>Cart Total</h5>
+                    <div class="shoping__checkout shadow-lg p-3">
+                        <h5>Rincian keranjang</h5>
                         <ul>
                             <li>Total Produk<span>{{ $items->count() }}</span></li>
-                            <li>Total Item<span>
-                                <?php
-                                    $count=0;
+                            <li>Total SubItem<span>
+                                    <?php
+                                    $count = 0;
                                     foreach ($items as $item) {
-                                        $count=$count+$item->quantity;
+                                        $count = $count + $item->quantity;
                                     }
                                     echo $count;
-                                ?>
+                                    ?>
                                 </span>
                             </li>
 
                             <li>Subtotal <span>Rp
-                                <?php
-                                    $jumlah=0;
+                                    <?php
+                                    $jumlah = 0;
                                     foreach ($items as $item) {
-                                        $jumlah=$jumlah+$item->harga*$item->quantity;
+                                        $jumlah = $jumlah + $item->harga * $item->quantity;
                                     }
-                                    echo $jumlah;
-                                ?>
-                            </span></li>
+                                    echo number_format($jumlah);
+                                    ?>
+                                </span></li>
                         </ul>
                         {{-- <a href="/checkout" class="primary-btn">PROCEED TO CHECKOUT</a> --}}
                     </div>
                 </div>
 
                 <div class="col-lg-12">
-                    <div class="mt-4">
-                        <a href="/catalog" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
-                        <a href="/checkout" class="primary-btn cart-btn cart-btn-right">CHECKOUT</a>
+                    <div class="mt-4 mb-4">
+                        <a href="/catalog" class="primary-btn cart-btn shadow">Lanjut Belanja</a>
+                        {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirmationModal">
+                            CHECKOUT
+                          </button> --}}
+                        <a href="#confirmationModal" class="primary-btn cart-btn cart-btn-right shadow"
+                            data-bs-toggle="modal" data-bs-target="#confirmationModal">Pesan</a>
+                    </div>
+                </div>
+                <div class="modal fade" id="confirmationModal" tabindex="-1"
+                    aria-labelledby="confirmationModalLabel"aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="confirmationModalLabel">Konfirmasi Pembelian</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Apakah pesanan anda sudah sesuai?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                <a href="/checkout" class="btn btn-primary">Lanjutkan</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
             </div>
         </div>
     </section>
-    @endsection
+@endsection

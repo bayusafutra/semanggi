@@ -59,7 +59,7 @@ Route::get('/detailproduk/{slug}', [BarangController::class, 'show']);
 Route::get('/cart', [CartController::class, 'index'])->middleware('auth');
 Route::post('/cart', [CartController::class, 'store'])->middleware('auth');
 Route::post('/update', [CartController::class, 'update'])->middleware('auth');
-Route::post('/remove', [CartController::class, 'destroy'])->middleware('auth');
+Route::post('/cart-remove', [CartController::class, 'destroy'])->middleware('auth');
 
 //tolong lebokno bayy ehehehe
 Route::get('/checkout', function () {
@@ -74,15 +74,9 @@ Route::get('/pembayaran/kode-unik', function () {
     return view('kodepembayaran');
 });
 
-Route::get('/admin/home', function () {
-    return view('layouts.navbarAdm');
-});
-
 Route::get('/ubahAlamat', function () {
     return view('ubahAlamatPengiriman');
 });
-
-Route::get('/keranjang', [CartController::class, 'coba']);
 
 //////////////////////////ADMIN////////////////////////////
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('admin');
@@ -99,5 +93,7 @@ Route::post('/dash-nonaktifkankategori', [KategoriController::class, 'nonaktif']
 Route::get('/dash-produk', [BarangController::class, 'index'])->middleware('admin');
 Route::get('/dash-buatproduk', [BarangController::class, 'indexcreate'])->middleware('admin');
 Route::post('/dash-buatproduk', [BarangController::class, 'store'])->middleware('admin');
+Route::post('/dash-updatestok', [BarangController::class, 'updatestok'])->middleware('admin');
+Route::post('/dash-updateproduk', [BarangController::class, 'update'])->middleware('admin');
 
 
