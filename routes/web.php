@@ -11,6 +11,7 @@ use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LupaPasswordController;
+use App\Http\Controllers\PesananController;
 use App\Http\Controllers\UbahPasswordController;
 
 /*
@@ -60,12 +61,9 @@ Route::get('/cart', [CartController::class, 'index'])->middleware('auth');
 Route::post('/cart', [CartController::class, 'store'])->middleware('auth');
 Route::post('/cart-remove', [CartController::class, 'destroy'])->middleware('auth');
 Route::post('/update-cart', [CartController::class, 'updateCart'])->middleware('auth');
-Route::post('/pesan', [CartController::class, 'nyoba'])->middleware('auth');
 
-//tolong lebokno bayy ehehehe
-Route::get('/checkout', function () {
-    return view('checkout');
-});
+Route::post('/pesan', [PesananController::class, 'store'])->middleware('auth');
+Route::get('/detailpesanan/{slug}', [PesananController::class, 'index'])->middleware('auth');
 
 Route::get('/pembayaran', function () {
     return view('pembayaran');

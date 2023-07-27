@@ -17,7 +17,7 @@
 @section('content')
     <section class="">
         @if (session()->has('success'))
-            <div class="container alert alert-success col-lg-4" role="alert">
+            <div class="container alert alert-success col-lg-6 text-center" role="alert">
                 {{ session('success') }}
             </div>
         @endif
@@ -25,88 +25,83 @@
             <div class="border-bottom">
                 <h4 class="mb-3 mt-3 text-center">KERANJANG SAYA</h4>
             </div>
-
-            <form action="/pesan" method="POST">
-                @csrf
-                <div class="col-lg-12">
-                    <table>
-                        <tbody>
-                            @if ($items->count())
-                                @foreach ($items as $item)
-                                    <div class="card mb-3">
-                                        <div class="card-body shadow-sm">
-                                            <div class="row align-items-center">
-                                                {{-- <div class="col">
+            <div class="col-lg-12">
+                <table>
+                    <tbody>
+                        @if ($items->count())
+                            @foreach ($items as $item)
+                                <div class="card mb-3">
+                                    <div class="card-body shadow-sm">
+                                        <div class="row align-items-center">
+                                            {{-- <div class="col">
                                                             <div class="form-check">
                                                                 <input class="form-check-input custom-checkbox" type="checkbox"
                                                                     value="" id="productCheckbox1">
                                                             </div>
                                                         </div> --}}
-                                                <div class="col-md-2">
-                                                    @if ($item->barang->gambar)
-                                                        <a href="/detailproduk/{{ $item->barang->slug }}">
-                                                            <img src="{{ asset('storage/' . $item->barang->gambar) }}"
-                                                                class="img-fluid" style="width: 100px; height: 100px"
-                                                                alt="">
-                                                        </a>
-                                                    @else
-                                                        <a href="/detailproduk/{{ $item->barang->slug }}">
-                                                            <img src="img/food.png" class="img-fluid"
-                                                                style="width: 100px; height: 100px" alt="">
-                                                        </a>
-                                                    @endif
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <a href="/detailproduk/{{ $item->barang->slug }}" style="color: black">
-                                                        <h5 class="card-title">{{ ucwords($item->barang->nama) }}</h5>
+                                            <div class="col-md-2">
+                                                @if ($item->barang->gambar)
+                                                    <a href="/detailproduk/{{ $item->barang->slug }}">
+                                                        <img src="{{ asset('storage/' . $item->barang->gambar) }}"
+                                                            class="img-fluid" style="width: 100px; height: 100px"
+                                                            alt="">
                                                     </a>
-                                                    <p class="card-text fw-bold" style="color: #5E9D7B">Rp
-                                                        {{ number_format($item->barang->harga, 2, ',', '.') }}</p>
-                                                    <div class="row">
-                                                        <div class="col-sm-6">
-                                                            <div class="input-group mb-3">
-                                                                <button class="btn btn-outline-secondary minus-btn"
-                                                                    type="button">-</button>
-                                                                <input type="text" style="background-color: white"
-                                                                    class="form-control numeric-input text-center fs-5"
-                                                                    min="{{ $item->barang->minim }}"
-                                                                    max="{{ $item->barang->stok }}" name="quantity"
-                                                                    value="{{ $item->quantity }}" readonly>
-                                                                <button class="btn btn-outline-secondary plus-btn"
-                                                                    type="button"
-                                                                    style="border-radius: 0 7px 7px 0">+</button>
-                                                                <input type="hidden" class="stok-produk"
-                                                                    value="{{ $item->barang->stok }}">
-                                                                <input type="hidden" class="minim-produk"
-                                                                    value="{{ $item->barang->minim }}"
-                                                                    data-item-id="{{ $item->id }}">
-                                                            </div>
+                                                @else
+                                                    <a href="/detailproduk/{{ $item->barang->slug }}">
+                                                        <img src="img/food.png" class="img-fluid"
+                                                            style="width: 100px; height: 100px" alt="">
+                                                    </a>
+                                                @endif
+                                            </div>
+                                            <div class="col-md-4">
+                                                <a href="/detailproduk/{{ $item->barang->slug }}" style="color: black">
+                                                    <h5 class="card-title">{{ ucwords($item->barang->nama) }}</h5>
+                                                </a>
+                                                <p class="card-text fw-bold" style="color: #5E9D7B">Rp
+                                                    {{ number_format($item->barang->harga, 2, ',', '.') }}</p>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="input-group mb-3">
+                                                            <button class="btn btn-outline-secondary minus-btn"
+                                                                type="button">-</button>
+                                                            <input type="text" style="background-color: white"
+                                                                class="form-control numeric-input text-center fs-5"
+                                                                min="{{ $item->barang->minim }}"
+                                                                max="{{ $item->barang->stok }}" name="quantity"
+                                                                value="{{ $item->quantity }}" readonly>
+                                                            <button class="btn btn-outline-secondary plus-btn"
+                                                                type="button" style="border-radius: 0 7px 7px 0">+</button>
+                                                            <input type="hidden" class="stok-produk"
+                                                                value="{{ $item->barang->stok }}">
+                                                            <input type="hidden" class="minim-produk"
+                                                                value="{{ $item->barang->minim }}"
+                                                                data-item-id="{{ $item->id }}">
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-4">
-                                                    <h5>Detail Produk</h5>
-                                                    <p>minimum pembelian : {{ $item->barang->minim }}
-                                                        {{ $item->barang->quantity }}</p>
-                                                    <p>stok produk : {{ $item->barang->stok }}
-                                                        {{ $item->barang->quantity }}</p>
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <h5 class="card-text mb-5" style="color: #5E9D7B">Total : <span
-                                                            class="subtotal" style="border: none; color: #5E9D7B">Rp
-                                                            {{ number_format($item->total, 2, ',', '.') }}</span></h5>
-                                                    <input type="hidden" class="harga"
-                                                        value="{{ $item->barang->harga }}">
-                                                    <form action="/cart-remove" method="POST">
-                                                        @csrf
-                                                        <input type="hidden" name="id" value="{{ $item->id }}">
-                                                        <div class="hapus d-flex justify-content-center">
-                                                            <button class="btn btn-danger btn-delete-item"
-                                                                data-id="{{ $item->id }}">Hapus</button>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <h5>Detail Produk</h5>
+                                                <p>minimum pembelian : {{ $item->barang->minim }}
+                                                    {{ $item->barang->quantity }}</p>
+                                                <p>stok produk : {{ $item->barang->stok }}
+                                                    {{ $item->barang->quantity }}</p>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <h5 class="card-text mb-5" style="color: #5E9D7B">Total : <span
+                                                        class="subtotal" style="border: none; color: #5E9D7B">Rp
+                                                        {{ number_format($item->total, 2, ',', '.') }}</span></h5>
+                                                <input type="hidden" class="harga" value="{{ $item->barang->harga }}">
+                                                <form action="/cart-remove" method="POST">
+                                                    @csrf
+                                                    <input type="hidden" name="id" value="{{ $item->id }}">
+                                                    <div class="hapus d-flex justify-content-center">
+                                                        <button class="btn btn-danger btn-delete-item"
+                                                            data-id="{{ $item->id }}">Hapus</button>
 
-                                                        </div>
-                                                    </form>
-                                                    {{-- <input type="hidden" name="id" value="{{ $item->id }}">
+                                                    </div>
+                                                </form>
+                                                {{-- <input type="hidden" name="id" value="{{ $item->id }}">
                                                         {{-- <div class="hapus d-flex justify-content-center">
                                                             <a href="#{{ $item->barang->id }}"
                                                                 class="btn btn-danger btn-delete-item" data-bs-toggle="modal"
@@ -146,21 +141,23 @@
                                                                 </div>
                                                             </div>
                                                         </div> --}}
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                @endforeach
-                            @else
-                                <div class="ket text-center my-3">
-                                    Belum ada produk yang ditambahkan ke keranjang
                                 </div>
-                            @endif
-                        </tbody>
-                    </table>
+                            @endforeach
+                        @else
+                            <div class="ket text-center my-3">
+                                Belum ada produk yang ditambahkan ke keranjang
+                            </div>
+                        @endif
+                    </tbody>
+                </table>
 
-                </div>
+            </div>
 
+            <form action="/pesan" method="POST">
+                @csrf
                 <div class="col-lg-12 mt-5">
                     <div class="shoping__checkout shadow-lg p-3">
                         <h5>Rincian Keranjang</h5>
@@ -174,7 +171,7 @@
                             <li>Subtotal<span id="totalKeranjang" class="subtotal1" style="border: none; color: #5E9D7B">Rp
                                     {{ number_format($totalkeranjang, 2, ',', '.') }}</span>
                                 <input type="hidden" id="totalharga" name="price"
-                                    value="{{ number_format($totalkeranjang, 2, ',', '.') }}">
+                                    value="{{ $totalkeranjang }}">
                             </li>
                         </ul>
                         {{-- <a href="/checkout" class="primary-btn">PROCEED TO CHECKOUT</a> --}}
@@ -184,9 +181,6 @@
                 <div class="col-lg-12">
                     <div class="mt-4 mb-4">
                         <a href="/catalog" class="primary-btn cart-btn shadow">Lanjut Belanja</a>
-                        {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirmationModal">
-                                CHECKOUT
-                              </button> --}}
                         <a href="#confirmationModal" class="primary-btn cart-btn cart-btn-right shadow"
                             data-bs-toggle="modal" data-bs-target="#confirmationModal">Pesan</a>
                     </div>
@@ -280,7 +274,7 @@
                 // Memperbarui nilai pada input hidden dengan ID "totalharga"
                 const totalKeranjangValue = getTotalKeranjangValue();
                 const totalHargaInput = document.querySelector('#totalharga');
-                totalHargaInput.value = totalKeranjangValue/100;
+                totalHargaInput.value = totalKeranjangValue / 100;
             }
 
             function getTotalKeranjangValue() {

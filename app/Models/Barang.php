@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Cart;
 use App\Models\Kategori;
 use App\Models\User;
+use App\Models\DetailPesananan;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -23,5 +24,9 @@ class Barang extends Model
 
     public function cart(){
         return $this->hasOne(Cart::class, 'barang_id');
+    }
+
+    public function detail(){
+        return $this->hasMany(DetailPesananan::class, 'barang_id');
     }
 }

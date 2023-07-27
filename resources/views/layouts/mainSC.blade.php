@@ -8,24 +8,25 @@
     <meta content="" name="keywords">
     <meta content="" name="description">
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+    <link href="{{ asset('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap') }}" rel="stylesheet">
     <!-- Dalam bagian head -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"></script>
+    <script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js') }}"></script>
 
     <!-- Css Styles -->
-    <link rel="stylesheet" href="det/css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="det/css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="det/css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="det/css/jquery-ui.min.css" type="text/css">
-    <link rel="stylesheet" href="det/css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="det/css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="det/css/style.css" type="text/css">
+    <link rel="stylesheet" href="{{ asset('det/css/bootstrap.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('det/css/elegant-icons.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('det/css/nice-select.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('det/css/jquery-ui.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('det/css/owl.carousel.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('det/css/slicknav.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('det/css/style.css') }}" type="text/css">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    <link href="{{ asset('https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css') }}" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('img/kintil.svg') }}" rel="icon">
 
     <!-- Template Stylesheet -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
@@ -188,15 +189,15 @@
 
 
     <!-- Js Plugins -->
-    <script src="det/js/jquery-3.3.1.min.js"></script>
-    <script src="det/js/bootstrap.min.js"></script>
-    <script src="det/js/jquery.nice-select.min.js"></script>
-    <script src="det/js/jquery-ui.min.js"></script>
-    <script src="det/js/jquery.slicknav.js"></script>
-    <script src="det/js/mixitup.min.js"></script>
-    <script src="det/js/owl.carousel.min.js"></script>
-    <script src="det/js/main.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+    <script src="{{ asset('det/js/jquery-3.3.1.min.js') }}"></script>
+    <script src="{{ asset('det/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('det/js/jquery.nice-select.min.js') }}"></script>
+    <script src="{{ asset('det/js/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('det/js/jquery.slicknav.js') }}"></script>
+    <script src="{{ asset('det/js/mixitup.min.js') }}"></script>
+    <script src="{{ asset('det/js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('det/js/main.js') }}"></script>
+    <script src="{{ asset('https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js') }}"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous">
     </script>
     {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
