@@ -99,7 +99,9 @@
                                             <small class="w-50 text-center py-2">
                                                 <form action="/cart" method="POST">
                                                     @csrf
+                                                    <input type="hidden" name="total" value="{{ $item->harga*$item->minim }}">
                                                     <input type="hidden" name="barang" value="{{ $item->id }}">
+                                                    <input type="hidden" name="quantity" value="{{ $item->minim }}">
                                                     <button type="submit" class="text-body border-0" style="background: none"><i class="fa fa-shopping-bag text-primary me-2"></i>Tambahkan ke keranjang</button>
                                                 </form>
                                             </small>
@@ -109,7 +111,7 @@
                                 @endforeach
 
                                 <div class="col-12 text-center">
-                                    <a class="btn btn-primary rounded-pill py-3 px-5" href="/catalog">View Katalog</a>
+                                    <a class="btn btn-primary rounded-pill py-3 px-5" href="/catalog">Lihat Katalog</a>
                                 </div>
                             </div>
                         </div>

@@ -43,7 +43,9 @@
                         <div class="col d-grid">
                             <form action="/cart" method="POST">
                                 @csrf
+                                <input type="hidden" name="total" value="{{ $produk[0]->harga*$produk[0]->minim }}">
                                 <input type="hidden" name="barang" value="{{ $produk[0]->id }}">
+                                <input type="hidden" name="quantity" value="{{ $produk[0]->minim }}">
                                 <button type="submit" class="btn btn-warning" style="padding-left: 82px; padding-right: 82px">Tambahkan ke keranjang</button>
                             </form>
                         </div>

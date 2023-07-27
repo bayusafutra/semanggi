@@ -3,12 +3,14 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Kampoeng Semanggi</title>
+    <title>Srikandi Semanggi</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+    <!-- Dalam bagian head -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"></script>
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="det/css/bootstrap.min.css" type="text/css">
@@ -27,6 +29,7 @@
 
     <!-- Template Stylesheet -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
     <!-- Icon Font Stylesheet -->
     <link href="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css') }}"
         rel="stylesheet">
@@ -81,11 +84,12 @@
                 </div>
             </div>
             <a class="btn p-0 ms-auto position-relative"><i class="fa fa-shopping-cart fs-4"></i>
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill" style="background-color: #F68037">
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill"
+                    style="background-color: #F68037">
                     @php
                         use App\Models\Cart;
-                        $cart = Cart::where("user_id", auth()->user()->id)->get();
-                        echo $cart->count()
+                        $cart = Cart::where('user_id', auth()->user()->id)->get();
+                        echo $cart->count();
                     @endphp
                     <span class="visually-hidden">unread messages</span>
                 </span>
@@ -119,24 +123,69 @@
     <div class="ShopCart">
         @yield('content')
     </div>
+
+    <!-- Footer Start -->
+    <div class="container-fluid footer mt-5 pt-5 wow fadeIn" style="background-color: #C0E6B7; color: black; position: relative; bottom: 0"
+        data-wow-delay="0.1s">
+        <div class="container py-5 d-flex justify-content-center">
+            <div class="row g-5">
+                <div class="col-lg-4">
+                    {{-- <h1 class="fw-bold text-primary mb-4">Srikandi<span class="text-warning">Semanggi</span></h1> --}}
+                    <img src="img/logo1.png" class="img-fluid" alt="">
+                    <p>Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed
+                        stet lorem sit clita</p>
+                    <div class="d-flex pt-2">
+                        <a class="btn btn-square btn-outline-light rounded-circle me-1 text-dark" href=""><i
+                                class="fab fa-twitter"></i></a>
+                        <a class="btn btn-square btn-outline-light rounded-circle me-1 text-dark" href=""><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-square btn-outline-light rounded-circle me-1 text-dark" href=""><i
+                                class="fab fa-youtube"></i></a>
+                        <a class="btn btn-square btn-outline-light rounded-circle me-0 text-dark" href=""><i
+                                class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <h4 class="text-dark mb-4">Address</h4>
+                    <p><i class="fa fa-map-marker-alt me-3"></i>Jalan Kendung IX, Sememi, Kec. Benowo,
+                        Kota Surabaya, Jawa Timur</p>
+                    <p><i class="fa fa-phone-alt me-3"></i>0838 5744 9383</p>
+                    <p><i class="fab fa-instagram me-3"></i>@srikandi_semanggi</p>
+                </div>
+                <div class="col-lg-2">
+                    <h4 class="text-dark mb-4">Quick Links</h4>
+                    <a class="btn btn-link" style="color: black" href="">Home</a>
+                    <a class="btn btn-link" style="color: black" href="">Profile</a>
+                    <a class="btn btn-link" style="color: black" href="/catalog">Catalog</a>
+                    @guest
+                        <a class="btn btn-link" style="color: black" href="">Login</a>
+                        <a class="btn btn-link" style="color: black" href="">Register</a>
+                    @endguest
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+
+    <!-- Copyright Start -->
+    <div class="container-fluid bg-primary text-body copyright py-4">
+        <div class="container">
+            <div class="row text-white">
+                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                    &copy; <a class="fw-semi-bold" style="color: #E7B10A" href="#"><span
+                            style="color:rgb(10, 67, 37)">Srikandi</span> Semanggi 2023</a>, All Right Reserved.
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    Designed By <span style="font-style: italic">Gebang Software House</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Copyright End -->
     <!-- Shoping Cart Section End -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const minusBtn = document.querySelector('.minus-btn');
-            const plusBtn = document.querySelector('.plus-btn');
-            const numericInput = document.querySelector('.numeric-input');
+    @yield('js')
 
-            minusBtn.addEventListener('click', function() {
-                if (numericInput.value > 1) {
-                    numericInput.value = parseInt(numericInput.value) - 1;
-                }
-            });
-
-            plusBtn.addEventListener('click', function() {
-                numericInput.value = parseInt(numericInput.value) + 1;
-            });
-        });
-    </script>
 
     <!-- Js Plugins -->
     <script src="det/js/jquery-3.3.1.min.js"></script>
@@ -150,6 +199,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous">
     </script>
+    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
+
 </body>
 
 </html>

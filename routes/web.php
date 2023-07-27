@@ -58,8 +58,9 @@ Route::get('/detailproduk/{slug}', [BarangController::class, 'show']);
 
 Route::get('/cart', [CartController::class, 'index'])->middleware('auth');
 Route::post('/cart', [CartController::class, 'store'])->middleware('auth');
-Route::post('/update', [CartController::class, 'update'])->middleware('auth');
 Route::post('/cart-remove', [CartController::class, 'destroy'])->middleware('auth');
+Route::post('/update-cart', [CartController::class, 'updateCart'])->middleware('auth');
+Route::post('/pesan', [CartController::class, 'nyoba'])->middleware('auth');
 
 //tolong lebokno bayy ehehehe
 Route::get('/checkout', function () {

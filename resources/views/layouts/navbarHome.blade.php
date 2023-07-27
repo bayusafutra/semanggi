@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Kampoeng Semanggi</title>
+    <title>Srikandi Semanggi</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -31,6 +31,7 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
     <link href="{{ asset('img/kintil.svg') }}" rel="icon">
 
     <!-- Template Stylesheet -->
@@ -87,12 +88,17 @@
                     </div>
                 </div>
             </div>
+
             <a href="/cart" class="btn p-0 ms-auto position-relative"><i class="fa fa-shopping-cart fs-4"></i>
                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill" style="background-color: #F68037">
                     @php
                         use App\Models\Cart;
-                        $cart = Cart::where("user_id", auth()->user()->id)->get();
-                        echo $cart->count()
+                        if(auth()->user()){
+                            $cart = Cart::where("user_id", auth()->user()->id)->get();
+                            echo $cart->count();
+                        }else {
+                            echo 0;
+                        }
                     @endphp
                     <span class="visually-hidden">unread messages</span>
                 </span>
@@ -130,9 +136,9 @@
     <!-- Footer Start -->
     <div class="container-fluid footer mt-5 pt-5 wow fadeIn" style="background-color: #C0E6B7; color: black; position: relative; bottom: 0"
         data-wow-delay="0.1s">
-        <div class="container py-5">
+        <div class="container py-5 d-flex justify-content-center">
             <div class="row g-5">
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-4">
                     {{-- <h1 class="fw-bold text-primary mb-4">Srikandi<span class="text-warning">Semanggi</span></h1> --}}
                     <img src="img/logo1.png" class="img-fluid" alt="">
                     <p>Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed
@@ -148,20 +154,22 @@
                                 class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-9" style="margin-left: 145px">
+                <div class="col-lg-6">
                     <h4 class="text-dark mb-4">Address</h4>
                     <p><i class="fa fa-map-marker-alt me-3"></i>Jalan Kendung IX, Sememi, Kec. Benowo,
                         Kota Surabaya, Jawa Timur</p>
                     <p><i class="fa fa-phone-alt me-3"></i>0838 5744 9383</p>
                     <p><i class="fab fa-instagram me-3"></i>@srikandi_semanggi</p>
                 </div>
-                <div class="col-lg-3 col-md-6" style="margin-left: 145px">
+                <div class="col-lg-2">
                     <h4 class="text-dark mb-4">Quick Links</h4>
                     <a class="btn btn-link" style="color: black" href="">Home</a>
                     <a class="btn btn-link" style="color: black" href="">Profile</a>
                     <a class="btn btn-link" style="color: black" href="/catalog">Catalog</a>
-                    <a class="btn btn-link" style="color: black" href="">Login</a>
-                    <a class="btn btn-link" style="color: black" href="">Register</a>
+                    @guest
+                        <a class="btn btn-link" style="color: black" href="">Login</a>
+                        <a class="btn btn-link" style="color: black" href="">Register</a>
+                    @endguest
                 </div>
             </div>
         </div>
