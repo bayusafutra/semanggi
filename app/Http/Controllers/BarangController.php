@@ -15,7 +15,8 @@ class BarangController extends Controller
     public function index(){
         return view('admin.produk.index', [
             "title" => "Dashboard | Produk",
-            "produk" => Barang::paginate(10)
+            "produk" => Barang::paginate(10),
+            "all" => Barang::all()
         ]);
     }
 

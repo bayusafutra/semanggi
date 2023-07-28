@@ -175,8 +175,12 @@
                                                 <small class="w-50 text-center py-2">
                                                     <form action="/cart" method="POST">
                                                         @csrf
+                                                        <input type="hidden" name="total"
+                                                            value="{{ $ker->harga * $ker->minim }}">
                                                         <input type="hidden" name="barang"
                                                             value="{{ $ker->id }}">
+                                                        <input type="hidden" name="quantity"
+                                                            value="{{ $ker->minim }}">
                                                         <button type="submit" class="text-body border-0"
                                                             style="background: none"><i
                                                                 class="fa fa-shopping-bag text-primary me-2"></i>Tambahkan

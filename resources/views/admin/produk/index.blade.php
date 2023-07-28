@@ -25,7 +25,7 @@
                     </div>
                     <div class="row justify-content-start">
                         <div class="col-lg-6" style="padding-left: 30px">
-                            <strong>Jumlah Produk : {{ $produk->count() }}</strong>
+                            <strong>Jumlah Produk : {{ $all->count() }}</strong>
                         </div>
                     </div>
                     <div class="table-responsive">
@@ -195,7 +195,7 @@
                                                             <div class="form-group">
                                                                 <label for="deskripsi">Deskripsi Produk</label>
                                                                 <textarea name="deskripsi" id="deskripsi" placeholder="Deskripsi program" class="form-control @error('deskripsi') is-invalid @enderror"
-                                                                value="{{ old('deskripsi', $prog->deskripsi) }}" cols="10" rows="5"></textarea>
+                                                                value="{{ old('deskripsi', $prog->deskripsi) }}" cols="10" rows="5">{{ old('deskripsi', $prog->deskripsi) }}</textarea>
                                                                 @error('deskripsi')
                                                                     <div class="invalid-feedback">
                                                                         {{ $message }}

@@ -116,7 +116,7 @@
                                 <a href="auth/google" class="py-2 px-3 mr-md-1 rounded fs-4 btn"
                                     style="background-color: white; font-family: 'Trebuchet MS'; font-weight: 600; text-decoration: none; -moz-border-radius: 10px; border-radius: 10px; -webkit-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15); -moz-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15); box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);"><img
                                         class="img-fluid" src="img/google.png"
-                                        style="height: 30px; width: 30px; margin-right: 5px" alt=""> Masuk dengan
+                                        style="height: 30px; width: 30px; margin-right: 5px" alt=""> Daftar dengan
                                     Google</a>
                             </div>
                         </div>

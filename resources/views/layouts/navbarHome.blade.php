@@ -63,7 +63,7 @@
         <div class="brand row d-flex align-items-center">
             <div class="col-11">
                 <a href="/" class="navbar-brand d-flex align-items-center">
-                    <img src="{{ asset('img/logo1.png') }}" class="img-fluid" style="height: 70px" alt="">
+                    <img src="{{ asset('img/logo1.png') }}" class="img-fluid" style="height: 75px" alt="">
                 </a>
             </div>
             <div class="col-1">
@@ -211,6 +211,7 @@
     <script src="{{ asset('lib/lightbox/js/lightbox.min.js') }}"></script>
     <!-- Template Javascript -->
     <script src="{{ asset('js/main.js') }}"></script>
+    @yield('js')
 </body>
 
 </html>

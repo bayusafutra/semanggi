@@ -27,21 +27,21 @@ class LupaPasswordController extends Controller
             'email' => 'required|email|exists:users',
         ]);
 
-        $token = Str::random(210);
+        // $token = Str::random(210);
         $email = PasswordReset::where('email', $request->email)->get();
-        if ($email) {
-            DB::table('password_resets')->where(['email' => $request->email])->delete();
-            DB::table('password_resets')->insert([
-                'email' => $request->email,
-                'token' => $token,
+        if ($email->count()) {
+            DB::table('password_resets')->update([
                 'created_at' => Carbon::now()
             ]);
+            $token = $email[0]->token;
         } else {
             DB::table('password_resets')->insert([
                 'email' => $request->email,
-                'token' => $token,
+                'token' => Str::random(210),
                 'created_at' => Carbon::now()
             ]);
+            $swap = PasswordReset::where('email', $request->email)->first();
+            $token = $swap->token;
         }
         $user = User::where('email', $request->email)->first();
 

@@ -48,13 +48,13 @@
                     </div>
                 </div>
                 <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
-                    <p class="section-title bg-white text-start text-primary pe-3">About Us</p>
+                    <p class="section-title bg-white text-start text-primary pe-3">Tentang Kami</p>
                     <h1 class="mb-4">Ketahui mengenai sejarah kampung semanggi</h1>
                     <p class="mb-4">Kampung ini dikenal dengan nama kampung semanggi sejak tahun 2016. Branding kampung semanggi dilakukan oleh bapak muslik selaku camat kecamatan benowo. Kampung Semanggi dikenal karena sebagian besar penduduknya terutama ibu-ibu yang berprofesi sebagai penjual semanggi.
                         Sebagian besar penjual semanggi berasal dari Kendung, namun sebelum tahun 2016, banyak orang-orang yang mencari daun semanggi sampai ke daerah Sidoarjo, Mojokerto, Krian, Lamongan, bahkan sampai daerah Kediri hingga Bojonegoro.
                         Kemudian pada tahun 2017, mereka memiliki inisiatif untuk membudidayakan semanggi di lahan kavlingan dan lahan aset kota yang belum dibangun. Mereka juga memanfaatkan lahan-lahan kosong yang ada di belakang rumah sebagai tempat untuk menanam semanggi.
                     </p>
-                    <a class="btn btn-secondary rounded-pill py-3 px-5" href="/profilkampungsemanggi">Read More</a>
+                    <a class="btn btn-secondary rounded-pill py-3 px-5" href="/profilkampungsemanggi">Baca Selengkapnya</a>
                 </div>
             </div>
         </div>
@@ -66,7 +66,7 @@
     <div class="container-xxl py-5">
         <div class="container">
             <div class="text-center mx-auto pb-4 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-                <p class="section-title bg-white text-center text-primary px-3">Semanggi's Store</p>
+                <p class="section-title bg-white text-center text-primary px-3">Toko Srikandi Semanggi</p>
                 <h1 class="mb-4">Olahan sehat berbahan baku semanggi</h1>
             </div>
             <div class="container-xxl py-5">
@@ -88,7 +88,10 @@
                                             @endif
                                         </div>
                                         <div class="text-center p-4">
-                                            <a class="d-block h5 mb-2" href="">{{ ucwords($item->nama) }}</a>
+                                            <div class="nama" style="height: 60px;">
+                                                <a class="d-block h5 mb-2"
+                                                    href="">{{ ucwords($item->nama) }}</a>
+                                            </div>
                                             <span class="text-primary me-1">Rp {{ number_format($item->harga, 2, ',','.') }}</span>
                                             {{-- <span class="text-body text-decoration-line-through">$29.00</span> --}}
                                         </div>
