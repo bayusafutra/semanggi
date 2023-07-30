@@ -13,7 +13,7 @@
                             <div class="row justify-content-start">
                                 <div class="col-lg-8 text-start">
                                     <h1 class="display-1 text-white mb-5 animated slideInRight">KAMPOENG SEMANGGI</h1>
-                                    <p class="fs-4 text-white">Profile</p>
+                                    <p class="fs-4 text-white">Profil Kampoeng Semanggi</p>
                                 </div>
                             </div>
                         </div>

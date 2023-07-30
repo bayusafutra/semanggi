@@ -50,16 +50,17 @@
             <div class="col-lg-6 text-end">
                 <div class="h-100 d-inline-flex align-items-center text-light">
                     <a class="btn btn-link text-light" href="/"><i>Home</i></a>
-                    <a class="btn btn-link text-light" href="/profile"><i>Profile</i></a>
+                    <a class="btn btn-link text-light" href="/profilkampungsemanggi"><i>Profile</i></a>
                 </div>
             </div>
         </div>
     </div>
+
     <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top px-5">
         <div class="brand row d-flex align-items-center">
             <div class="col-11">
                 <a href="/" class="navbar-brand d-flex align-items-center">
-                    <img src="{{ asset('img/logo1.png') }}" class="img-fluid" style="height: 70px" alt="">
+                    <img src="{{ asset('img/logo1.png') }}" class="img-fluid" style="height: 75px" alt="">
                 </a>
             </div>
             <div class="col-1">
@@ -73,24 +74,27 @@
             <div class="row justify-content-between">
                 <div class="col-auto d-none d-lg-block">
                     <div class="d-flex align-items-center">
-                        <form action="">
-                            @csrf
+                        <form action="/catalog#listproduk">
                             <div class="input-group d-flex flex-end-center" style="width: 16cm">
                                 <input class="form-control form-eduprixsearch-control rounded-pill"
-                                    id="formGroupExampleInput" type="text"
-                                    placeholder="Apa yang anda cari hari ini?" />
+                                    id="formGroupExampleInput" type="text" name="search" value="{{ request('search') }}"
+                                    placeholder="Produk apa yang anda cari hari ini?" />
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-            <a class="btn p-0 ms-auto position-relative"><i class="fa fa-shopping-cart fs-4"></i>
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill"
-                    style="background-color: #F68037">
+
+            <a href="/cart" class="btn p-0 ms-auto position-relative"><i class="fa fa-shopping-cart fs-4"></i>
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill" style="background-color: #F68037">
                     @php
                         use App\Models\Cart;
-                        $cart = Cart::where('user_id', auth()->user()->id)->get();
-                        echo $cart->count();
+                        if(auth()->user()){
+                            $cart = Cart::where("user_id", auth()->user()->id)->get();
+                            echo $cart->count();
+                        }else {
+                            echo 0;
+                        }
                     @endphp
                     <span class="visually-hidden">unread messages</span>
                 </span>
@@ -120,14 +124,13 @@
             </div>
         </div>
     </nav>
+
     <!-- Shoping Cart Section Begin -->
     <div class="ShopCart">
         @yield('content')
     </div>
 
-    <!-- Footer Start -->
-    <div class="container-fluid footer mt-5 pt-5 wow fadeIn" style="background-color: #C0E6B7; color: black; position: relative; bottom: 0"
-        data-wow-delay="0.1s">
+    <div class="container-fluid footer mt-5 pt-5 wow fadeIn" style="background-color: #C0E6B7; color: black; position: relative; bottom: 0" data-wow-delay="0.1s">
         <div class="container py-5 d-flex justify-content-center">
             <div class="row g-5">
                 <div class="col-lg-4">
@@ -155,21 +158,18 @@
                 </div>
                 <div class="col-lg-2">
                     <h4 class="text-dark mb-4">Quick Links</h4>
-                    <a class="btn btn-link" style="color: black" href="">Home</a>
-                    <a class="btn btn-link" style="color: black" href="">Profile</a>
+                    <a class="btn btn-link" style="color: black" href="/">Home</a>
+                    <a class="btn btn-link" style="color: black" href="/profilkampungsemanggi">Profile</a>
                     <a class="btn btn-link" style="color: black" href="/catalog">Catalog</a>
                     @guest
-                        <a class="btn btn-link" style="color: black" href="">Login</a>
-                        <a class="btn btn-link" style="color: black" href="">Register</a>
+                        <a class="btn btn-link" style="color: black" href="/login">Login</a>
+                        <a class="btn btn-link" style="color: black" href="/signup">Register</a>
                     @endguest
                 </div>
             </div>
         </div>
     </div>
-    <!-- Footer End -->
 
-
-    <!-- Copyright Start -->
     <div class="container-fluid bg-primary text-body copyright py-4">
         <div class="container">
             <div class="row text-white">
@@ -183,10 +183,8 @@
             </div>
         </div>
     </div>
-    <!-- Copyright End -->
-    <!-- Shoping Cart Section End -->
-    @yield('js')
 
+    @yield('js')
 
     <!-- Js Plugins -->
     <script src="{{ asset('det/js/jquery-3.3.1.min.js') }}"></script>

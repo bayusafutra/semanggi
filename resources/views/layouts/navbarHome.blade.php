@@ -54,7 +54,7 @@
             <div class="col-lg-6 text-end">
                 <div class="h-100 d-inline-flex align-items-center text-light">
                     <a class="btn btn-link text-light" href="/"><i>Home</i></a>
-                    <a class="btn btn-link text-light" href="/profile"><i>Profile</i></a>
+                    <a class="btn btn-link text-light" href="/profilkampungsemanggi"><i>Profile</i></a>
                 </div>
             </div>
         </div>
@@ -77,12 +77,11 @@
             <div class="row justify-content-between">
                 <div class="col-auto d-none d-lg-block">
                     <div class="d-flex align-items-center">
-                        <form action="">
-                            @csrf
+                        <form action="/catalog#listproduk">
                             <div class="input-group d-flex flex-end-center" style="width: 16cm">
                                 <input class="form-control form-eduprixsearch-control rounded-pill"
-                                    id="formGroupExampleInput" type="text"
-                                    placeholder="Apa yang anda cari hari ini?" />
+                                    id="formGroupExampleInput" type="text" name="search" value="{{ request('search') }}"
+                                    placeholder="Produk apa yang anda cari hari ini?" />
                             </div>
                         </form>
                     </div>
@@ -133,7 +132,6 @@
         @yield('content')
     </div>
 
-    <!-- Footer Start -->
     <div class="container-fluid footer mt-5 pt-5 wow fadeIn" style="background-color: #C0E6B7; color: black; position: relative; bottom: 0"
         data-wow-delay="0.1s">
         <div class="container py-5 d-flex justify-content-center">
@@ -163,21 +161,18 @@
                 </div>
                 <div class="col-lg-2">
                     <h4 class="text-dark mb-4">Quick Links</h4>
-                    <a class="btn btn-link" style="color: black" href="">Home</a>
-                    <a class="btn btn-link" style="color: black" href="">Profile</a>
+                    <a class="btn btn-link" style="color: black" href="/">Home</a>
+                    <a class="btn btn-link" style="color: black" href="/profilkampungsemanggi">Profile</a>
                     <a class="btn btn-link" style="color: black" href="/catalog">Catalog</a>
                     @guest
-                        <a class="btn btn-link" style="color: black" href="">Login</a>
-                        <a class="btn btn-link" style="color: black" href="">Register</a>
+                        <a class="btn btn-link" style="color: black" href="/login">Login</a>
+                        <a class="btn btn-link" style="color: black" href="/signup">Register</a>
                     @endguest
                 </div>
             </div>
         </div>
     </div>
-    <!-- Footer End -->
 
-
-    <!-- Copyright Start -->
     <div class="container-fluid bg-primary text-body copyright py-4">
         <div class="container">
             <div class="row text-white">
@@ -191,13 +186,10 @@
             </div>
         </div>
     </div>
-    <!-- Copyright End -->
-
 
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i
             class="bi bi-arrow-up"></i></a>
-
 
     <!-- JavaScript Libraries -->
     <script src="{{ asset('https://code.jquery.com/jquery-3.4.1.min.js') }}"></script>
