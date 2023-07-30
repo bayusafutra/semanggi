@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AlamatController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
@@ -63,18 +64,16 @@ Route::post('/cart-remove', [CartController::class, 'destroy'])->middleware('aut
 Route::post('/update-cart', [CartController::class, 'updateCart'])->middleware('auth');
 
 Route::post('/pesan', [PesananController::class, 'store'])->middleware('auth');
+Route::post('/pesanproduk', [PesananController::class, 'create'])->middleware('auth');
 Route::get('/detailpesanan/{slug}', [PesananController::class, 'index'])->middleware('auth');
 
+Route::get('/ubahalamat', [AlamatController::class, 'edit'])->middleware('auth');
 Route::get('/pembayaran', function () {
     return view('pembayaran');
 });
 
 Route::get('/pembayaran/kode-unik', function () {
     return view('kodepembayaran');
-});
-
-Route::get('/ubahAlamat', function () {
-    return view('ubahAlamatPengiriman');
 });
 
 //////////////////////////ADMIN////////////////////////////

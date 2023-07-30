@@ -18,6 +18,7 @@ class PesananController extends Controller
         $produk = DetailPesananan::where('pesanan_id', $pesanan->id)->get();
         $subtotal = $pesanan->total;
         return view('checkout', [
+            "pesanan" => $pesanan,
             "produk" => $produk,
             "subtotal" => $subtotal
         ]);
@@ -25,10 +26,15 @@ class PesananController extends Controller
 
     public function store(Request $request)
     {
+
         $validatedData["user_id"] = auth()->user()->id;
         $validatedData["slug"] = Str::random(40);
         $validatedData["total"] = $request->price;
         $pesanan = Pesanan::create($validatedData);
+
+        $swap = strtoupper(Str::random(5));
+        $hayo["nomer"] = "SS".$swap.$pesanan->created_at->format('YmdHi').$pesanan->id;
+        $pesanan->update($hayo);
 
         $keranjang = Cart::where('user_id', auth()->user()->id)->get();
         foreach ($keranjang as $ker) {
@@ -37,6 +43,24 @@ class PesananController extends Controller
             $rules["qtyitem"] = $ker->quantity;
             DetailPesananan::create($rules);
         }
+        return redirect("/detailpesanan/$pesanan->slug");
+    }
+
+    public function create(Request $request){
+        $validatedData["user_id"] = auth()->user()->id;
+        $validatedData["slug"] = Str::random(40);
+        $validatedData["total"] = $request->hayo;
+        $pesanan = Pesanan::create($validatedData);
+
+        $swap = strtoupper(Str::random(5));
+        $hayo["nomer"] = "SS".$swap.$pesanan->created_at->format('YmdHi').$pesanan->id;
+        $pesanan->update($hayo);
+
+        $rules["barang_id"] = $request->barang;
+        $rules["pesanan_id"] = $pesanan->id;
+        $rules["qtyitem"] = $request->quantity;
+        DetailPesananan::create($rules);
+
         return redirect("/detailpesanan/$pesanan->slug");
     }
 }

@@ -97,7 +97,7 @@
                                         </div>
                                         <div class="d-flex border-top">
                                             <small class="w-50 text-center border-end py-2">
-                                                <a class="text-body" href="/detailproduk/{{ $item->slug }}"><i class="fa fa-eye text-primary me-2"></i>View detail</a>
+                                                <a class="text-body" href="/detailproduk/{{ $item->slug }}"><i class="fa fa-eye text-primary me-2"></i>Lihat Produk</a>
                                             </small>
                                             <small class="w-50 text-center py-2">
                                                 <form action="/cart" method="POST">

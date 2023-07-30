@@ -9,7 +9,7 @@
                     </a>Detail Pesanan</h4>
                 <form action="#">
                     <div class="row">
-                        <div class="col-lg-8">
+                        <div class="col-lg-7">
                             <div class="checkout__input">
                                 <div class="row">
                                     <div class="card">
@@ -20,7 +20,7 @@
                                             <p class="card-text"><span class="text-success fw-bold">Tasya Rania
                                                     Arinastia</span>, Jl. Jaksa Agung Suprapto No.12, Kauman, Kec. Nganjuk,
                                                 Kabupaten Nganjuk, Jawa Timur 64411, Nganjuk, Nganjuk, Jawa Timur, 64411</p>
-                                            <a href="/ubahAlamat" class="btn btn-primary">Ubah Alamat Pengiriman</a>
+                                            <a href="/ubahalamat" class="btn btn-primary">Ubah Alamat Pengiriman</a>
                                         </div>
                                     </div>
                                     <div class="card mt-3">
@@ -65,9 +65,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-md-6">
+                        <div class="col-lg-5 col-md-6">
                             <div class="checkout__order">
                                 <h4>Pesanan Anda</h4>
+                                <strong>No Pesanan : #{{ $pesanan->nomer }}</strong>
                                 <div class="checkout_order_products"><span>Rincian Produk</span></div>
                                 <ul>
                                     @foreach ($produk as $pro)
@@ -78,7 +79,7 @@
                                 <div class="checkout_order_subtotal mb-3">
                                     <div class="row d-flex justify-content-between">
                                         <div class="col-7">
-                                            <span class="text-start">Subtotal Produk</span>
+                                            <span class="text-end">Subtotal Produk</span>
                                         </div>
                                         <div class="col-5">
                                             <span class="text-end fw-bold">Rp {{ number_format($subtotal, 2, ',','.') }}</span>

@@ -54,7 +54,7 @@
             <div class="col-lg-6 text-end">
                 <div class="h-100 d-inline-flex align-items-center text-light">
                     <a class="btn btn-link text-light" href="/"><i>Home</i></a>
-                    <a class="btn btn-link text-light" href="/profilkampungsemanggi"><i>Profile</i></a>
+                    <a class="btn btn-link text-light" href="/profilkampungsemanggi"><i>Profil Kampung Semanggi</i></a>
                 </div>
             </div>
         </div>

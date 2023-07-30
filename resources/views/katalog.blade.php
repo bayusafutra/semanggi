@@ -108,7 +108,7 @@
                                             </div>
                                             <div class="text-center p-4">
                                                 <div class="nama" style="height: 60px;">
-                                                    <a class="d-block h5 mb-2" href="">{{ ucwords($ker->nama) }}</a>
+                                                    <a class="d-block h5 mb-2" href="/detailproduk/{{ $ker->slug }}">{{ ucwords($ker->nama) }}</a>
                                                 </div>
                                                 <span class="text-primary me-1">Rp
                                                     {{ number_format($ker->harga, 2, ',', '.') }}</span>
@@ -116,7 +116,7 @@
                                             <div class="d-flex border-top">
                                                 <small class="w-50 text-center border-end py-2">
                                                     <a class="text-body" href="/detailproduk/{{ $ker->slug }}"><i
-                                                            class="fa fa-eye text-primary me-2"></i>View detail</a>
+                                                            class="fa fa-eye text-primary me-2"></i>Lihat Produk</a>
                                                 </small>
                                                 <small class="w-50 text-center py-2">
                                                     <form action="/cart" method="POST">
@@ -171,7 +171,7 @@
                                                 <div class="d-flex border-top">
                                                     <small class="w-50 text-center border-end py-2">
                                                         <a class="text-body" href="/detailproduk/{{ $ker->slug }}"><i
-                                                                class="fa fa-eye text-primary me-2"></i>View detail</a>
+                                                                class="fa fa-eye text-primary me-2"></i>Lihat Produk</a>
                                                     </small>
                                                     <small class="w-50 text-center py-2">
                                                         <form action="/cart" method="POST">

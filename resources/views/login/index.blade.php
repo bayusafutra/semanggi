@@ -30,8 +30,7 @@
                             @endif
 
                             @if (session()->has('loginError'))
-                                <div class="alert alert-danger alert-dismissible fade show col-md-12"
-                                    style="margin-left: 100px" role="alert">
+                                <div class="alert alert-danger alert-dismissible fade show col-md-12" role="alert">
                                     {{ session('loginError') }}
                                     <button type="button" class="btn-close" data-bs-dismiss="alert"
                                         aria-label="Close"></button>
