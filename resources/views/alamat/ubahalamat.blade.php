@@ -1,4 +1,12 @@
 @extends('layouts.mainSC')
+@section('css')
+<style>
+    .scrollable-select {
+        max-height: 200px; /* Atur tinggi maksimum sesuai kebutuhan */
+        overflow-y: scroll;
+    }
+</style>
+@endsection
 
 @section('content')
     <!-- Checkout Section Begin -->
@@ -12,36 +20,46 @@
                         <div class="col-lg-8 col-md-6">
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">Nama Penerima</label>
-                                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Nama Lengkap">
+                                <input type="text" class="form-control" id="exampleFormControlInput1"
+                                    placeholder="Nama Lengkap">
                             </div>
-                            <div class="mb-3">
-                                <label for="exampleFormControlInput1" class="form-label">Nomor Telepon</label>
-                                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Nomor Telepon">
+                            <label for="exampleFormControlInput1" class="form-label">Nomor Telepon</label><br>
+                            <div class="mb-3 input-group flex-nowrap">
+                                <span class="input-group-text" id="addon-wrapping">+62</span>
+                                <input type="text" class="form-control" placeholder="Contoh: 881026108613"
+                                    aria-label="Nomor" aria-describedby="addon-wrapping"
+                                    oninput="this.value = this.value.replace(/[^0-9]/g, '');">
                             </div>
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">Alamat Lengkap</label>
-                                <textarea name="" class="form-control" id="" cols="15" rows="5" placeholder="Nama Jalan, Gedung, No Rumah"></textarea>
+                                <textarea name="" class="form-control" id="" cols="15" rows="5"
+                                    placeholder="Nama Jalan, Gedung, No Rumah"></textarea>
                             </div>
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">Detail Lainnya</label>
-                                <input type="text" class="form-control" name="" id="" placeholder="Contoh: Blok / Unit No., Patokan">
+                                <input type="text" class="form-control" name="" id=""
+                                    placeholder="Contoh: Blok / Unit No., Patokan">
                             </div>
 
                             <div class="row">
+
                                 <div class="col-lg-6">
                                     <div class="form-group mb-3">
                                         <label for="inputProvinsi">Provinsi</label>
                                         <select id="inputProvinsi" class="form-control">
-                                            <option selected>Pilih Provinsi</option>
-                                            <option>Jawa Timur</option>
-                                            <option>Jawa Tengah</option>
+                                            <option selected="selected" disabled="disabled">Pilih Provinsi</option>
+                                            @foreach ($provinsi as $pro)
+                                                <option>{{ ucwords($pro->name) }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
+
+
                                 <div class="col-lg-6">
                                     <div class="form-group mb-3">
                                         <label for="inputKota">Kota/Kabupaten</label>
-                                        <select id="inputKota" class="form-control">
+                                        <select id="inputKota" class="form-control" style="max-height: 200px; overflow-y: auto;">
                                             <option selected>Pilih Kota/Kabupaten</option>
                                             <option>Surabaya</option>
                                             <option>Sidoarjo</option>
@@ -49,10 +67,12 @@
                                     </div>
                                 </div>
 
+
                                 <div class="col-lg-4 mt-4">
                                     <div class="form-group mb-3">
-                                        <label for="inputProvinsi">Kecamatan</label>
-                                        <select id="inputProvinsi" class="form-control">
+                                        <label for="inputKecamatan">Kecamatan</label>
+                                        <select id="inputKecamatan" class="form-control"
+                                            style="max-height: 200px; overflow-y: auto;">
                                             <option selected>Pilih Kecamatan</option>
                                             <option>Wonocolo</option>
                                             <option>Semampir</option>
@@ -62,8 +82,9 @@
 
                                 <div class="col-lg-4 mt-4">
                                     <div class="form-group mb-3">
-                                        <label for="inputProvinsi">Kelurahan/Desa</label>
-                                        <select id="inputProvinsi" class="form-control">
+                                        <label for="inputKelurahan">Kelurahan/Desa</label>
+                                        <select id="inputKelurahan" class="form-control"
+                                            style="max-height: 200px; overflow-y: auto;">
                                             <option selected>Pilih Kelurahan/Desa</option>
                                             <option>Jemur Wonosari</option>
                                             <option>Wonokusumo</option>
@@ -78,45 +99,8 @@
                                     </div>
                                 </div>
                             </div>
-                            {{-- <div class="checkout__input">
-                                <p>Alamat<span>*</span></p>
-                                <input type="text" placeholder="Street Address" class="checkout_input_add">
-                            </div>
-                            <div class="checkout__input">
-                                <p>Kota/Kabupaten<span>*</span></p>
-                                <input type="text">
-                            </div>
-                            <div class="checkout__input">
-                                <p>Kode Pos<span>*</span></p>
-                                <input type="text">
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="checkout__input">
-                                        <p>Nomor Handphone<span>*</span></p>
-                                        <input type="text">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="checkout__input">
-                                        <p>Email<span>*</span></p>
-                                        <input type="text">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="checkout_input_checkbox">
-                                <label for="diff-acc">
-                                    Kirim untuk seseorang ?
-                                    <input type="checkbox" id="diff-acc">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                            <div class="checkout__input">
-                                <p>Catatan<span>*</span></p>
-                                <input type="text"
-                                    placeholder="Notes about your order, e.g. special notes for delivery.">
-                            </div> --}}
                         </div>
+
                         <div class="col-lg-4 col-md-6">
                             <div class="checkout__order">
                                 <h4>Your Order</h4>
@@ -157,7 +141,8 @@
                                 <div class="container mt-4">
                                     <div class="row">
                                         <div class="col text-center">
-                                            <a class="site-btn" href="/pembayaran" role="button">Lanjutkan Pembayaran</a>
+                                            <a class="site-btn" href="/pembayaran" role="button">Lanjutkan
+                                                Pembayaran</a>
                                         </div>
                                     </div>
                                 </div>

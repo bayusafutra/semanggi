@@ -20,7 +20,7 @@
                                             <p class="card-text"><span class="text-success fw-bold">Tasya Rania
                                                     Arinastia</span>, Jl. Jaksa Agung Suprapto No.12, Kauman, Kec. Nganjuk,
                                                 Kabupaten Nganjuk, Jawa Timur 64411, Nganjuk, Nganjuk, Jawa Timur, 64411</p>
-                                            <a href="/ubahalamat" class="btn btn-primary">Ubah Alamat Pengiriman</a>
+                                            <a href="/ubahAlamat" class="btn btn-primary">Ubah Alamat Pengiriman</a>
                                         </div>
                                     </div>
                                     <div class="card mt-3">

@@ -67,7 +67,7 @@ Route::post('/pesan', [PesananController::class, 'store'])->middleware('auth');
 Route::post('/pesanproduk', [PesananController::class, 'create'])->middleware('auth');
 Route::get('/detailpesanan/{slug}', [PesananController::class, 'index'])->middleware('auth');
 
-Route::get('/ubahalamat', [AlamatController::class, 'edit'])->middleware('auth');
+Route::get('/ubahAlamat', [AlamatController::class, 'edit'])->middleware('auth');
 Route::get('/pembayaran', function () {
     return view('pembayaran');
 });
