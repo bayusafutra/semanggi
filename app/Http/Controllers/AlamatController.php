@@ -8,9 +8,21 @@ use Illuminate\Http\Request;
 class AlamatController extends Controller
 {
     public function edit(){
-        $provinsi = DB::table('provinces')->get();
         return view('alamat.ubahalamat', [
-            "provinsi" => $provinsi
         ]);
+    }
+
+    public function provinsi(){
+        $data = DB::table('provinces')
+        ->where('name', 'LIKE', '%' . request('q') . '%')
+        ->paginate(10);
+        return response()->json($data);
+    }
+
+    public function regency($id){
+        $data = DB::table('regencies')
+        ->where('name', 'LIKE', '%' . request('q') . '%')
+        ->paginate(10);
+        return response()->json($data);
     }
 }

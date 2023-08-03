@@ -9,7 +9,7 @@
                     </a>Detail Pesanan</h4>
                 <form action="#">
                     <div class="row">
-                        <div class="col-lg-7">
+                        <div class="col-lg-6">
                             <div class="checkout__input">
                                 <div class="row">
                                     <div class="card">
@@ -65,57 +65,76 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-5 col-md-6">
+                        <div class="col-lg-6">
                             <div class="checkout__order">
                                 <h4>Pesanan Anda</h4>
                                 <strong>No Pesanan : #{{ $pesanan->nomer }}</strong>
-                                <div class="checkout_order_products"><span>Rincian Produk</span></div>
-                                <ul>
-                                    @foreach ($produk as $pro)
-                                        <li>{{ ucwords($pro->barang->nama) }} (x{{ $pro->qtyitem }})<span>Rp {{ number_format($pro->barang->harga*$pro->qtyitem, 2, ',','.') }}</span></li>
-                                    @endforeach
-                                </ul>
+                                <div class="checkout_order_subtotal mb-3">
+                                    <div class="row d-flex justify-content-between">
+                                            <span class="text-start">Rincian Produk</span>
+                                                @foreach ($produk as $pro)
+                                                <div class="row">
+                                                    <div class="col-8">
+                                                        <span class="col-7">{{ ucwords($pro->barang->nama)}} (x{{ $pro->qtyitem }})</span>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <span class="text-end fw-bold">Rp {{ number_format($pro->barang->harga*$pro->qtyitem, 2, ',','.') }}</span>
+                                                    </div>
+                                                </div>
+                                                @endforeach
+                                    </div>
+                                </div>
+
+                                <hr>
 
                                 <div class="checkout_order_subtotal mb-3">
                                     <div class="row d-flex justify-content-between">
-                                        <div class="col-7">
-                                            <span class="text-end">Subtotal Produk</span>
-                                        </div>
-                                        <div class="col-5">
-                                            <span class="text-end fw-bold">Rp {{ number_format($subtotal, 2, ',','.') }}</span>
+                                        <div class="row">
+                                            <div class="col-8">
+                                                <span class="text-start">Subtotal Produk</span>
+                                            </div>
+                                            <div class="col-4">
+                                                <span class="text-end fw-bold">Rp {{ number_format($subtotal, 2, ',','.') }}</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="checkout_order_subtotal mb-3">
                                     <div class="row d-flex justify-content-between">
-                                        <div class="col-8">
-                                            <span class="text-start">Ongkir</span>
-                                        </div>
-                                        <div class="col-4">
-                                            <span class="text-end fw-bold">Rp.90.000</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="checkout_order_subtotal mb-3">
-                                    <div class="row d-flex justify-content-between">
-                                        <div class="col-8">
-                                            <span class="text-start">Biaya Layanan</span>
-                                        </div>
-                                        <div class="col-4">
-                                            <span class="text-end fw-bold">Rp.90.000</span>
+                                        <div class="row">
+                                            <div class="col-8">
+                                                <span class="text-start">Ongkir</span>
+                                            </div>
+                                            <div class="col-4">
+                                                <span class="text-end fw-bold">Rp {{ number_format($subtotal, 2, ',','.') }}</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="checkout_order_subtotal mb-3">
                                     <div class="row d-flex justify-content-between">
-                                        <div class="col-8">
-                                            <span class="text-start">Total Biaya</span>
+                                        <div class="row">
+                                            <div class="col-8">
+                                                <span class="text-start">Biaya Layanan</span>
+                                            </div>
+                                            <div class="col-4">
+                                                <span class="text-end fw-bold">Rp {{ number_format($subtotal, 2, ',','.') }}</span>
+                                            </div>
                                         </div>
-                                        <div class="col-4">
-                                            <span class="text-end fw-bold">Rp.90.000</span>
+                                    </div>
+                                </div>
+
+                                <div class="checkout_order_subtotal mb-3">
+                                    <div class="row d-flex justify-content-between">
+                                        <div class="row">
+                                            <div class="col-8">
+                                                <span class="text-start">Total Biaya</span>
+                                            </div>
+                                            <div class="col-4">
+                                                <span class="text-end fw-bold">Rp {{ number_format($subtotal, 2, ',','.') }}</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
