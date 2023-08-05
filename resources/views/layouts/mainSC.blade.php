@@ -108,6 +108,7 @@
                             <a href="/dashboard" class="dropdown-item py-2">Administrator</a>
                             <hr style="border: 2px black">
                         @endcan
+                        <a class="dropdown-item py-2" href="/profilpengguna" style="text-decoration: none">Profil Pengguna</a>
                         <a class="dropdown-item py-2" href="/ubahpassword" style="text-decoration: none">Ubah Password</a>
                         <form action="/logout" method="post">
                             @csrf

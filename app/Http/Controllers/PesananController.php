@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Requests\StorePesananRequest;
 use App\Http\Requests\UpdatePesananRequest;
+use App\Models\Alamat;
 use App\Models\Cart;
 use App\Models\DetailPesananan;
 
@@ -26,10 +27,13 @@ class PesananController extends Controller
 
     public function store(Request $request)
     {
-
         $validatedData["user_id"] = auth()->user()->id;
         $validatedData["slug"] = Str::random(40);
         $validatedData["total"] = $request->price;
+        $alamat = Alamat::where('user_id', auth()->user()->id)->where('status', 1)->first();
+        if($alamat->count()){
+            $validatedData["alamat_id"] = $alamat->id;
+        }
         $pesanan = Pesanan::create($validatedData);
 
         $swap = strtoupper(Str::random(5));
@@ -50,6 +54,10 @@ class PesananController extends Controller
         $validatedData["user_id"] = auth()->user()->id;
         $validatedData["slug"] = Str::random(40);
         $validatedData["total"] = $request->hayo;
+        $alamat = Alamat::where('user_id', auth()->user()->id)->where('status', 1)->first();
+        if($alamat->count()){
+            $validatedData["alamat_id"] = $alamat->id;
+        }
         $pesanan = Pesanan::create($validatedData);
 
         $swap = strtoupper(Str::random(5));

@@ -14,6 +14,7 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LupaPasswordController;
 use App\Http\Controllers\PesananController;
 use App\Http\Controllers\UbahPasswordController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,10 @@ Route::get('/catalog', [CatalogController::class, 'index']);
 Route::get('/profilkampungsemanggi', function () {
     return view('profile');
 });
+
+Route::get('/profilpengguna', [ProfileController::class, 'index'])->middleware('auth');
+Route::get('/editprofile', [ProfileController::class, 'edit'])->middleware('auth');
+Route::post('/editprofile', [ProfileController::class, 'update'])->middleware('auth');
 
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate'])->middleware('guest');
@@ -67,9 +72,14 @@ Route::post('/pesan', [PesananController::class, 'store'])->middleware('auth');
 Route::post('/pesanproduk', [PesananController::class, 'create'])->middleware('auth');
 Route::get('/detailpesanan/{slug}', [PesananController::class, 'index'])->middleware('auth');
 
-Route::get('/ubahAlamat', [AlamatController::class, 'edit'])->middleware('auth');
+Route::get('/ubahAlamat/{slug}', [AlamatController::class, 'index'])->middleware('auth');
+Route::get('/tambahAlamat', [AlamatController::class, 'edit'])->middleware('auth');
 Route::get('inputProvinsi', [AlamatController::class, 'provinsi'])->name('pilihProv');
-Route::get('inputKota/{id}', [AlamatController::class, 'regency']);
+Route::get('inputKota/{id}', [AlamatController::class, 'regency'])->name('pilihKota');
+Route::get('inputKecamatan/{id}', [AlamatController::class, 'district'])->name('pilihKecamatan');
+Route::get('inputKelurahan/{id}', [AlamatController::class, 'village'])->name('pilihKelurahan');
+Route::get('inputKodePos/{id}', [AlamatController::class, 'kodepos'])->name('pilihKodePos');
+Route::post('/createalamat', [AlamatController::class, 'store'])->middleware('auth');
 
 Route::get('/pembayaran', function () {
     return view('pembayaran');

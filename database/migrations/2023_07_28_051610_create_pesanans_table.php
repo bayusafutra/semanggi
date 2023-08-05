@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('pesanans', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->integer('status')->default(1);
             $table->bigInteger('total');
             $table->integer('subproduk')->default(0);
