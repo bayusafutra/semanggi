@@ -78,8 +78,7 @@
                         <form action="/catalog#listproduk">
                             <div class="input-group d-flex flex-end-center" style="width: 16cm">
                                 <input class="form-control form-eduprixsearch-control rounded-pill"
-                                    id="formGroupExampleInput" type="text" name="search"
-                                    value="{{ request('search') }}"
+                                    id="formGroupExampleInput" type="text" name="search" value="{{ request('search') }}"
                                     placeholder="Produk apa yang anda cari hari ini?" />
                             </div>
                         </form>
@@ -88,14 +87,13 @@
             </div>
 
             <a href="/cart" class="btn p-0 ms-auto position-relative"><i class="fa fa-shopping-cart fs-4"></i>
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill"
-                    style="background-color: #F68037">
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill" style="background-color: #F68037">
                     @php
                         use App\Models\Cart;
-                        if (auth()->user()) {
-                            $cart = Cart::where('user_id', auth()->user()->id)->get();
+                        if(auth()->user()){
+                            $cart = Cart::where("user_id", auth()->user()->id)->get();
                             echo $cart->count();
-                        } else {
+                        }else {
                             echo 0;
                         }
                     @endphp
@@ -111,8 +109,8 @@
                             <a href="/dashboard" class="dropdown-item py-2">Administrator</a>
                             <hr style="border: 2px black">
                         @endcan
-                        <a class="dropdown-item py-2" href="/ubahpassword" style="text-decoration: none">Ubah
-                            Password</a>
+                        <a class="dropdown-item py-2" href="/profilpengguna" style="text-decoration: none">Profil Pengguna</a>
+                        <a class="dropdown-item py-2" href="/ubahpassword" style="text-decoration: none">Ubah Password</a>
                         <form action="/logout" method="post">
                             @csrf
                             <button class="dropdown-item py-2" style="color: black">Logout</button>
@@ -137,7 +135,7 @@
             <div class="row g-5">
                 <div class="col-lg-4">
                     {{-- <h1 class="fw-bold text-primary mb-4">Srikandi<span class="text-warning">Semanggi</span></h1> --}}
-                    <img src="img/logo1.png" class="img-fluid" alt="">
+                    <img src="{{ asset('img/logo1.png') }}" class="img-fluid" alt="">
                     <p>Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed
                         stet lorem sit clita</p>
                     <div class="d-flex pt-2">

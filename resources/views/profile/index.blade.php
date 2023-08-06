@@ -33,11 +33,17 @@
                                 </a>
                             </li>
                             <li style="width: 100%">
-                                <a class="d-flex align-items-center justify-content-between" href=""
+                                <a class="d-flex align-items-center justify-content-between" href="/pesanansaya"
                                     style="padding: 0px 15px 0px 15px"><i class="fa fa-cube" style="color: #89817F">
                                         Pesanan Saya</i>
                                     <span class="label pull-right r-activity m-2"
-                                        style="background: #5B8C51; color: white; padding: 1px 10px 1px 10px;">0</span>
+                                        style="background: #5B8C51; color: white; padding: 1px 10px 1px 10px;">
+                                        @php
+                                            use App\Models\Pesanan;
+                                            $pesanan = Pesanan::where('user_id', auth()->user()->id)->get();
+                                            echo $pesanan->count();
+                                        @endphp
+                                    </span>
                                 </a>
                             </li>
                             <li style="width: 100%">
@@ -52,18 +58,13 @@
                                     style="padding: 10px 15px 10px 15px"><i class="fa fa-edit" style="color: #89817F"></i>Edit Profile
                                 </a>
                             </li>
-                            <li style="width: 100%">
-                                <a class="d-flex align-items-center" href="/alamatpengiriman"
-                                    style="padding: 10px 15px 10px 15px"><i class="fa fa-map-marker" style="color: #89817F"></i>Alamat Pengiriman
-                                </a>
-                            </li>
                         </ul>
                     </div>
                 </div>
                 <div class="profile-info col-md-9">
                     <div class="panel">
                         <div class="bio-graph-heading" style="font-style: normal; font-weight: 900">
-                            DATA DIRI DONATUR
+                            DATA DIRI
                         </div>
                         <div class="panel-body bio-graph-info container py-3" style="background-color: white">
                             <h1>Biografi</h1>
@@ -77,7 +78,7 @@
                                 </div>
                                 <div class="bio-row">
                                     @if (auth()->user()->notelp)
-                                        <p><span style="font-weight: 900">No Telepon </span>:
+                                        <p><span style="font-weight: 900">No Telepon </span>: +62
                                             {{ auth()->user()->notelp }}</p>
                                     @else
                                         <p><span style="font-weight: 900">No Telepon </span>: -</p>

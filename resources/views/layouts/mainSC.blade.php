@@ -136,7 +136,7 @@
             <div class="row g-5">
                 <div class="col-lg-4">
                     {{-- <h1 class="fw-bold text-primary mb-4">Srikandi<span class="text-warning">Semanggi</span></h1> --}}
-                    <img src="img/logo1.png" class="img-fluid" alt="">
+                    <img src="{{ asset('img/logo1.png') }}" class="img-fluid" alt="">
                     <p>Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed
                         stet lorem sit clita</p>
                     <div class="d-flex pt-2">

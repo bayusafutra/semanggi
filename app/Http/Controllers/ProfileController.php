@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Alamat;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
@@ -45,5 +46,9 @@ class ProfileController extends Controller
         }
         $user->update($validatedData);
         return back()->with('success', "Data diri pengguna berhasil diupdate");
+    }
+
+    public function pesanan(){
+        return view('profile.pesanansaya');
     }
 }

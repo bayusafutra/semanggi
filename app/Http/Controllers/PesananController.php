@@ -31,7 +31,7 @@ class PesananController extends Controller
         $validatedData["slug"] = Str::random(40);
         $validatedData["total"] = $request->price;
         $alamat = Alamat::where('user_id', auth()->user()->id)->where('status', 1)->first();
-        if($alamat->count()){
+        if($alamat){
             $validatedData["alamat_id"] = $alamat->id;
         }
         $pesanan = Pesanan::create($validatedData);

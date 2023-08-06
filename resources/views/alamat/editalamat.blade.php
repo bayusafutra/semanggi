@@ -1,15 +1,17 @@
 @extends('layouts.alamatlayout')
+
 @section('kontent')
     <section class="checkout spad" style="margin-bottom: 100px">
         <div class="container">
             <div class="checkout__form">
-                <h4><a type="button" class="btn p-0 ms-auto btn-lg me-md-2" href="/ubahAlamat/{{ $pesanan->slug }}"><i class="bi bi-arrow-left"></i>
-                    </a>Tambah Alamat Pengiriman</h4>
-                <form action="/createalamat" method="POST">
+                <h4><a type="button" class="btn p-0 ms-auto btn-lg me-md-2" href="javascript:void(0);"
+                        onclick="history.back();"><i class="bi bi-arrow-left"></i>
+                    </a>Edit Alamat Pengiriman</h4>
+                <form action="/editalamat" method="POST">
+                    <input type="hidden" name="id" value="{{ $alamat->id }}">
                     @csrf
-                    <input type="hidden" name="pesanan" value="{{ $pesanan->id }}">
                     <div class="row">
-                        <div class="col-lg-6 col-md-6">
+                        <div class="col-lg-9 col-md-6">
                             @if (session()->has('success'))
                                 <div class="row justify-content-center">
                                     <div class="alert alert-success alert-dismissible text-center col-lg-6 fade show"
@@ -24,7 +26,7 @@
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">Nama Penerima</label>
                                 <input type="text" class="form-control" id="exampleFormControlInput1" name="nama"
-                                    value="{{ old('nama') }}" placeholder="Nama Penerima" required>
+                                    value="{{ old('nama', $alamat->nama) }}" placeholder="Nama Penerima" required>
                             </div>
 
                             <label for="exampleFormControlInput1" class="form-label">Nomor Telepon</label><br>
@@ -32,20 +34,21 @@
                                 <span class="input-group-text" id="addon-wrapping">+62</span>
                                 <input type="text" class="form-control" placeholder="Contoh: 881026108613"
                                     aria-label="Nomor" aria-describedby="addon-wrapping" name="notelp"
-                                    value="{{ old('notelp') }}" oninput="this.value = this.value.replace(/[^0-9]/g, '');"
-                                    required>
+                                    value="{{ old('notelp', $alamat->notelp) }}"
+                                    oninput="this.value = this.value.replace(/[^0-9]/g, '');" required>
                             </div>
 
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">Alamat Lengkap</label>
                                 <textarea class="form-control" id="" cols="15" rows="5" placeholder="Nama Jalan, Gedung, No Rumah"
-                                    name="alamat" required>{{ old('alamat') }}</textarea>
+                                    name="alamat" required>{{ old('alamat', $alamat->alamat) }}</textarea>
                             </div>
 
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">Detail Lainnya</label>
                                 <input type="text" class="form-control" name="detail" id="detail"
-                                    value="{{ old('detail') }}" placeholder="Contoh: Blok / Unit No., Patokan">
+                                    value="{{ old('detail', $alamat->detail) }}"
+                                    placeholder="Contoh: Blok / Unit No., Patokan">
                             </div>
 
                             <div class="row">
@@ -58,7 +61,6 @@
                                     </div>
                                 </div>
 
-
                                 <div class="col-lg-6">
                                     <div class="form-group mb-3">
                                         <label for="inputKota">Kota/Kabupaten</label>
@@ -67,7 +69,6 @@
                                         </select>
                                     </div>
                                 </div>
-
 
                                 <div class="col-lg-4 mt-4">
                                     <div class="form-group mb-3">
@@ -95,86 +96,18 @@
                                         </select>
                                     </div>
                                 </div>
-
                             </div>
+
+                            @if ($alamat->status != 1)
+                                <div class="form-check form-switch form-check-reverse mt-3">
+                                    <input class="form-check-input" style="height: 70%; width: 5%" type="checkbox" id="flexSwitchCheckReverse" name="utama">
+                                    <label class="form-check-label ms-3" style="font-size: 130%; padding-top: 1px" for="flexSwitchCheckReverse">Jadikan sebagai alamat utama</label>
+                                </div>
+                            @endif
+
                             <div class="button d-flex justify-content-center mt-5">
                                 <button type="submit" class="btn btn-lg"
                                     style="background-color: #5B8C51; color: white">Simpan</button>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-6">
-                            <div class="checkout__order">
-                                <h4>Pesanan Anda</h4>
-                                <div class="row d-flex justify-content-between">
-                                    <div class="col-7">
-                                        <strong>No Pesanan : #{{ $pesanan->nomer }}</strong><br>
-                                    </div>
-                                    <div class="col-5">
-                                        <small class="" style="font-size: 15px">{{ \Carbon\Carbon::parse($pesanan->created_at)->translatedFormat('l, d F Y H:i') }}</small>
-                                    </div>
-                                </div>
-                                <div class="checkout_order_subtotal my-3">
-                                    <div class="row d-flex justify-content-between">
-                                        <span class="text-start">Rincian Produk</span>
-                                        @foreach ($produk as $pro)
-                                            <div class="row">
-                                                <div class="col-8">
-                                                    <span class="col-7">{{ ucwords($pro->barang->nama) }}
-                                                        (x{{ $pro->qtyitem }})
-                                                    </span>
-                                                </div>
-                                                <div class="col-4">
-                                                    <span class="text-end">Rp
-                                                        {{ number_format($pro->barang->harga * $pro->qtyitem, 2, ',', '.') }}</span>
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                </div>
-
-                                <hr>
-
-                                <div class="checkout_order_subtotal mb-2">
-                                    <div class="row d-flex justify-content-between">
-                                        <div class="row">
-                                            <div class="col-8">
-                                                <span class="text-start">Subtotal Produk</span>
-                                            </div>
-                                            <div class="col-4">
-                                                <span class="text-end">Rp
-                                                    {{ number_format($subtotal, 2, ',', '.') }}</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="checkout_order_subtotal mb-2">
-                                    <div class="row d-flex justify-content-between">
-                                        <div class="row">
-                                            <div class="col-8">
-                                                <span class="text-start">Ongkos Kirim</span>
-                                            </div>
-                                            <div class="col-4">
-                                                <span class="text-end">Rp 7.000,00</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="checkout_order_subtotal mb-2">
-                                    <div class="row d-flex justify-content-between">
-                                        <div class="row">
-                                            <div class="col-8">
-                                                <span class="text-start fw-bold">Total Biaya</span>
-                                            </div>
-                                            <div class="col-4">
-                                                <span class="text-end fw-bold">Rp
-                                                    {{ number_format($subtotal + 7000, 2, ',', '.') }}</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -183,6 +116,7 @@
         </div>
     </section>
 @endsection
+
 @section('js')
     <script>
         $(document).ready(function() {
@@ -298,5 +232,14 @@
             });
 
         });
+    </script>
+    <script>
+        export default {
+            methods: {
+                goBack() {
+                    this.$router.go(-1); // Menggunakan Vue Router untuk kembali ke halaman sebelumnya
+                }
+            }
+        };
     </script>
 @endsection

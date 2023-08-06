@@ -73,11 +73,17 @@
                                 </a>
                             </li>
                             <li style="width: 100%">
-                                <a class="d-flex align-items-center justify-content-between" href=""
+                                <a class="d-flex align-items-center justify-content-between" href="/pesanansaya"
                                     style="padding: 0px 15px 0px 15px"><i class="fa fa-cube" style="color: #89817F">
                                         Pesanan Saya</i>
                                     <span class="label pull-right r-activity m-2"
-                                        style="background: #5B8C51; color: white; padding: 1px 10px 1px 10px;">0</span>
+                                        style="background: #5B8C51; color: white; padding: 1px 10px 1px 10px;">
+                                        @php
+                                            use App\Models\Pesanan;
+                                            $pesanan = Pesanan::where('user_id', auth()->user()->id)->get();
+                                            echo $pesanan->count();
+                                        @endphp
+                                    </span>
                                 </a>
                             </li>
                             <li style="width: 100%">
@@ -91,12 +97,6 @@
                             <li class="active" style="width: 100%">
                                 <a class="d-flex align-items-center" href="#" style="padding: 10px 15px 10px 15px"><i
                                         class="fa fa-edit" style="color: #89817F"></i>Edit Profile
-                                </a>
-                            </li>
-                            <li style="width: 100%">
-                                <a class="d-flex align-items-center" href="/alamatpengiriman"
-                                    style="padding: 10px 15px 10px 15px"><i class="fa fa-map-marker"
-                                        style="color: #89817F"></i>Alamat Pengiriman
                                 </a>
                             </li>
                         </ul>
