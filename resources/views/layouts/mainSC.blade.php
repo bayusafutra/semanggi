@@ -11,6 +11,7 @@
     <link href="{{ asset('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap') }}" rel="stylesheet">
     <!-- Dalam bagian head -->
     <script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="{{ asset('det/css/bootstrap.min.css') }}" type="text/css">

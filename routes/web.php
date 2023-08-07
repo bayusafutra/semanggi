@@ -72,6 +72,7 @@ Route::post('/update-cart', [CartController::class, 'updateCart'])->middleware('
 Route::post('/pesan', [PesananController::class, 'store'])->middleware('auth');
 Route::post('/pesanproduk', [PesananController::class, 'create'])->middleware('auth');
 Route::get('/detailpesanan/{slug}', [PesananController::class, 'index'])->middleware('auth');
+Route::post('/checkout', [PesananController::class, 'checkout'])->middleware('auth');
 
 Route::get('inputProvinsi', [AlamatController::class, 'provinsi'])->name('pilihProv');
 Route::get('inputKota/{id}', [AlamatController::class, 'regency'])->name('pilihKota');

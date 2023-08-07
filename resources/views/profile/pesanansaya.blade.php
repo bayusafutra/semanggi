@@ -66,7 +66,7 @@
                 <div class="profile-info col-md-9">
                     <div class="panel">
                         <div class="bio-graph-heading" style="font-style: normal; font-weight: 900">
-                            DATA DIRI
+                            DATA PESANAN
                         </div>
                         <div class="panel-body bio-graph-info container py-3" style="background-color: white">
                             <section id="listproduk">
@@ -77,34 +77,44 @@
                                                 data-wow-delay="100">
                                                 <ul class="produk nav nav-pills d-flex mx-auto justify-content-center mb-5">
 
-                                                    <li class="nav-item me-2">
+                                                    <li class="nav-item me-2 mb-2">
                                                         <a class="btn btn-outline-primary border-2 active"
-                                                            data-bs-toggle="pill" href="#tab-1">Belum Bayar</a>
+                                                            data-bs-toggle="pill" href="#tab-1">Belum Checkout</a>
                                                     </li>
 
-                                                    <li class="nav-item me-2">
+                                                    <li class="nav-item me-2 mb-2">
+                                                        <a class="btn btn-outline-primary border-2"
+                                                            data-bs-toggle="pill" href="#tab-8">Belum Bayar</a>
+                                                    </li>
+
+                                                    <li class="nav-item me-2 mb-2">
                                                         <a class="btn btn-outline-primary border-2" data-bs-toggle="pill"
                                                             href="#tab-2">Verifikasi</a>
                                                     </li>
 
-                                                    <li class="nav-item me-2">
+                                                    <li class="nav-item me-2 mb-2">
                                                         <a class="btn btn-outline-primary border-2" data-bs-toggle="pill"
                                                             href="#tab-3">Dikemas</a>
                                                     </li>
 
-                                                    <li class="nav-item me-2">
+                                                    <li class="nav-item me-2 mb-2">
                                                         <a class="btn btn-outline-primary border-2" data-bs-toggle="pill"
                                                             href="#tab-4">Dikirim</a>
                                                     </li>
 
-                                                    <li class="nav-item me-2">
+                                                    <li class="nav-item me-2 mb-2">
                                                         <a class="btn btn-outline-primary border-2" data-bs-toggle="pill"
-                                                            href="#tab-5">Selesai</a>
+                                                            href="#tab-5">Menunggu Pengambilan</a>
                                                     </li>
 
-                                                    <li class="nav-item me-2">
+                                                    <li class="nav-item me-2 mb-2">
                                                         <a class="btn btn-outline-primary border-2" data-bs-toggle="pill"
-                                                            href="#tab-6">Batal</a>
+                                                            href="#tab-6">Selesai</a>
+                                                    </li>
+
+                                                    <li class="nav-item me-2 mb-2">
+                                                        <a class="btn btn-outline-primary border-2" data-bs-toggle="pill"
+                                                            href="#tab-7">Batal</a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -112,71 +122,846 @@
 
                                         <div class="tab-content">
                                             <div id="tab-1" class="tab-pane fade show p-0 active">
-                                                <div class="row g-4">
-                                                    <div class="card p-3" style="border-color: black">
-                                                        <div class="card-title">
-                                                            <div class="row d-flex justify-content-between">
-                                                                <div class="col-6">
-                                                                    <strong>No Pesanan</strong>
+                                                <div class="row g-4 d-flex justify-content-center">
+                                                    @if ($belumco->count())
+                                                        @foreach ($belumco as $bel)
+                                                            <div class="col-10">
+                                                                <div class="card p-3"
+                                                                    style="border: none; background-color: #F1F2F7">
+                                                                    <div class="card-title">
+                                                                        <div class="row d-flex justify-content-between">
+                                                                            <div class="col-6">
+                                                                                <strong class="fw-bold fs-5"><a
+                                                                                        title="Lihat detail pesanan"
+                                                                                        style="color: black"
+                                                                                        href="/detailpesanan/{{ $bel->slug }}">#{{ $bel->nomer }}</a></strong>
+                                                                            </div>
+                                                                            <div class="col-6 text-end">
+                                                                                <small
+                                                                                    style="color: black">{{ \Carbon\Carbon::parse($bel->created_at)->translatedFormat('l, d F Y H:i') }}</small>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card-body">
+                                                                        <div class="row">
+                                                                            <div class="col-2">
+                                                                                <img src="{{ asset('storage/' . $bel->detail[0]->barang->gambar) }}"
+                                                                                    style="height: 77px; width: 77px"
+                                                                                    alt="">
+                                                                            </div>
+                                                                            <div class="col-10">
+                                                                                <span
+                                                                                    style="color:black; 500; font-size: 20px font-family: Verdana, Geneva, Tahoma, sans-serif;">{{ $bel->detail[0]->barang->nama }}</span><br>
+                                                                                <div class="row">
+                                                                                    <div class="col-6">
+                                                                                        <span
+                                                                                            style="color: black">{{ $bel->detail[0]->barang->berat }}</span>
+                                                                                    </div>
+                                                                                    <div class="col-6 text-end">
+                                                                                        <span
+                                                                                            style="color: black">x{{ $bel->detail[0]->qtyitem }}
+                                                                                            {{ $bel->detail[0]->barang->quantity }}</span>
+                                                                                    </div>
+                                                                                    <div class="col-12 text-end">
+                                                                                        <span style="color: #F68037">Rp
+                                                                                            {{ number_format($bel->detail[0]->barang->harga, 2, ',', '.') }}</span>
+                                                                                    </div>
+
+                                                                                    @if ($bel->detail()->count() > 1)
+                                                                                        <hr class="my-2"
+                                                                                            style="border: 1px solid rgb(91, 91, 91)">
+                                                                                        <div class="col-12 text-center">
+                                                                                            <a href="">Tampilkan
+                                                                                                produk pembelian lainnya</a>
+                                                                                        </div>
+                                                                                    @endif
+
+                                                                                    <hr class="my-2"
+                                                                                        style="border: 1px solid rgb(91, 91, 91)">
+                                                                                    <div class="col-6">
+                                                                                        <span
+                                                                                            style="color: black">{{ $bel->detail()->count() }}
+                                                                                            Produk</span>
+                                                                                    </div>
+                                                                                    <div class="col-6 text-end">
+                                                                                        <strong style="color: black">Jumlah
+                                                                                            Harus Dibayar: </strong><span
+                                                                                            style="color: #F68037">Rp
+                                                                                            {{ number_format($bel->total, 2, ',', '.') }}</span>
+                                                                                    </div>
+                                                                                    <hr class="my-2"
+                                                                                        style="border: 1px solid rgb(91, 91, 91)">
+                                                                                    <div
+                                                                                        class="col-7 d-flex align-items-center">
+                                                                                        <span style="color: black">Segera lakukan checkout pesanan Anda</span>
+                                                                                    </div>
+                                                                                    <div class="col-5 text-end">
+                                                                                        <a href="/detailpesanan/{{ $bel->slug }}" class="btn"
+                                                                                            style="background-color: #5B8C51; color: white">Checkout Sekarang</a>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                                <div class="col-6 text-end">
-                                                                    <small>28 Juni 2023</small>
+                                                            </div>
+                                                        @endforeach
+                                                    @else
+                                                        <div class="pesan d-flex justify-content-center">
+                                                            <div class="row text-center">
+                                                                <div class="col-12 mb-2">
+                                                                    <img src="img/order.png"
+                                                                        style="height: 50px; width: 50px"
+                                                                        alt=""><br>
+                                                                </div>
+                                                                <div class="col-12">
+                                                                    <strong>Belum Ada Pesanan</strong>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="card-body">
-                                                            <div class="row">
-                                                                <div class="col-3">
-                                                                    <img src="" alt="">
+                                                    @endif
+                                                </div>
+                                            </div>
+
+                                            <div id="tab-8" class="tab-pane fade show p-0">
+                                                <div class="row g-4 d-flex justify-content-center">
+                                                    @if ($belumbayar->count())
+                                                        @foreach ($belumbayar as $bel)
+                                                            <div class="col-10">
+                                                                <div class="card p-3"
+                                                                    style="border: none; background-color: #F1F2F7">
+                                                                    <div class="card-title">
+                                                                        <div class="row d-flex justify-content-between">
+                                                                            <div class="col-6">
+                                                                                <strong class="fw-bold fs-5"><a
+                                                                                        title="Lihat detail pesanan"
+                                                                                        style="color: black"
+                                                                                        href="">#{{ $bel->nomer }}</a></strong>
+                                                                            </div>
+                                                                            <div class="col-6 text-end">
+                                                                                <small
+                                                                                    style="color: black">{{ \Carbon\Carbon::parse($bel->created_at)->translatedFormat('l, d F Y H:i') }}</small>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card-body">
+                                                                        <div class="row">
+                                                                            <div class="col-2">
+                                                                                <img src="{{ asset('storage/' . $bel->detail[0]->barang->gambar) }}"
+                                                                                    style="height: 77px; width: 77px"
+                                                                                    alt="">
+                                                                            </div>
+                                                                            <div class="col-10">
+                                                                                <span
+                                                                                    style="color:black; 500; font-size: 20px font-family: Verdana, Geneva, Tahoma, sans-serif;">{{ $bel->detail[0]->barang->nama }}</span><br>
+                                                                                <div class="row">
+                                                                                    <div class="col-6">
+                                                                                        <span
+                                                                                            style="color: black">{{ $bel->detail[0]->barang->berat }}</span>
+                                                                                    </div>
+                                                                                    <div class="col-6 text-end">
+                                                                                        <span
+                                                                                            style="color: black">x{{ $bel->detail[0]->qtyitem }}
+                                                                                            {{ $bel->detail[0]->barang->quantity }}</span>
+                                                                                    </div>
+                                                                                    <div class="col-12 text-end">
+                                                                                        <span style="color: #F68037">Rp
+                                                                                            {{ number_format($bel->detail[0]->barang->harga, 2, ',', '.') }}</span>
+                                                                                    </div>
+
+                                                                                    @if ($bel->detail()->count() > 1)
+                                                                                        <hr class="my-2"
+                                                                                            style="border: 1px solid rgb(91, 91, 91)">
+                                                                                        <div class="col-12 text-center">
+                                                                                            <a href="">Tampilkan
+                                                                                                produk pembelian lainnya</a>
+                                                                                        </div>
+                                                                                    @endif
+
+                                                                                    <hr class="my-2"
+                                                                                        style="border: 1px solid rgb(91, 91, 91)">
+                                                                                    <div class="col-6">
+                                                                                        <span
+                                                                                            style="color: black">{{ $bel->detail()->count() }}
+                                                                                            Produk</span>
+                                                                                    </div>
+                                                                                    <div class="col-6 text-end">
+                                                                                        <strong style="color: black">Jumlah
+                                                                                            Harus Dibayar: </strong><span
+                                                                                            style="color: #F68037">Rp
+                                                                                            {{ number_format($bel->total, 2, ',', '.') }}</span>
+                                                                                    </div>
+                                                                                    <hr class="my-2"
+                                                                                        style="border: 1px solid rgb(91, 91, 91)">
+                                                                                    <div
+                                                                                        class="col-8 d-flex align-items-center">
+                                                                                        <span style="color: black">Bayar
+                                                                                            sebelum
+                                                                                            {{ \Carbon\Carbon::parse($bel->deadlinePaid)->translatedFormat('l, d F Y H:i') }}</span>
+                                                                                    </div>
+                                                                                    <div class="col-4 text-end">
+                                                                                        <a href="/detailpesanan/{{ $bel->slug }}" class="btn"
+                                                                                            style="background-color: #5B8C51; color: white">Bayar
+                                                                                            Sekarang</a>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+                                                    @else
+                                                        <div class="pesan d-flex justify-content-center">
+                                                            <div class="row text-center">
+                                                                <div class="col-12 mb-2">
+                                                                    <img src="img/order.png"
+                                                                        style="height: 50px; width: 50px"
+                                                                        alt=""><br>
+                                                                </div>
+                                                                <div class="col-12">
+                                                                    <strong>Belum Ada Pesanan</strong>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    @endif
                                                 </div>
                                             </div>
 
                                             <div id="tab-2" class="tab-pane fade show p-0">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        JDJBS
-                                                        sjasansk
-                                                    </div>
+                                                <div class="row g-4 d-flex justify-content-center">
+                                                    @if ($verifikasi->count())
+                                                        @foreach ($verifikasi as $bel)
+                                                            <div class="col-10">
+                                                                <div class="card p-3"
+                                                                    style="border: none; background-color: #F1F2F7">
+                                                                    <div class="card-title">
+                                                                        <div class="row d-flex justify-content-between">
+                                                                            <div class="col-6">
+                                                                                <strong class="fw-bold fs-5"><a
+                                                                                        title="Lihat detail pesanan"
+                                                                                        style="color: black"
+                                                                                        href="">#{{ $bel->nomer }}</a></strong>
+                                                                            </div>
+                                                                            <div class="col-6 text-end">
+                                                                                <small
+                                                                                    style="color: black">{{ \Carbon\Carbon::parse($bel->created_at)->translatedFormat('l, d F Y H:i') }}</small>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card-body">
+                                                                        <div class="row">
+                                                                            <div class="col-2">
+                                                                                <img src="{{ asset('storage/' . $bel->detail[0]->barang->gambar) }}"
+                                                                                    style="height: 77px; width: 77px"
+                                                                                    alt="">
+                                                                            </div>
+                                                                            <div class="col-10">
+                                                                                <span
+                                                                                    style="color:black; 500; font-size: 20px font-family: Verdana, Geneva, Tahoma, sans-serif;">{{ $bel->detail[0]->barang->nama }}</span><br>
+                                                                                <div class="row">
+                                                                                    <div class="col-6">
+                                                                                        <span
+                                                                                            style="color: black">{{ $bel->detail[0]->barang->berat }}</span>
+                                                                                    </div>
+                                                                                    <div class="col-6 text-end">
+                                                                                        <span
+                                                                                            style="color: black">x{{ $bel->detail[0]->qtyitem }}
+                                                                                            {{ $bel->detail[0]->barang->quantity }}</span>
+                                                                                    </div>
+                                                                                    <div class="col-12 text-end">
+                                                                                        <span style="color: #F68037">Rp
+                                                                                            {{ number_format($bel->detail[0]->barang->harga, 2, ',', '.') }}</span>
+                                                                                    </div>
+
+                                                                                    @if ($bel->detail()->count() > 1)
+                                                                                        <hr class="my-2"
+                                                                                            style="border: 1px solid rgb(91, 91, 91)">
+                                                                                        <div class="col-12 text-center">
+                                                                                            <a href="">Tampilkan
+                                                                                                produk pembelian lainnya</a>
+                                                                                        </div>
+                                                                                    @endif
+
+                                                                                    <hr class="my-2"
+                                                                                        style="border: 1px solid rgb(91, 91, 91)">
+                                                                                    <div class="col-6">
+                                                                                        <span
+                                                                                            style="color: black">{{ $bel->detail()->count() }}
+                                                                                            Produk</span>
+                                                                                    </div>
+                                                                                    <div class="col-6 text-end">
+                                                                                        <strong style="color: black">Jumlah
+                                                                                            Harus Dibayar: </strong><span
+                                                                                            style="color: #F68037">Rp
+                                                                                            {{ number_format($bel->total, 2, ',', '.') }}</span>
+                                                                                    </div>
+                                                                                    <hr class="my-2"
+                                                                                        style="border: 1px solid rgb(91, 91, 91)">
+                                                                                    <div
+                                                                                        class="col-6 d-flex align-items-center">
+                                                                                        <span style="color: black">Waktu
+                                                                                            Pembayaran:
+                                                                                            <br>{{ \Carbon\Carbon::parse($bel->paidTime)->translatedFormat('l, d F Y H:i') }}</span>
+                                                                                    </div>
+                                                                                    <div
+                                                                                        class="col-6 d-flex align-items-center justify-content-end">
+                                                                                        <span
+                                                                                            style="color: #1a7532">Menunggu
+                                                                                            verifikasi pembayaran</span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+                                                    @else
+                                                        <div class="pesan d-flex justify-content-center">
+                                                            <div class="row text-center">
+                                                                <div class="col-12 mb-2">
+                                                                    <img src="img/order.png"
+                                                                        style="height: 50px; width: 50px"
+                                                                        alt=""><br>
+                                                                </div>
+                                                                <div class="col-12">
+                                                                    <strong>Belum Ada Pesanan</strong>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @endif
                                                 </div>
                                             </div>
 
                                             <div id="tab-3" class="tab-pane fade show p-0">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        JDJBS
-                                                        sjasansk
-                                                    </div>
+                                                <div class="row g-4 d-flex justify-content-center">
+                                                    @if ($dikemas->count())
+                                                        @foreach ($dikemas as $bel)
+                                                            <div class="col-10">
+                                                                <div class="card p-3"
+                                                                    style="border: none; background-color: #F1F2F7">
+                                                                    <div class="card-title">
+                                                                        <div class="row d-flex justify-content-between">
+                                                                            <div class="col-6">
+                                                                                <strong class="fw-bold fs-5"><a
+                                                                                        title="Lihat detail pesanan"
+                                                                                        style="color: black"
+                                                                                        href="">#{{ $bel->nomer }}</a></strong>
+                                                                            </div>
+                                                                            <div class="col-6 text-end">
+                                                                                <small
+                                                                                    style="color: black">{{ \Carbon\Carbon::parse($bel->created_at)->translatedFormat('l, d F Y H:i') }}</small>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card-body">
+                                                                        <div class="row">
+                                                                            <div class="col-2">
+                                                                                <img src="{{ asset('storage/' . $bel->detail[0]->barang->gambar) }}"
+                                                                                    style="height: 77px; width: 77px"
+                                                                                    alt="">
+                                                                            </div>
+                                                                            <div class="col-10">
+                                                                                <span
+                                                                                    style="color:black; 500; font-size: 20px font-family: Verdana, Geneva, Tahoma, sans-serif;">{{ $bel->detail[0]->barang->nama }}</span><br>
+                                                                                <div class="row">
+                                                                                    <div class="col-6">
+                                                                                        <span
+                                                                                            style="color: black">{{ $bel->detail[0]->barang->berat }}</span>
+                                                                                    </div>
+                                                                                    <div class="col-6 text-end">
+                                                                                        <span
+                                                                                            style="color: black">x{{ $bel->detail[0]->qtyitem }}
+                                                                                            {{ $bel->detail[0]->barang->quantity }}</span>
+                                                                                    </div>
+                                                                                    <div class="col-12 text-end">
+                                                                                        <span style="color: #F68037">Rp
+                                                                                            {{ number_format($bel->detail[0]->barang->harga, 2, ',', '.') }}</span>
+                                                                                    </div>
+
+                                                                                    @if ($bel->detail()->count() > 1)
+                                                                                        <hr class="my-2"
+                                                                                            style="border: 1px solid rgb(91, 91, 91)">
+                                                                                        <div class="col-12 text-center">
+                                                                                            <a href="">Tampilkan
+                                                                                                produk pembelian lainnya</a>
+                                                                                        </div>
+                                                                                    @endif
+
+                                                                                    <hr class="my-2"
+                                                                                        style="border: 1px solid rgb(91, 91, 91)">
+                                                                                    <div class="col-6">
+                                                                                        <span
+                                                                                            style="color: black">{{ $bel->detail()->count() }}
+                                                                                            Produk</span>
+                                                                                    </div>
+                                                                                    <div class="col-6 text-end">
+                                                                                        <strong style="color: black">Total
+                                                                                            Pesanan: </strong><span
+                                                                                            style="color: #F68037">Rp
+                                                                                            {{ number_format($bel->total, 2, ',', '.') }}</span>
+                                                                                    </div>
+                                                                                    <hr class="my-2"
+                                                                                        style="border: 1px solid rgb(91, 91, 91)">
+                                                                                    <div
+                                                                                        class="col-9 d-flex align-items-center">
+                                                                                        <span style="color: black">Paket
+                                                                                            dikirim
+                                                                                            sebelum
+                                                                                            <strong>{{ \Carbon\Carbon::parse($bel->timebataskirim)->translatedFormat('l, d F Y') }}</strong></span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+                                                    @else
+                                                        <div class="pesan d-flex justify-content-center">
+                                                            <div class="row text-center">
+                                                                <div class="col-12 mb-2">
+                                                                    <img src="img/order.png"
+                                                                        style="height: 50px; width: 50px"
+                                                                        alt=""><br>
+                                                                </div>
+                                                                <div class="col-12">
+                                                                    <strong>Belum Ada Pesanan</strong>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @endif
                                                 </div>
                                             </div>
 
                                             <div id="tab-4" class="tab-pane fade show p-0">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        JDJBS
-                                                        sjasansk
-                                                    </div>
+                                                <div class="row g-4 d-flex justify-content-center">
+                                                    @if ($dikirim->count())
+                                                        @foreach ($dikirim as $bel)
+                                                            <div class="col-10">
+                                                                <div class="card p-3"
+                                                                    style="border: none; background-color: #F1F2F7">
+                                                                    <div class="card-title">
+                                                                        <div class="row d-flex justify-content-between">
+                                                                            <div class="col-6">
+                                                                                <strong class="fw-bold fs-5"><a
+                                                                                        title="Lihat detail pesanan"
+                                                                                        style="color: black"
+                                                                                        href="">#{{ $bel->nomer }}</a></strong>
+                                                                            </div>
+                                                                            <div class="col-6 text-end">
+                                                                                <small
+                                                                                    style="color: black">{{ \Carbon\Carbon::parse($bel->created_at)->translatedFormat('l, d F Y H:i') }}</small>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card-body">
+                                                                        <div class="row">
+                                                                            <div class="col-2">
+                                                                                <img src="{{ asset('storage/' . $bel->detail[0]->barang->gambar) }}"
+                                                                                    style="height: 77px; width: 77px"
+                                                                                    alt="">
+                                                                            </div>
+                                                                            <div class="col-10">
+                                                                                <span
+                                                                                    style="color:black; 500; font-size: 20px font-family: Verdana, Geneva, Tahoma, sans-serif;">{{ $bel->detail[0]->barang->nama }}</span><br>
+                                                                                <div class="row">
+                                                                                    <div class="col-6">
+                                                                                        <span
+                                                                                            style="color: black">{{ $bel->detail[0]->barang->berat }}</span>
+                                                                                    </div>
+                                                                                    <div class="col-6 text-end">
+                                                                                        <span
+                                                                                            style="color: black">x{{ $bel->detail[0]->qtyitem }}
+                                                                                            {{ $bel->detail[0]->barang->quantity }}</span>
+                                                                                    </div>
+                                                                                    <div class="col-12 text-end">
+                                                                                        <span style="color: #F68037">Rp
+                                                                                            {{ number_format($bel->detail[0]->barang->harga, 2, ',', '.') }}</span>
+                                                                                    </div>
+
+                                                                                    @if ($bel->detail()->count() > 1)
+                                                                                        <hr class="my-2"
+                                                                                            style="border: 1px solid rgb(91, 91, 91)">
+                                                                                        <div class="col-12 text-center">
+                                                                                            <a href="">Tampilkan
+                                                                                                produk pembelian lainnya</a>
+                                                                                        </div>
+                                                                                    @endif
+
+                                                                                    <hr class="my-2"
+                                                                                        style="border: 1px solid rgb(91, 91, 91)">
+                                                                                    <div class="col-6">
+                                                                                        <span
+                                                                                            style="color: black">{{ $bel->detail()->count() }}
+                                                                                            Produk</span>
+                                                                                    </div>
+                                                                                    <div class="col-6 text-end">
+                                                                                        <strong style="color: black">Total
+                                                                                            Pesanan: </strong><span
+                                                                                            style="color: #F68037">Rp
+                                                                                            {{ number_format($bel->total, 2, ',', '.') }}</span>
+                                                                                    </div>
+                                                                                    <hr class="my-2"
+                                                                                        style="border: 1px solid rgb(91, 91, 91)">
+                                                                                    <div
+                                                                                        class="col-6 d-flex align-items-center">
+                                                                                        <span style="color: black"></span>
+                                                                                    </div>
+                                                                                    <div class="col-6 text-end">
+                                                                                        <a href="" class="btn"
+                                                                                            style="background-color: #5B8C51; color: white">Pesanan
+                                                                                            Diterima</a>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+                                                    @else
+                                                        <div class="pesan d-flex justify-content-center">
+                                                            <div class="row text-center">
+                                                                <div class="col-12 mb-2">
+                                                                    <img src="img/order.png"
+                                                                        style="height: 50px; width: 50px"
+                                                                        alt=""><br>
+                                                                </div>
+                                                                <div class="col-12">
+                                                                    <strong>Belum Ada Pesanan</strong>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @endif
                                                 </div>
                                             </div>
 
                                             <div id="tab-5" class="tab-pane fade show p-0">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        JDJBS
-                                                        sjasansk
-                                                    </div>
+                                                <div class="row g-4 d-flex justify-content-center">
+                                                    @if ($ambil->count())
+                                                        @foreach ($ambil as $bel)
+                                                            <div class="col-10">
+                                                                <div class="card p-3"
+                                                                    style="border: none; background-color: #F1F2F7">
+                                                                    <div class="card-title">
+                                                                        <div class="row d-flex justify-content-between">
+                                                                            <div class="col-6">
+                                                                                <strong class="fw-bold fs-5"><a
+                                                                                        title="Lihat detail pesanan"
+                                                                                        style="color: black"
+                                                                                        href="">#{{ $bel->nomer }}</a></strong>
+                                                                            </div>
+                                                                            <div class="col-6 text-end">
+                                                                                <small
+                                                                                    style="color: black">{{ \Carbon\Carbon::parse($bel->created_at)->translatedFormat('l, d F Y H:i') }}</small>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card-body">
+                                                                        <div class="row">
+                                                                            <div class="col-2">
+                                                                                <img src="{{ asset('storage/' . $bel->detail[0]->barang->gambar) }}"
+                                                                                    style="height: 77px; width: 77px"
+                                                                                    alt="">
+                                                                            </div>
+                                                                            <div class="col-10">
+                                                                                <span
+                                                                                    style="color:black; 500; font-size: 20px font-family: Verdana, Geneva, Tahoma, sans-serif;">{{ $bel->detail[0]->barang->nama }}</span><br>
+                                                                                <div class="row">
+                                                                                    <div class="col-6">
+                                                                                        <span
+                                                                                            style="color: black">{{ $bel->detail[0]->barang->berat }}</span>
+                                                                                    </div>
+                                                                                    <div class="col-6 text-end">
+                                                                                        <span
+                                                                                            style="color: black">x{{ $bel->detail[0]->qtyitem }}
+                                                                                            {{ $bel->detail[0]->barang->quantity }}</span>
+                                                                                    </div>
+                                                                                    <div class="col-12 text-end">
+                                                                                        <span style="color: #F68037">Rp
+                                                                                            {{ number_format($bel->detail[0]->barang->harga, 2, ',', '.') }}</span>
+                                                                                    </div>
+
+                                                                                    @if ($bel->detail()->count() > 1)
+                                                                                        <hr class="my-2"
+                                                                                            style="border: 1px solid rgb(91, 91, 91)">
+                                                                                        <div class="col-12 text-center">
+                                                                                            <a href="">Tampilkan
+                                                                                                produk pembelian lainnya</a>
+                                                                                        </div>
+                                                                                    @endif
+
+                                                                                    <hr class="my-2"
+                                                                                        style="border: 1px solid rgb(91, 91, 91)">
+                                                                                    <div class="col-6">
+                                                                                        <span
+                                                                                            style="color: black">{{ $bel->detail()->count() }}
+                                                                                            Produk</span>
+                                                                                    </div>
+                                                                                    <div class="col-6 text-end">
+                                                                                        <strong style="color: black">Total
+                                                                                            Pesanan: </strong><span
+                                                                                            style="color: #F68037">Rp
+                                                                                            {{ number_format($bel->total, 2, ',', '.') }}</span>
+                                                                                    </div>
+                                                                                    <hr class="my-2"
+                                                                                        style="border: 1px solid rgb(91, 91, 91)">
+                                                                                    <div
+                                                                                        class="col-7 d-flex align-items-center">
+                                                                                        <span style="color: black">Silahkan
+                                                                                            ambil
+                                                                                            pesanan Anda di Kampung
+                                                                                            Semanggi</span>
+                                                                                    </div>
+                                                                                    <div class="col-5 text-end">
+                                                                                        <a href="" class="btn"
+                                                                                            style="background-color: #5B8C51; color: white">Pesanan
+                                                                                            Diterima</a>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+                                                    @else
+                                                        <div class="pesan d-flex justify-content-center">
+                                                            <div class="row text-center">
+                                                                <div class="col-12 mb-2">
+                                                                    <img src="img/order.png"
+                                                                        style="height: 50px; width: 50px"
+                                                                        alt=""><br>
+                                                                </div>
+                                                                <div class="col-12">
+                                                                    <strong>Belum Ada Pesanan</strong>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @endif
                                                 </div>
                                             </div>
 
                                             <div id="tab-6" class="tab-pane fade show p-0">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        JDJBS
-                                                        sjasansk
-                                                    </div>
+                                                <div class="row g-4 d-flex justify-content-center">
+                                                    @if ($selesai->count())
+                                                        @foreach ($selesai as $bel)
+                                                            <div class="col-10">
+                                                                <div class="card p-3"
+                                                                    style="border: none; background-color: #F1F2F7">
+                                                                    <div class="card-title">
+                                                                        <div class="row d-flex justify-content-between">
+                                                                            <div class="col-6">
+                                                                                <strong class="fw-bold fs-5"><a
+                                                                                        title="Lihat detail pesanan"
+                                                                                        style="color: black"
+                                                                                        href="">#{{ $bel->nomer }}</a></strong>
+                                                                            </div>
+                                                                            <div class="col-6 text-end">
+                                                                                <small
+                                                                                    style="color: black">{{ \Carbon\Carbon::parse($bel->created_at)->translatedFormat('l, d F Y H:i') }}</small>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card-body">
+                                                                        <div class="row">
+                                                                            <div class="col-2">
+                                                                                <img src="{{ asset('storage/' . $bel->detail[0]->barang->gambar) }}"
+                                                                                    style="height: 77px; width: 77px"
+                                                                                    alt="">
+                                                                            </div>
+                                                                            <div class="col-10">
+                                                                                <span
+                                                                                    style="color:black; 500; font-size: 20px font-family: Verdana, Geneva, Tahoma, sans-serif;">{{ $bel->detail[0]->barang->nama }}</span><br>
+                                                                                <div class="row">
+                                                                                    <div class="col-6">
+                                                                                        <span
+                                                                                            style="color: black">{{ $bel->detail[0]->barang->berat }}</span>
+                                                                                    </div>
+                                                                                    <div class="col-6 text-end">
+                                                                                        <span
+                                                                                            style="color: black">x{{ $bel->detail[0]->qtyitem }}
+                                                                                            {{ $bel->detail[0]->barang->quantity }}</span>
+                                                                                    </div>
+                                                                                    <div class="col-12 text-end">
+                                                                                        <span style="color: #F68037">Rp
+                                                                                            {{ number_format($bel->detail[0]->barang->harga, 2, ',', '.') }}</span>
+                                                                                    </div>
+
+                                                                                    @if ($bel->detail()->count() > 1)
+                                                                                        <hr class="my-2"
+                                                                                            style="border: 1px solid rgb(91, 91, 91)">
+                                                                                        <div class="col-12 text-center">
+                                                                                            <a href="">Tampilkan
+                                                                                                produk pembelian lainnya</a>
+                                                                                        </div>
+                                                                                    @endif
+
+                                                                                    <hr class="my-2"
+                                                                                        style="border: 1px solid rgb(91, 91, 91)">
+                                                                                    <div class="col-6">
+                                                                                        <span
+                                                                                            style="color: black">{{ $bel->detail()->count() }}
+                                                                                            Produk</span>
+                                                                                    </div>
+                                                                                    <div class="col-6 text-end">
+                                                                                        <strong style="color: black">Total
+                                                                                            Pesanan: </strong><span
+                                                                                            style="color: #F68037">Rp
+                                                                                            {{ number_format($bel->total, 2, ',', '.') }}</span>
+                                                                                    </div>
+                                                                                    <hr class="my-2"
+                                                                                        style="border: 1px solid rgb(91, 91, 91)">
+                                                                                    <div
+                                                                                        class="col-7 d-flex align-items-center">
+                                                                                        <span style="color: black">Nilai
+                                                                                            produk
+                                                                                            sebelum
+                                                                                            <strong>{{ \Carbon\Carbon::parse($bel->timebatasnilai)->translatedFormat('l, d F Y') }}</strong></span>
+                                                                                    </div>
+                                                                                    <div class="col-5 text-end">
+                                                                                        <a href="" class="btn"
+                                                                                            style="background-color: #5B8C51; color: white">Beri
+                                                                                            Penilaian</a>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+                                                    @else
+                                                        <div class="pesan d-flex justify-content-center">
+                                                            <div class="row text-center">
+                                                                <div class="col-12 mb-2">
+                                                                    <img src="img/order.png"
+                                                                        style="height: 50px; width: 50px"
+                                                                        alt=""><br>
+                                                                </div>
+                                                                <div class="col-12">
+                                                                    <strong>Belum Ada Pesanan</strong>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @endif
+                                                </div>
+                                            </div>
+
+                                            <div id="tab-7" class="tab-pane fade show p-0">
+                                                <div class="row g-4 d-flex justify-content-center">
+                                                    @if ($batal->count())
+                                                        @foreach ($batal as $bel)
+                                                            <div class="col-10">
+                                                                <div class="card p-3"
+                                                                    style="border: none; background-color: #F1F2F7">
+                                                                    <div class="card-title">
+                                                                        <div class="row d-flex justify-content-between">
+                                                                            <div class="col-6">
+                                                                                <strong class="fw-bold fs-5"><a
+                                                                                        title="Lihat detail pesanan"
+                                                                                        style="color: black"
+                                                                                        href="">#{{ $bel->nomer }}</a></strong>
+                                                                            </div>
+                                                                            <div class="col-6 text-end">
+                                                                                <small
+                                                                                    style="color: black">{{ \Carbon\Carbon::parse($bel->created_at)->translatedFormat('l, d F Y H:i') }}</small>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card-body">
+                                                                        <div class="row">
+                                                                            <div class="col-2">
+                                                                                <img src="{{ asset('storage/' . $bel->detail[0]->barang->gambar) }}"
+                                                                                    style="height: 77px; width: 77px"
+                                                                                    alt="">
+                                                                            </div>
+                                                                            <div class="col-10">
+                                                                                <span
+                                                                                    style="color:black; 500; font-size: 20px font-family: Verdana, Geneva, Tahoma, sans-serif;">{{ $bel->detail[0]->barang->nama }}</span><br>
+                                                                                <div class="row">
+                                                                                    <div class="col-6">
+                                                                                        <span
+                                                                                            style="color: black">{{ $bel->detail[0]->barang->berat }}</span>
+                                                                                    </div>
+                                                                                    <div class="col-6 text-end">
+                                                                                        <span
+                                                                                            style="color: black">x{{ $bel->detail[0]->qtyitem }}
+                                                                                            {{ $bel->detail[0]->barang->quantity }}</span>
+                                                                                    </div>
+                                                                                    <div class="col-12 text-end">
+                                                                                        <span style="color: #F68037">Rp
+                                                                                            {{ number_format($bel->detail[0]->barang->harga, 2, ',', '.') }}</span>
+                                                                                    </div>
+
+                                                                                    @if ($bel->detail()->count() > 1)
+                                                                                        <hr class="my-2"
+                                                                                            style="border: 1px solid rgb(91, 91, 91)">
+                                                                                        <div class="col-12 text-center">
+                                                                                            <a href="">Tampilkan
+                                                                                                produk pembelian lainnya</a>
+                                                                                        </div>
+                                                                                    @endif
+
+                                                                                    <hr class="my-2"
+                                                                                        style="border: 1px solid rgb(91, 91, 91)">
+                                                                                    <div class="col-6">
+                                                                                        <span
+                                                                                            style="color: black">{{ $bel->detail()->count() }}
+                                                                                            Produk</span>
+                                                                                    </div>
+                                                                                    <div class="col-6 text-end">
+                                                                                        <strong style="color: black">Total
+                                                                                            Pesanan: </strong><span
+                                                                                            style="color: #F68037">Rp
+                                                                                            {{ number_format($bel->total, 2, ',', '.') }}</span>
+                                                                                    </div>
+                                                                                    <hr class="my-2"
+                                                                                        style="border: 1px solid rgb(91, 91, 91)">
+
+                                                                                    <div
+                                                                                        class="col-7 d-flex align-items-center">
+                                                                                        @if ($bel->pesanbatal)
+                                                                                            <span
+                                                                                                style="color: black">Dibatalkan oleh Anda
+                                                                                            </span>
+                                                                                        @else
+                                                                                            <span
+                                                                                                style="color: black">Dibatalkan
+                                                                                                secara otomatis oleh
+                                                                                                sistem
+                                                                                            </span>
+                                                                                        @endif
+                                                                                    </div>
+
+                                                                                    <div class="col-5 text-end">
+                                                                                        <a href="" class="btn"
+                                                                                            style="background-color: #5B8C51; color: white">Beli
+                                                                                            Lagi</a>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+                                                    @else
+                                                        <div class="pesan d-flex justify-content-center">
+                                                            <div class="row text-center">
+                                                                <div class="col-12 mb-2">
+                                                                    <img src="img/order.png"
+                                                                        style="height: 50px; width: 50px"
+                                                                        alt=""><br>
+                                                                </div>
+                                                                <div class="col-12">
+                                                                    <strong>Belum Ada Pesanan</strong>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>

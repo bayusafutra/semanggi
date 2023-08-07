@@ -71,4 +71,22 @@ class PesananController extends Controller
 
         return redirect("/detailpesanan/$pesanan->slug");
     }
+
+    public function checkout(Request $request){
+        $pesanan = Pesanan::where('id', $request->pesanan)->first();
+        if($request->pembayaran == 1){
+            $validatedData["alamat_id"] = null;
+        }else{
+            $validatedData["subtotal"] = $pesanan->total+7000;
+        }
+
+        if($request->catatan){
+            $validatedData["catatan"] = $request->catatan;
+        }
+        $validatedData["deadlinePaid"] = now()->addDays(1);
+        $validatedData["status"] = 2;
+
+        $pesanan->update($validatedData);
+        return redirect('/pembayaran');
+    }
 }

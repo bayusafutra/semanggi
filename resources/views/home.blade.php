@@ -96,10 +96,10 @@
                                             {{-- <span class="text-body text-decoration-line-through">$29.00</span> --}}
                                         </div>
                                         <div class="d-flex border-top">
-                                            <small class="w-50 text-center border-end py-2">
+                                            <small class="w-50 text-center border-end py-2 d-flex align-items-center justify-content-center">
                                                 <a class="text-body" href="/detailproduk/{{ $item->slug }}"><i class="fa fa-eye text-primary me-2"></i>Lihat Produk</a>
                                             </small>
-                                            <small class="w-50 text-center py-2">
+                                            <small class="w-50 text-center py-2 d-flex align-items-center justify-content-center">
                                                 <form action="/cart" method="POST">
                                                     @csrf
                                                     <input type="hidden" name="total" value="{{ $item->harga*$item->minim }}">
