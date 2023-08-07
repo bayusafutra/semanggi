@@ -10,6 +10,8 @@ use App\Http\Requests\UpdatePesananRequest;
 use App\Models\Alamat;
 use App\Models\Cart;
 use App\Models\DetailPesananan;
+use App\Models\Payment;
+use App\Models\Pembayaran;
 
 class PesananController extends Controller
 {
@@ -18,10 +20,12 @@ class PesananController extends Controller
         $pesanan = Pesanan::where('slug', $slug)->first();
         $produk = DetailPesananan::where('pesanan_id', $pesanan->id)->get();
         $subtotal = $pesanan->total;
+        $payment = Payment::where('status', 1)->get();
         return view('checkout', [
             "pesanan" => $pesanan,
             "produk" => $produk,
-            "subtotal" => $subtotal
+            "subtotal" => $subtotal,
+            "payment" => $payment
         ]);
     }
 
@@ -50,7 +54,8 @@ class PesananController extends Controller
         return redirect("/detailpesanan/$pesanan->slug");
     }
 
-    public function create(Request $request){
+    public function create(Request $request)
+    {
         $validatedData["user_id"] = auth()->user()->id;
         $validatedData["slug"] = Str::random(40);
         $validatedData["total"] = $request->hayo;
@@ -76,6 +81,7 @@ class PesananController extends Controller
         $pesanan = Pesanan::where('id', $request->pesanan)->first();
         if($request->pembayaran == 1){
             $validatedData["alamat_id"] = null;
+            $validatedData["subtotal"] = $pesanan->total;
         }else{
             $validatedData["subtotal"] = $pesanan->total+7000;
         }
@@ -85,8 +91,15 @@ class PesananController extends Controller
         }
         $validatedData["deadlinePaid"] = now()->addDays(1);
         $validatedData["status"] = 2;
+        $validatedData["payment_id"] = $request->payment;
 
         $pesanan->update($validatedData);
-        return redirect('/pembayaran');
+
+        $create["pesanan_id"] = $pesanan->id;
+        $create["user_id"] = auth()->user()->id;
+        $create["slug"] = Str::random(40);
+
+        $bayar = Pembayaran::create($create);
+        return redirect("/pembayaran/$bayar->slug");
     }
 }

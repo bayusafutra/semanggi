@@ -8,6 +8,7 @@ use App\Models\Barang;
 use App\Models\Cart;
 use App\Models\Pesanan;
 use App\Models\Alamat;
+use App\Models\Pembayaran;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -36,5 +37,9 @@ class User extends Authenticatable
 
     public function alamat(){
         return $this->hasMany(Alamat::class, 'user_id');
+    }
+
+    public function pembayaran(){
+        return $this->hasMany(Pembayaran::class, 'user_id');
     }
 }

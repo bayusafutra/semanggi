@@ -12,6 +12,8 @@ use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LupaPasswordController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PesananController;
 use App\Http\Controllers\UbahPasswordController;
 use App\Http\Controllers\ProfileController;
@@ -71,7 +73,7 @@ Route::post('/update-cart', [CartController::class, 'updateCart'])->middleware('
 
 Route::post('/pesan', [PesananController::class, 'store'])->middleware('auth');
 Route::post('/pesanproduk', [PesananController::class, 'create'])->middleware('auth');
-Route::get('/detailpesanan/{slug}', [PesananController::class, 'index'])->middleware('auth');
+Route::get('/detailpesanan/{slug}', [PesananController::class, 'index'])->middleware(['auth', 'checkout']);
 Route::post('/checkout', [PesananController::class, 'checkout'])->middleware('auth');
 
 Route::get('inputProvinsi', [AlamatController::class, 'provinsi'])->name('pilihProv');
@@ -79,17 +81,16 @@ Route::get('inputKota/{id}', [AlamatController::class, 'regency'])->name('pilihK
 Route::get('inputKecamatan/{id}', [AlamatController::class, 'district'])->name('pilihKecamatan');
 Route::get('inputKelurahan/{id}', [AlamatController::class, 'village'])->name('pilihKelurahan');
 Route::get('inputKodePos/{id}', [AlamatController::class, 'kodepos'])->name('pilihKodePos');
-Route::get('/ubahAlamat/{slug}', [AlamatController::class, 'index'])->middleware('auth');
-Route::post('/ubahalamat', [AlamatController::class, 'ubahalamat'])->middleware('auth');
-Route::get('/tambahAlamat/{slug}', [AlamatController::class, 'create'])->middleware('auth');
-Route::post('/createalamat', [AlamatController::class, 'store'])->middleware('auth');
-Route::get('/editalamat/{slug}', [AlamatController::class, 'edit'])->middleware('auth');
-Route::post('/editalamat', [AlamatController::class, 'update'])->middleware('auth');
-Route::post('/hapusalamat', [AlamatController::class, 'destroy'])->middleware('auth');
 
-Route::get('/pembayaran', function () {
-    return view('pembayaran');
-});
+Route::get('/ubahAlamat/{slug}', [AlamatController::class, 'index'])->middleware(['auth', 'checkout']);
+Route::post('/ubahalamat', [AlamatController::class, 'ubahalamat'])->middleware('auth');
+Route::get('/tambahAlamat/{slug}', [AlamatController::class, 'create'])->middleware(['auth', 'checkout']);
+Route::post('/createalamat', [AlamatController::class, 'store'])->middleware('auth');
+Route::get('/editalamat/{slug}', [AlamatController::class, 'edit'])->middleware(['auth', 'checkout']);
+Route::post('/editalamat', [AlamatController::class, 'update'])->middleware('auth');
+Route::post('/hapusalamat', [AlamatController::class, 'destroy'])->middleware(['auth', 'checkout']);
+
+Route::get('/pembayaran/{slug}', [PembayaranController::class, 'index'])->middleware('auth');
 
 Route::get('/pembayaran/kode-unik', function () {
     return view('kodepembayaran');
@@ -113,4 +114,11 @@ Route::post('/dash-buatproduk', [BarangController::class, 'store'])->middleware(
 Route::post('/dash-updatestok', [BarangController::class, 'updatestok'])->middleware('admin');
 Route::post('/dash-updateproduk', [BarangController::class, 'update'])->middleware('admin');
 
+Route::get('/dash-metodepembayaran', [PaymentController::class, 'index'])->middleware('admin');
+Route::get('/dash-tambahmetodepembayaran', [PaymentController::class, 'create'])->middleware('admin');
+Route::post('/dash-tambahmetodepembayaran', [PaymentController::class, 'store'])->middleware('admin');
+Route::get('/dash-ubahmetodepembayaran/{slug}', [PaymentController::class, 'edit'])->middleware('admin');
+Route::post('/dash-ubahmetodepembayaran', [PaymentController::class, 'update'])->middleware('admin');
+Route::post('/dash-nonaktifmetodepembayaran', [PaymentController::class, 'nonaktif'])->middleware('admin');
+Route::post('/dash-aktifmetodepembayaran', [PaymentController::class, 'aktif'])->middleware('admin');
 

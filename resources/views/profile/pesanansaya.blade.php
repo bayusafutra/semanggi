@@ -1,4 +1,21 @@
 @extends('layouts.profilelayout')
+@section('css')
+    <style>
+        .scroll-container {
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .produk {
+            display: inline-block;
+        }
+
+        .produk li {
+            display: inline-block;
+            margin-right: 10px;
+        }
+    </style>
+@endsection
 @section('kontent')
     <div id="snippetContent">
         <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js'></script>
@@ -75,48 +92,52 @@
                                         <div class="row g-0 gx-5 d-flex justify-content-center mb-5">
                                             <div class="col-lg-12 text-start text-lg-end wow slideInCenter"
                                                 data-wow-delay="100">
-                                                <ul class="produk nav nav-pills d-flex mx-auto justify-content-center mb-5">
+                                                <div class="scroll-container">
+                                                    <ul
+                                                        class="produk nav nav-pills d-flex mx-auto justify-content-center mb-3">
 
-                                                    <li class="nav-item me-2 mb-2">
-                                                        <a class="btn btn-outline-primary border-2 active"
-                                                            data-bs-toggle="pill" href="#tab-1">Belum Checkout</a>
-                                                    </li>
+                                                        <li class="nav-item me-2 mb-2">
+                                                            <a class="btn btn-outline-primary border-2 active"
+                                                                data-bs-toggle="pill" href="#tab-1">Belum Checkout</a>
+                                                        </li>
 
-                                                    <li class="nav-item me-2 mb-2">
-                                                        <a class="btn btn-outline-primary border-2"
-                                                            data-bs-toggle="pill" href="#tab-8">Belum Bayar</a>
-                                                    </li>
+                                                        <li class="nav-item me-2 mb-2">
+                                                            <a class="btn btn-outline-primary border-2"
+                                                                data-bs-toggle="pill" href="#tab-8">Belum Bayar</a>
+                                                        </li>
 
-                                                    <li class="nav-item me-2 mb-2">
-                                                        <a class="btn btn-outline-primary border-2" data-bs-toggle="pill"
-                                                            href="#tab-2">Verifikasi</a>
-                                                    </li>
+                                                        <li class="nav-item me-2 mb-2">
+                                                            <a class="btn btn-outline-primary border-2"
+                                                                data-bs-toggle="pill" href="#tab-2">Verifikasi</a>
+                                                        </li>
 
-                                                    <li class="nav-item me-2 mb-2">
-                                                        <a class="btn btn-outline-primary border-2" data-bs-toggle="pill"
-                                                            href="#tab-3">Dikemas</a>
-                                                    </li>
+                                                        <li class="nav-item me-2 mb-2">
+                                                            <a class="btn btn-outline-primary border-2"
+                                                                data-bs-toggle="pill" href="#tab-3">Dikemas</a>
+                                                        </li>
 
-                                                    <li class="nav-item me-2 mb-2">
-                                                        <a class="btn btn-outline-primary border-2" data-bs-toggle="pill"
-                                                            href="#tab-4">Dikirim</a>
-                                                    </li>
+                                                        <li class="nav-item me-2 mb-2">
+                                                            <a class="btn btn-outline-primary border-2"
+                                                                data-bs-toggle="pill" href="#tab-4">Dikirim</a>
+                                                        </li>
 
-                                                    <li class="nav-item me-2 mb-2">
-                                                        <a class="btn btn-outline-primary border-2" data-bs-toggle="pill"
-                                                            href="#tab-5">Menunggu Pengambilan</a>
-                                                    </li>
+                                                        <li class="nav-item me-2 mb-2">
+                                                            <a class="btn btn-outline-primary border-2"
+                                                                data-bs-toggle="pill" href="#tab-5">Menunggu
+                                                                Pengambilan</a>
+                                                        </li>
 
-                                                    <li class="nav-item me-2 mb-2">
-                                                        <a class="btn btn-outline-primary border-2" data-bs-toggle="pill"
-                                                            href="#tab-6">Selesai</a>
-                                                    </li>
+                                                        <li class="nav-item me-2 mb-2">
+                                                            <a class="btn btn-outline-primary border-2"
+                                                                data-bs-toggle="pill" href="#tab-6">Selesai</a>
+                                                        </li>
 
-                                                    <li class="nav-item me-2 mb-2">
-                                                        <a class="btn btn-outline-primary border-2" data-bs-toggle="pill"
-                                                            href="#tab-7">Batal</a>
-                                                    </li>
-                                                </ul>
+                                                        <li class="nav-item me-2 mb-2">
+                                                            <a class="btn btn-outline-primary border-2"
+                                                                data-bs-toggle="pill" href="#tab-7">Batal</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
 
@@ -193,11 +214,15 @@
                                                                                         style="border: 1px solid rgb(91, 91, 91)">
                                                                                     <div
                                                                                         class="col-7 d-flex align-items-center">
-                                                                                        <span style="color: black">Segera lakukan checkout pesanan Anda</span>
+                                                                                        <span style="color: black">Segera
+                                                                                            lakukan checkout pesanan
+                                                                                            Anda</span>
                                                                                     </div>
                                                                                     <div class="col-5 text-end">
-                                                                                        <a href="/detailpesanan/{{ $bel->slug }}" class="btn"
-                                                                                            style="background-color: #5B8C51; color: white">Checkout Sekarang</a>
+                                                                                        <a href="/detailpesanan/{{ $bel->slug }}"
+                                                                                            class="btn"
+                                                                                            style="background-color: #5B8C51; color: white">Checkout
+                                                                                            Sekarang</a>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -300,7 +325,8 @@
                                                                                             {{ \Carbon\Carbon::parse($bel->deadlinePaid)->translatedFormat('l, d F Y H:i') }}</span>
                                                                                     </div>
                                                                                     <div class="col-4 text-end">
-                                                                                        <a href="/detailpesanan/{{ $bel->slug }}" class="btn"
+                                                                                        <a href="/pembayaran/{{ $bel->pembayaran->slug }}"
+                                                                                            class="btn"
                                                                                             style="background-color: #5B8C51; color: white">Bayar
                                                                                             Sekarang</a>
                                                                                     </div>
@@ -925,7 +951,8 @@
                                                                                         class="col-7 d-flex align-items-center">
                                                                                         @if ($bel->pesanbatal)
                                                                                             <span
-                                                                                                style="color: black">Dibatalkan oleh Anda
+                                                                                                style="color: black">Dibatalkan
+                                                                                                oleh Anda
                                                                                             </span>
                                                                                         @else
                                                                                             <span

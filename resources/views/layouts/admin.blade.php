@@ -122,6 +122,7 @@
                             <li class="nav-item"><a class="nav-link" href="/dash-kategori">Kategori Produk</a>
                             </li>
                             <li class="nav-item"><a class="nav-link" href="/dash-produk">Produk</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/dash-metodepembayaran">Metode Pembayaran</a></li>
                         </ul>
                     </div>
                 </li>

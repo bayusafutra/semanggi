@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\User;
 use App\Models\Alamat;
+use App\Models\Payment;
 use App\Models\DetailPesananan;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -23,6 +24,14 @@ class Pesanan extends Model
 
     public function alamat(){
         return $this->belongsTo(Alamat::class, 'alamat_id');
+    }
+
+    public function payment(){
+        return $this->belongsTo(Payment::class, 'payment_id');
+    }
+
+    public function pembayaran(){
+        return $this->hasOne(Pembayaran::class, 'pesanan_id');
     }
 
 }

@@ -11,7 +11,7 @@
                     @csrf
                     <input type="hidden" name="pesanan" value="{{ $pesanan->id }}">
                     <div class="row">
-                        <div class="col-lg-6">
+                        <div class="col-lg-6" style="max-height: 507px; overflow-y: auto">
                             <div class="checkout__input">
                                 <div class="row">
 
@@ -100,6 +100,29 @@
                                         <div class="card-body">
                                             <h4 class="card-title">Catatan Pesanan (optional)</h4>
                                             <textarea class="form-control" placeholder="Silahkan tinggalkan catatan..." name="catatan"cols="68" rows="5"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="card mt-3">
+                                        <div class="card-body">
+                                            <h4 class="card-title">Pilih Metode Pembayaran</h4>
+
+                                            @foreach ($payment as $pay)
+                                                <div class="col-sm-9 mb-2">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <div class="form-check form">
+                                                                <input class="form-check-input" type="radio" name="payment" value="{{ $pay->id }}" oninvalid="this.setCustomValidity('Pilih salah satu metode pembayaran.')" oninput="this.setCustomValidity('')" required>
+                                                                <label class="form-check-label" for="pembayaran1">
+                                                                    <span class="text-success fw-bold">{{ ucwords($pay->nama) }}</span><br>
+                                                                    <img class="img-fluid" src="{{ asset('storage/'.$pay->logo) }}" style="height: 60px; width: 100px" alt="">
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+
                                         </div>
                                     </div>
 

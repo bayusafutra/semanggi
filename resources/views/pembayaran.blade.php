@@ -6,11 +6,11 @@
     <section class="checkout spad">
         <div class="container">
             <div class="checkout__form">
-                <h4><a type="button" class="btn p-0 ms-auto btn-lg me-md-2" href="/checkout"><i class="bi bi-arrow-left"></i>
-                </a>Pilih Metode Pembayaran</h4>
+                <h4><a type="button" class="btn p-0 ms-auto btn-lg me-md-2" href="/pesanansaya"><i class="bi bi-arrow-left"></i>
+                </a>Pembayaran Pesanan</h4>
                 <form action="#">
                     <div class="row">
-                        <div class="col-lg-8">
+                        <div class="col-lg-6">
                             <div class="list-group list-group-flush">
                                 <a href="#" class="list-group-item list-group-item-action" aria-current="true">
                                   Bank BRI
@@ -20,55 +20,89 @@
                                 <a href="#" class="list-group-item list-group-item-action">Bank Mandiri</a>
                               </div>
                         </div>
-                        <div class="col-lg-4 col-md-6">
+                        <div class="col-lg-6">
                             <div class="checkout__order">
-                                <h4>Your Order</h4>
-
-                                <h5 class="card-title">Alamat Pengiriman</h5>
-                                <p class="card-text"><span class="text-success fw-bold">Tasya Rania Arinastia</span>, Jl. Jaksa Agung Suprapto No.12, Kauman, Kec. Nganjuk, Kabupaten Nganjuk, Jawa Timur 64411, Nganjuk, Nganjuk, Jawa Timur, 64411</p>
-
-                                <h5 class="card-title">Detail Pemesanan</h5>
-                                <div class="checkout_order_products">Total<span> Produk</span></div>
-                                <ul>
-                                    <li>Stik Semanggi <span>Rp 20.000</span></li>
-                                    <li>Mie Semanggi <span>Rp 35.000</span></li>
-                                    <li>Kue Dahlia Semanggi <span>Rp 35.000</span></li>
-                                </ul>
-                                <div class="checkout_order_subtotal">
-                                    <div class="row">
-                                        <span class="text-start">Subtotal</span>
-                                        <span class="text-end fw-bold">Rp.90.000</span>
+                                <h4>Pesanan Anda</h4>
+                                <div class="row d-flex justify-content-between">
+                                    <div class="col-7">
+                                        <strong>No Pesanan : #{{ $bayar->pesanan->nomer }}</strong><br>
+                                    </div>
+                                    <div class="col-5">
+                                        <small class=""
+                                            style="font-size: 15px">{{ \Carbon\Carbon::parse($bayar->pesanan->created_at)->translatedFormat('l, d F Y H:i') }}</small>
+                                    </div>
+                                </div>
+                                <div class="checkout_order_subtotal my-3">
+                                    <div class="row d-flex justify-content-between">
+                                        <span class="text-start">Rincian Produk</span>
+                                        @foreach ($bayar->pesanan->detail()->get() as $pro)
+                                            <div class="row">
+                                                <div class="col-8">
+                                                    <span class="col-7">{{ ucwords($pro->barang->nama) }}
+                                                        (x{{ $pro->qtyitem }})
+                                                    </span>
+                                                </div>
+                                                <div class="col-4">
+                                                    <span class="text-end">Rp
+                                                        {{ number_format($pro->barang->harga * $pro->qtyitem, 2, ',', '.') }}</span>
+                                                </div>
+                                            </div>
+                                        @endforeach
                                     </div>
                                 </div>
 
-                                <div class="checkout_order_ongkir">
-                                    <div class="row">
-                                        <span class="text-start">Ongkir</span>
-                                        <span class="text-end fw-bold">Rp.20.000</span>
+                                <hr>
+
+                                <div class="checkout_order_subtotal mb-2">
+                                    <div class="row d-flex justify-content-between">
+                                        <div class="row">
+                                            <div class="col-8">
+                                                <span class="text-start">Subtotal Produk</span>
+                                            </div>
+                                            <div class="col-4">
+                                                <span class="text-end">Rp
+                                                    {{ number_format($bayar->pesanan->subtotal, 2, ',', '.') }}</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div class="checkout_order_biayaLayanan">
-                                    <div class="row">
-                                        <span class="text-start">Biaya Layanan</span>
-                                        <span class="text-end fw-bold">Rp.5.000</span>
+                                @if ($bayar->pesanan->alamat_id)
+                                    <div class="checkout_order_subtotal mb-2" id="ongkir">
+                                        <div class="row d-flex justify-content-between">
+                                            <div class="row">
+                                                <div class="col-8">
+                                                    <span class="text-start">Ongkos Kirim</span>
+                                                </div>
+                                                <div class="col-4">
+                                                    <span class="text-end">Rp 7.000,00</span>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
+                                @endif
 
-                                <div class="checkout_order_total">
-                                    <div class="row">
-                                        <span class="text-start">Total</span>
-                                        <span class="text-end fw-bold">Rp.115.000</span>
+                                <div class="checkout_order_subtotal mb-2">
+                                    <div class="row d-flex justify-content-between">
+                                        <div class="row">
+                                            <div class="col-8">
+                                                <span class="text-start fw-bold">Total Biaya</span>
+                                            </div>
+                                            <div class="col-4">
+                                                <span class="fw-bold">Rp
+                                                    {{ number_format($bayar->pesanan->subtotal, 2, ',', '.') }}</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div class="container mt-4">
                                     <div class="row">
-                                      <div class="col text-center">
-                                        <a class="site-btn" href="/pembayaran/kode-unik" role="button">Konfirmasi Pembayaran</a>
-                                      </div>
+                                        <div class="col text-center">
+                                            <button type="submit" class="site-btn" role="button">Checkout</button>
+                                        </div>
                                     </div>
-                                  </div>
+                                </div>
 
                             </div>
                         </div>
