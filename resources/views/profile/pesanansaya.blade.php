@@ -151,13 +151,13 @@
                                                                     style="border: none; background-color: #F1F2F7">
                                                                     <div class="card-title">
                                                                         <div class="row d-flex justify-content-between">
-                                                                            <div class="col-6">
+                                                                            <div class="col-7">
                                                                                 <strong class="fw-bold fs-5"><a
                                                                                         title="Lihat detail pesanan"
                                                                                         style="color: black"
                                                                                         href="/detailpesanan/{{ $bel->slug }}">#{{ $bel->nomer }}</a></strong>
                                                                             </div>
-                                                                            <div class="col-6 text-end">
+                                                                            <div class="col-5 text-end">
                                                                                 <small
                                                                                     style="color: black">{{ \Carbon\Carbon::parse($bel->created_at)->translatedFormat('l, d F Y H:i') }}</small>
                                                                             </div>
@@ -172,7 +172,7 @@
                                                                             </div>
                                                                             <div class="col-10">
                                                                                 <span
-                                                                                    style="color:black; 500; font-size: 20px font-family: Verdana, Geneva, Tahoma, sans-serif;">{{ $bel->detail[0]->barang->nama }}</span><br>
+                                                                                    style="color:black; 500; font-size: 20px font-family: Verdana, Geneva, Tahoma, sans-serif;">{{ ucwords($bel->detail[0]->barang->nama) }}</span><br>
                                                                                 <div class="row">
                                                                                     <div class="col-6">
                                                                                         <span
@@ -257,13 +257,13 @@
                                                                     style="border: none; background-color: #F1F2F7">
                                                                     <div class="card-title">
                                                                         <div class="row d-flex justify-content-between">
-                                                                            <div class="col-6">
+                                                                            <div class="col-7">
                                                                                 <strong class="fw-bold fs-5"><a
                                                                                         title="Lihat detail pesanan"
                                                                                         style="color: black"
                                                                                         href="">#{{ $bel->nomer }}</a></strong>
                                                                             </div>
-                                                                            <div class="col-6 text-end">
+                                                                            <div class="col-5 text-end">
                                                                                 <small
                                                                                     style="color: black">{{ \Carbon\Carbon::parse($bel->created_at)->translatedFormat('l, d F Y H:i') }}</small>
                                                                             </div>
@@ -278,7 +278,7 @@
                                                                             </div>
                                                                             <div class="col-10">
                                                                                 <span
-                                                                                    style="color:black; 500; font-size: 20px font-family: Verdana, Geneva, Tahoma, sans-serif;">{{ $bel->detail[0]->barang->nama }}</span><br>
+                                                                                    style="color:black; 500; font-size: 20px font-family: Verdana, Geneva, Tahoma, sans-serif;">{{ ucwords($bel->detail[0]->barang->nama) }}</span><br>
                                                                                 <div class="row">
                                                                                     <div class="col-6">
                                                                                         <span
@@ -363,13 +363,13 @@
                                                                     style="border: none; background-color: #F1F2F7">
                                                                     <div class="card-title">
                                                                         <div class="row d-flex justify-content-between">
-                                                                            <div class="col-6">
+                                                                            <div class="col-7">
                                                                                 <strong class="fw-bold fs-5"><a
                                                                                         title="Lihat detail pesanan"
                                                                                         style="color: black"
                                                                                         href="">#{{ $bel->nomer }}</a></strong>
                                                                             </div>
-                                                                            <div class="col-6 text-end">
+                                                                            <div class="col-5 text-end">
                                                                                 <small
                                                                                     style="color: black">{{ \Carbon\Carbon::parse($bel->created_at)->translatedFormat('l, d F Y H:i') }}</small>
                                                                             </div>
@@ -384,7 +384,7 @@
                                                                             </div>
                                                                             <div class="col-10">
                                                                                 <span
-                                                                                    style="color:black; 500; font-size: 20px font-family: Verdana, Geneva, Tahoma, sans-serif;">{{ $bel->detail[0]->barang->nama }}</span><br>
+                                                                                    style="color:black; 500; font-size: 20px font-family: Verdana, Geneva, Tahoma, sans-serif;">{{ ucwords($bel->detail[0]->barang->nama) }}</span><br>
                                                                                 <div class="row">
                                                                                     <div class="col-6">
                                                                                         <span
@@ -469,13 +469,13 @@
                                                                     style="border: none; background-color: #F1F2F7">
                                                                     <div class="card-title">
                                                                         <div class="row d-flex justify-content-between">
-                                                                            <div class="col-6">
+                                                                            <div class="col-7">
                                                                                 <strong class="fw-bold fs-5"><a
                                                                                         title="Lihat detail pesanan"
                                                                                         style="color: black"
                                                                                         href="">#{{ $bel->nomer }}</a></strong>
                                                                             </div>
-                                                                            <div class="col-6 text-end">
+                                                                            <div class="col-5 text-end">
                                                                                 <small
                                                                                     style="color: black">{{ \Carbon\Carbon::parse($bel->created_at)->translatedFormat('l, d F Y H:i') }}</small>
                                                                             </div>
@@ -490,7 +490,7 @@
                                                                             </div>
                                                                             <div class="col-10">
                                                                                 <span
-                                                                                    style="color:black; 500; font-size: 20px font-family: Verdana, Geneva, Tahoma, sans-serif;">{{ $bel->detail[0]->barang->nama }}</span><br>
+                                                                                    style="color:black; 500; font-size: 20px font-family: Verdana, Geneva, Tahoma, sans-serif;">{{ ucwords($bel->detail[0]->barang->nama) }}</span><br>
                                                                                 <div class="row">
                                                                                     <div class="col-6">
                                                                                         <span
@@ -570,13 +570,13 @@
                                                                     style="border: none; background-color: #F1F2F7">
                                                                     <div class="card-title">
                                                                         <div class="row d-flex justify-content-between">
-                                                                            <div class="col-6">
+                                                                            <div class="col-7">
                                                                                 <strong class="fw-bold fs-5"><a
                                                                                         title="Lihat detail pesanan"
                                                                                         style="color: black"
                                                                                         href="">#{{ $bel->nomer }}</a></strong>
                                                                             </div>
-                                                                            <div class="col-6 text-end">
+                                                                            <div class="col-5 text-end">
                                                                                 <small
                                                                                     style="color: black">{{ \Carbon\Carbon::parse($bel->created_at)->translatedFormat('l, d F Y H:i') }}</small>
                                                                             </div>
@@ -591,7 +591,7 @@
                                                                             </div>
                                                                             <div class="col-10">
                                                                                 <span
-                                                                                    style="color:black; 500; font-size: 20px font-family: Verdana, Geneva, Tahoma, sans-serif;">{{ $bel->detail[0]->barang->nama }}</span><br>
+                                                                                    style="color:black; 500; font-size: 20px font-family: Verdana, Geneva, Tahoma, sans-serif;">{{ ucwords($bel->detail[0]->barang->nama) }}</span><br>
                                                                                 <div class="row">
                                                                                     <div class="col-6">
                                                                                         <span
@@ -673,13 +673,13 @@
                                                                     style="border: none; background-color: #F1F2F7">
                                                                     <div class="card-title">
                                                                         <div class="row d-flex justify-content-between">
-                                                                            <div class="col-6">
+                                                                            <div class="col-7">
                                                                                 <strong class="fw-bold fs-5"><a
                                                                                         title="Lihat detail pesanan"
                                                                                         style="color: black"
                                                                                         href="">#{{ $bel->nomer }}</a></strong>
                                                                             </div>
-                                                                            <div class="col-6 text-end">
+                                                                            <div class="col-5 text-end">
                                                                                 <small
                                                                                     style="color: black">{{ \Carbon\Carbon::parse($bel->created_at)->translatedFormat('l, d F Y H:i') }}</small>
                                                                             </div>
@@ -694,7 +694,7 @@
                                                                             </div>
                                                                             <div class="col-10">
                                                                                 <span
-                                                                                    style="color:black; 500; font-size: 20px font-family: Verdana, Geneva, Tahoma, sans-serif;">{{ $bel->detail[0]->barang->nama }}</span><br>
+                                                                                    style="color:black; 500; font-size: 20px font-family: Verdana, Geneva, Tahoma, sans-serif;">{{ ucwords($bel->detail[0]->barang->nama) }}</span><br>
                                                                                 <div class="row">
                                                                                     <div class="col-6">
                                                                                         <span
@@ -779,13 +779,13 @@
                                                                     style="border: none; background-color: #F1F2F7">
                                                                     <div class="card-title">
                                                                         <div class="row d-flex justify-content-between">
-                                                                            <div class="col-6">
+                                                                            <div class="col-7">
                                                                                 <strong class="fw-bold fs-5"><a
                                                                                         title="Lihat detail pesanan"
                                                                                         style="color: black"
                                                                                         href="">#{{ $bel->nomer }}</a></strong>
                                                                             </div>
-                                                                            <div class="col-6 text-end">
+                                                                            <div class="col-5 text-end">
                                                                                 <small
                                                                                     style="color: black">{{ \Carbon\Carbon::parse($bel->created_at)->translatedFormat('l, d F Y H:i') }}</small>
                                                                             </div>
@@ -800,7 +800,7 @@
                                                                             </div>
                                                                             <div class="col-10">
                                                                                 <span
-                                                                                    style="color:black; 500; font-size: 20px font-family: Verdana, Geneva, Tahoma, sans-serif;">{{ $bel->detail[0]->barang->nama }}</span><br>
+                                                                                    style="color:black; 500; font-size: 20px font-family: Verdana, Geneva, Tahoma, sans-serif;">{{ ucwords($bel->detail[0]->barang->nama) }}</span><br>
                                                                                 <div class="row">
                                                                                     <div class="col-6">
                                                                                         <span
@@ -885,13 +885,13 @@
                                                                     style="border: none; background-color: #F1F2F7">
                                                                     <div class="card-title">
                                                                         <div class="row d-flex justify-content-between">
-                                                                            <div class="col-6">
+                                                                            <div class="col-7">
                                                                                 <strong class="fw-bold fs-5"><a
                                                                                         title="Lihat detail pesanan"
                                                                                         style="color: black"
                                                                                         href="">#{{ $bel->nomer }}</a></strong>
                                                                             </div>
-                                                                            <div class="col-6 text-end">
+                                                                            <div class="col-5 text-end">
                                                                                 <small
                                                                                     style="color: black">{{ \Carbon\Carbon::parse($bel->created_at)->translatedFormat('l, d F Y H:i') }}</small>
                                                                             </div>
@@ -906,7 +906,7 @@
                                                                             </div>
                                                                             <div class="col-10">
                                                                                 <span
-                                                                                    style="color:black; 500; font-size: 20px font-family: Verdana, Geneva, Tahoma, sans-serif;">{{ $bel->detail[0]->barang->nama }}</span><br>
+                                                                                    style="color:black; 500; font-size: 20px font-family: Verdana, Geneva, Tahoma, sans-serif;">{{ ucwords($bel->detail[0]->barang->nama) }}</span><br>
                                                                                 <div class="row">
                                                                                     <div class="col-6">
                                                                                         <span

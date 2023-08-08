@@ -55,6 +55,14 @@
                                     <img class="img-fluid" src="{{ asset('storage/' . auth()->user()->gambar) }}"
                                         alt="">
                                 </a>
+                                <form action="/hapuspp" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="id" value="{{ auth()->user()->id }}">
+                                    <input type="hidden" name="oldImage" value="{{ auth()->user()->gambar }}">
+                                    <button type="submit" style="border: none; background: none; color: #5d0e09">
+                                        <span class="fw-bold" style="font-size: 17px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">[Hapus Foto Profil]</span>
+                                    </button>
+                                </form>
                             @else
                                 <a href="#">
                                     <img class="img-fluid"

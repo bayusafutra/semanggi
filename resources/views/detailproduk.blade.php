@@ -45,8 +45,11 @@
                     </ul>
 
                     <h6>Deskripsi Produk :</h6>
-                    <p class="pb-2"><i class="bi bi-quote" style="color: #F68037"></i> {{ $produk[0]->deskripsi }} <i
-                            class="bi bi-quote" id="bi-quote" style="color: #F68037"></i></p>
+                    <p class="pb-2"><i class="bi bi-quote" style="color: #F68037"></i> {{ $produk[0]->deskripsi }}
+                        <i
+                            class="bi bi-quote" id="bi-quote" style="color: #F68037">
+                        </i>
+                    </p>
 
                     <div class="row pb-3">
                         <div class="col d-grid">

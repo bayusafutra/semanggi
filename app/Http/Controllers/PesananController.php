@@ -99,6 +99,9 @@ class PesananController extends Controller
         $create["user_id"] = auth()->user()->id;
         $create["slug"] = Str::random(40);
 
+        $swap = strtoupper(Str::random(5));
+        $create["nomer"] = "SSPAY".$swap.$pesanan->deadlinePaid->format('YmdHi').$pesanan->id;
+
         $bayar = Pembayaran::create($create);
         return redirect("/pembayaran/$bayar->slug");
     }

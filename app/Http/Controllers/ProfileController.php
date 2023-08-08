@@ -49,7 +49,18 @@ class ProfileController extends Controller
         return back()->with('success', "Data diri pengguna berhasil diupdate");
     }
 
-    public function pesanan(){
+    public function hapuspp(Request $request)
+    {
+        $user = User::where('id', $request->id)->first();
+        Storage::delete($request->oldImage);
+        $validatedData['gambar'] = null;
+        $user->update($validatedData);
+
+        return back()->with('success', "Foto profil berhasil dihapus");
+    }
+
+    public function pesanan()
+    {
         $belumco = Pesanan::where('user_id', auth()->user()->id)->where('status', 1)->get();
         $belumbayar = Pesanan::where('user_id', auth()->user()->id)->where('status', 2)->get();
         $verifikasi = Pesanan::where('user_id', auth()->user()->id)->where('status', 3)->get();

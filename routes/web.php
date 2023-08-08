@@ -41,6 +41,7 @@ Route::get('/profilpengguna', [ProfileController::class, 'index'])->middleware('
 Route::get('/editprofile', [ProfileController::class, 'edit'])->middleware('auth');
 Route::post('/editprofile', [ProfileController::class, 'update'])->middleware('auth');
 Route::get('/pesanansaya', [ProfileController::class, 'pesanan'])->middleware('auth');
+Route::post('/hapuspp', [ProfileController::class, 'hapuspp'])->middleware('auth');
 
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate'])->middleware('guest');
@@ -90,7 +91,8 @@ Route::get('/editalamat/{slug}', [AlamatController::class, 'edit'])->middleware(
 Route::post('/editalamat', [AlamatController::class, 'update'])->middleware('auth');
 Route::post('/hapusalamat', [AlamatController::class, 'destroy'])->middleware(['auth', 'checkout']);
 
-Route::get('/pembayaran/{slug}', [PembayaranController::class, 'index'])->middleware('auth');
+Route::get('/pembayaran/{slug}', [PembayaranController::class, 'index'])->middleware(['auth', 'bayar']);
+Route::post('/unggahbukti', [PembayaranController::class, 'unggah'])->middleware('auth');
 
 Route::get('/pembayaran/kode-unik', function () {
     return view('kodepembayaran');
