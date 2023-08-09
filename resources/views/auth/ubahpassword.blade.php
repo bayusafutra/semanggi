@@ -146,7 +146,7 @@
                         <form action="/ubahpassword" method="post">
                             @csrf
                             <div class="form-floating mb-4 mt-4">
-                                <input type="text" id="current_password"
+                                <input type="password" id="current_password"
                                     class="form-control @error('current_password') is-invalid @enderror"
                                     placeholder="current_password" name="current_password" autofocus required
                                     value="{{ old('current_password') }}" />

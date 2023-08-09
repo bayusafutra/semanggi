@@ -54,7 +54,7 @@
                     <div class="row pb-3">
                         <div class="col d-grid">
                             <button type="submit" class="btn btn-warning" data-bs-toggle="modal"
-                                data-bs-target="#confirmationModal">Beli Sekarang</button>
+                                data-bs-target="#confirmationModal">Pesan Sekarang</button>
                         </div>
 
                         <div class="modal fade" id="confirmationModal" tabindex="-1"
@@ -142,7 +142,7 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Batal</button>
-                                            <button type="submit" class="btn btn-primary">Beli Sekarang</button>
+                                            <button type="submit" class="btn btn-primary">Pesan Sekarang</button>
                                         </div>
                                     </form>
                                 </div>
