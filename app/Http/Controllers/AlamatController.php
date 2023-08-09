@@ -68,7 +68,10 @@ class AlamatController extends Controller
         $validatedData['kodepos'] = $kodepos->name;
 
         $pesanan = Pesanan::where('id', $request->pesanan)->first();
-        Alamat::create($validatedData);
+        $newalamat = Alamat::create($validatedData);
+
+        $update["alamat_id"] =  $newalamat->id;
+        $pesanan->update($update);
         return redirect("/ubahAlamat/$pesanan->slug")->with('berhasil', "Alamat pengiriman berhasil ditambahkan");
     }
 

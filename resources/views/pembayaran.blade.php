@@ -115,10 +115,10 @@
                                         <p class="mt-3">
                                             <strong>Unggah bukti pembayaran Anda!</strong><br><br>
                                             <div class="row">
-                                                <div class="col-4">
-                                                    <label for="fileInput" class="file-selector-button">Pilih Gambar</label>
+                                                <div class="col-6">
+                                                    <label for="fileInput" class="file-selector-button">Pilih Bukti Pembayaran</label>
                                                 </div>
-                                                <div class="col-8">
+                                                <div class="col-6">
                                                     <img class="img-preview img-fluid mb-3"
                                                         style="height: 200px; width: 125px" id="gambar">
                                                 </div>

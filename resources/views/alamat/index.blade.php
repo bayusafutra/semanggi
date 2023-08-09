@@ -66,6 +66,8 @@
                                                                         <input class="form-check-input" type="radio"
                                                                             name="alamat" id="pembayaran1"
                                                                             value="{{ $al->id }}"
+                                                                            @if ($pesanan->alamat_id)
+                                                                            @endif
                                                                             {{ $al->id == $pesanan->alamat->id ? 'checked' : '' }}
                                                                         >
 

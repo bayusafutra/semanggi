@@ -29,8 +29,7 @@
                                                                 <label class="form-check-label" for="pembayaran1">
                                                                     <span class="text-success fw-bold">Ambil di
                                                                         tempat</span>
-                                                                    <p class="card-text">With supporting text below as a
-                                                                        natural lead-in to additional content.</p>
+                                                                    <p class="card-text">Ambil pesananmu pada alamat yang tertera di bawah ini!</p>
                                                                 </label>
                                                             </div>
                                                         </div>
@@ -46,8 +45,7 @@
                                                                 <label class="form-check-label" for="pembayaran2">
                                                                     <span class="text-success fw-bold">Dikirim ke
                                                                         rumah</span>
-                                                                    <p class="card-text">With supporting text below as a
-                                                                        natural lead-in to additional content.</p>
+                                                                    <p class="card-text">Pilih alamat pengiriman untuk pesanan Anda!</p>
                                                                 </label>
                                                             </div>
                                                         </div>
@@ -88,9 +86,9 @@
                                     <div class="card mt-3" id="tempat">
                                         <div class="card-body">
                                             <h4 class="card-title">Alamat Pengambilan</h4>
-                                            <span class="text-success fw-bold">Rumah Bapak Jarwo
+                                            <span class="text-success fw-bold">Rumah Bapak Parmo
                                             </span>
-                                            <p class="card-text"><strong>+62 88198631818</strong><br>
+                                            <p class="card-text"><strong>+62 85648784577</strong><br>
                                                 Jalan Kendung IX, Kelurahan SEMEMI, Kecamatan BENOWO, SURABAYA JAWA TIMUR, 60198
                                             </p>
                                         </div>
