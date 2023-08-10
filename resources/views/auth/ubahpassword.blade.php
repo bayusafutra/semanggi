@@ -22,14 +22,6 @@
 </head>
 
 <body>
-    {{-- <!-- Spinner Start -->
-    <div id="spinner"
-        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-        <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;"></div>
-    </div>
-    <!-- Spinner End --> --}}
-
-    <!-- Topbar Start -->
     <div class="container-fluid bg-dark px-0">
         <div class="row g-0 d-none d-lg-flex">
             <div class="col-lg-6 ps-5 text-start">
@@ -37,19 +29,17 @@
             <div class="col-lg-6 text-end">
                 <div class="h-100 d-inline-flex align-items-center text-light">
                     <a class="btn btn-link text-light" href="/"><i>Home</i></a>
-                    <a class="btn btn-link text-light" href="/profile"><i>Profile</i></a>
+                    <a class="btn btn-link text-light" href="/profilkampungsemanggi"><i>Profil Kampung Semanggi</i></a>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Topbar End -->
 
-    <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top px-5">
         <div class="brand row d-flex align-items-center">
             <div class="col-11">
                 <a href="/" class="navbar-brand d-flex align-items-center">
-                    <img src="img/logo1.png" class="img-fluid" style="height: 70px" alt="">
+                    <img src="{{ asset('img/logo1.png') }}" class="img-fluid" style="height: 75px" alt="">
                 </a>
             </div>
             <div class="col-1">
@@ -63,21 +53,30 @@
             <div class="row justify-content-between">
                 <div class="col-auto d-none d-lg-block">
                     <div class="d-flex align-items-center">
-                        <form action="">
-                            @csrf
+                        <form action="/catalog#listproduk">
                             <div class="input-group d-flex flex-end-center" style="width: 16cm">
                                 <input class="form-control form-eduprixsearch-control rounded-pill"
-                                    id="formGroupExampleInput" type="text"
-                                    placeholder="Apa yang anda cari hari ini?" />
+                                    id="formGroupExampleInput" type="text" name="search"
+                                    value="{{ request('search') }}"
+                                    placeholder="Produk apa yang anda cari hari ini?" />
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-            <a class="btn p-0 ms-auto position-relative"><i class="fa fa-shopping-cart fs-4"></i>
+
+            <a href="/cart" class="btn p-0 ms-auto position-relative"><i class="fa fa-shopping-cart fs-4"></i>
                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill"
                     style="background-color: #F68037">
-                    99+
+                    @php
+                        use App\Models\Cart;
+                        if (auth()->user()) {
+                            $cart = Cart::where('user_id', auth()->user()->id)->get();
+                            echo $cart->count();
+                        } else {
+                            echo 0;
+                        }
+                    @endphp
                     <span class="visually-hidden">unread messages</span>
                 </span>
             </a>
@@ -90,6 +89,8 @@
                             <a href="/dashboard" class="dropdown-item py-2">Administrator</a>
                             <hr style="border: 2px black">
                         @endcan
+                        <a class="dropdown-item py-2" href="/profilpengguna" style="text-decoration: none">Profil
+                            Pengguna</a>
                         <a class="dropdown-item py-2" href="/ubahpassword" style="text-decoration: none">Ubah Password</a>
                         <form action="/logout" method="post">
                             @csrf
@@ -106,7 +107,7 @@
             </div>
         </div>
     </nav>
-    <!-- Navbar End -->
+
     <div class="d-lg-flex half">
         <div class="bg order-1 order-md-2" style="background-image: url('images/login.jpg');"></div>
         <div class="contents order-2 order-md-1">
@@ -172,8 +173,8 @@
                             <div class="form-floating mb-4 mt-4">
                                 <input type="password" id="password_confirmation"
                                     class="form-control @error('password_confirmation') is-invalid @enderror"
-                                    placeholder="password_confirmation" name="password_confirmation" autofocus required
-                                    value="{{ old('password_confirmation') }}" />
+                                    placeholder="password_confirmation" name="password_confirmation" autofocus
+                                    required value="{{ old('password_confirmation') }}" />
                                 <label for="password_confirmation">Konfirmasi passsword baru</label>
                                 @error('password_confirmation')
                                     <div class="invalid-feedback"></div>
@@ -192,15 +193,13 @@
         </div>
     </div>
 
-    <!-- Footer Start -->
-    <div class="container-fluid footer pt-5 wow fadeIn"
-        style="background-color: #C0E6B7; color: black" data-wow-delay="0.1s">
-        <div class="container py-5">
+    <div class="container-fluid footer mt-5 pt-5 wow fadeIn"
+        style="background-color: #C0E6B7; color: black; position: relative; bottom: 0" data-wow-delay="0.1s">
+        <div class="container py-5 d-flex justify-content-center">
             <div class="row g-5">
-                <div class="col-lg-3 col-md-6">
-                    {{-- <h1 class="fw-bold text-primary mb-4">Srikandi<span class="text-warning">Semanggi</span></h1> --}}
-                    <img src="img/logo1.png" class="img-fluid" alt="">
-                    <p style="color: black">Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed
+                <div class="col-lg-4">
+                    <img src="{{ asset('img/logo1.png') }}" class="img-fluid" alt="">
+                    <p>Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed
                         stet lorem sit clita</p>
                     <div class="d-flex pt-2">
                         <a class="btn btn-square btn-outline-light rounded-circle me-1 text-dark" href=""><i
@@ -213,28 +212,27 @@
                                 class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-9" style="margin-left: 145px">
+                <div class="col-lg-6">
                     <h4 class="text-dark mb-4">Address</h4>
-                    <p style="color: black"><i class="fa fa-map-marker-alt me-3"></i>Jalan Kendung IX, Sememi, Kec. Benowo,
+                    <p><i class="fa fa-map-marker-alt me-3"></i>Jalan Kendung IX, Sememi, Kec. Benowo,
                         Kota Surabaya, Jawa Timur</p>
-                    <p style="color: black"><i class="fa fa-phone-alt me-3"></i>0838 5744 9383</p>
-                    <p style="color: black"><i class="fab fa-instagram me-3"></i>@srikandi_semanggi</p>
+                    <p><i class="fa fa-phone-alt me-3"></i>0838 5744 9383</p>
+                    <p><i class="fab fa-instagram me-3"></i>@srikandi_semanggi</p>
                 </div>
-                <div class="col-lg-3 col-md-6" style="margin-left: 145px">
+                <div class="col-lg-2">
                     <h4 class="text-dark mb-4">Quick Links</h4>
-                    <a class="btn btn-link" style="color: black" href="">Home</a>
-                    <a class="btn btn-link" style="color: black" href="">Profile</a>
+                    <a class="btn btn-link" style="color: black" href="/">Home</a>
+                    <a class="btn btn-link" style="color: black" href="/profilkampungsemanggi">Profile</a>
                     <a class="btn btn-link" style="color: black" href="/catalog">Catalog</a>
-                    <a class="btn btn-link" style="color: black" href="">Login</a>
-                    <a class="btn btn-link" style="color: black" href="">Register</a>
+                    @guest
+                        <a class="btn btn-link" style="color: black" href="/login">Login</a>
+                        <a class="btn btn-link" style="color: black" href="/signup">Register</a>
+                    @endguest
                 </div>
             </div>
         </div>
     </div>
-    <!-- Footer End -->
 
-
-    <!-- Copyright Start -->
     <div class="container-fluid bg-primary text-body copyright py-4">
         <div class="container">
             <div class="row text-white">
@@ -248,10 +246,7 @@
             </div>
         </div>
     </div>
-    <!-- Copyright End -->
 
-
-    <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i
             class="bi bi-arrow-up"></i></a>
     <script src="{{ asset('js/login/jquery-3.3.1.min.js') }}"></script>

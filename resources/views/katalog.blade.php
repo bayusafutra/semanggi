@@ -1,12 +1,12 @@
 @extends('layouts.navbarHome')
 
 @section('content')
-    <!-- Carousel Start -->
+
     <div class="container-fluid p-0 mb-5 wow fadeIn" data-wow-delay="0.1s">
         <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img class="w-100" src="img/catalog-1.png" alt="Image">
+                    <img class="w-100" src="slider/slider2.png" alt="Image">
                     <div class="carousel-caption">
                         <div class="container">
                             <div class="row justify-content-start">
@@ -18,7 +18,7 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="w-100" src="img/catalog-2.png" alt="Image">
+                    <img class="w-100" src="slider/slider3.jpg" alt="Image">
                     <div class="carousel-caption">
                         <div class="container">
                             <div class="row justify-content-start">
@@ -30,7 +30,7 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="w-100" src="img/catalog-3.png" alt="Image">
+                    <img class="w-100" src="slider/slider4.png" alt="Image">
                     <div class="carousel-caption">
                         <div class="container">
                             <div class="row justify-content-start">
@@ -42,7 +42,7 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="w-100" src="img/catalog-4.png" alt="Image">
+                    <img class="w-100" src="slider/slider5.png" alt="Image">
                     <div class="carousel-caption">
                         <div class="container">
                             <div class="row justify-content-start">
@@ -64,9 +64,7 @@
             </button>
         </div>
     </div>
-    <!-- Carousel End -->
 
-    <!-- Product Start -->
     <section id="listproduk">
         <div class="container-xxl py-5">
             <div class="container portofolio">
@@ -206,5 +204,4 @@
             </div>
         </div>
     </section>
-    <!-- Product End -->
 @endsection

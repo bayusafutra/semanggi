@@ -67,8 +67,8 @@
                                                                             name="alamat" id="pembayaran1"
                                                                             value="{{ $al->id }}"
                                                                             @if ($pesanan->alamat_id)
+                                                                                {{ $al->id == $pesanan->alamat->id ? 'checked' : '' }}
                                                                             @endif
-                                                                            {{ $al->id == $pesanan->alamat->id ? 'checked' : '' }}
                                                                         >
 
                                                                         <label class="form-check-label" for="pembayaran1">

@@ -81,6 +81,14 @@ class KategoriController extends Controller
         return back()->with('success', "Kategori program: $kategori->nama berhasil dinonaktifkan");
     }
 
+    public function aktif(){
+        $id=request('id');
+        $kategori = Kategori::where('id', $id)->first();
+        $validatedData['status'] = 1;
+        $kategori->update($validatedData);
+        return back()->with('success', "Kategori program: $kategori->nama berhasil diaktifkan kembali");
+    }
+
     public function checkSlug(Request $request)
     {
         $slug = SlugService::createSlug(Kategori::class, 'slug', $request->nama);

@@ -4,6 +4,14 @@
     <section class="checkout spad">
         <div class="container">
             <div class="checkout__form">
+                @if (session()->has('alamat'))
+                    <div class="row justify-content-center">
+                        <div class="alert alert-success alert-dismissible text-center col-lg-6 fade show" role="alert">
+                            {{ session('alamat') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    </div>
+                @endif
                 <h4><a type="button" class="btn p-0 ms-auto btn-lg me-md-2" href="/pesanansaya"><i
                             class="bi bi-arrow-left"></i>
                     </a>Detail Pesanan</h4>
@@ -29,7 +37,8 @@
                                                                 <label class="form-check-label" for="pembayaran1">
                                                                     <span class="text-success fw-bold">Ambil di
                                                                         tempat</span>
-                                                                    <p class="card-text">Ambil pesananmu pada alamat yang tertera di bawah ini!</p>
+                                                                    <p class="card-text">Ambil pesananmu pada alamat yang
+                                                                        tertera di bawah ini!</p>
                                                                 </label>
                                                             </div>
                                                         </div>
@@ -41,11 +50,13 @@
                                                         <div class="card-body">
                                                             <div class="form-check form">
                                                                 <input class="form-check-input" type="radio"
-                                                                    name="pembayaran" id="pembayaran2" value="2" checked>
+                                                                    name="pembayaran" id="pembayaran2" value="2"
+                                                                    checked>
                                                                 <label class="form-check-label" for="pembayaran2">
                                                                     <span class="text-success fw-bold">Dikirim ke
                                                                         rumah</span>
-                                                                    <p class="card-text">Pilih alamat pengiriman untuk pesanan Anda!</p>
+                                                                    <p class="card-text">Pilih alamat pengiriman untuk
+                                                                        pesanan Anda!</p>
                                                                 </label>
                                                             </div>
                                                         </div>
@@ -89,7 +100,8 @@
                                             <span class="text-success fw-bold">Rumah Bapak Parmo
                                             </span>
                                             <p class="card-text"><strong>+62 85648784577</strong><br>
-                                                Jalan Kendung IX, Kelurahan SEMEMI, Kecamatan BENOWO, SURABAYA JAWA TIMUR, 60198
+                                                Jalan Kendung IX, Kelurahan SEMEMI, Kecamatan BENOWO, SURABAYA JAWA TIMUR,
+                                                60198
                                             </p>
                                         </div>
                                     </div>
@@ -97,7 +109,7 @@
                                     <div class="card mt-3">
                                         <div class="card-body">
                                             <h4 class="card-title">Catatan Pesanan (optional)</h4>
-                                            <textarea class="form-control" placeholder="Silahkan tinggalkan catatan..." name="catatan"cols="68" rows="5"></textarea>
+                                            <textarea class="form-control" placeholder="Silahkan tinggalkan catatan..." name="catatan"cols="68" rows="5">{{ $pesanan->catatan }}</textarea>
                                         </div>
                                     </div>
 
@@ -110,10 +122,19 @@
                                                     <div class="card">
                                                         <div class="card-body">
                                                             <div class="form-check form">
-                                                                <input class="form-check-input" type="radio" name="payment" value="{{ $pay->id }}" oninvalid="this.setCustomValidity('Pilih salah satu metode pembayaran.')" oninput="this.setCustomValidity('')" required>
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="payment" value="{{ $pay->id }}"
+                                                                    onsubmit="return validateForm()"
+                                                                    @if ($pesanan->payment_id)
+                                                                        {{ $pay->id == $pesanan->payment->id ? 'checked' : '' }}
+                                                                    @endif
+                                                                required>
                                                                 <label class="form-check-label" for="pembayaran1">
-                                                                    <span class="text-success fw-bold">{{ ucwords($pay->nama) }}</span><br>
-                                                                    <img class="img-fluid" src="{{ asset('storage/'.$pay->logo) }}" style="height: 60px; width: 100px" alt="">
+                                                                    <span
+                                                                        class="text-success fw-bold">{{ ucwords($pay->nama) }}</span><br>
+                                                                    <img class="img-fluid"
+                                                                        src="{{ asset('storage/' . $pay->logo) }}"
+                                                                        style="height: 60px; width: 100px" alt="">
                                                                 </label>
                                                             </div>
                                                         </div>
@@ -266,5 +287,15 @@
             handleOngkirDisplay();
         });
     </script>
-@endsection
 
+    <script>
+        function validateForm() {
+            var selectedRadio = document.querySelector('input[type="radio"][name="payment"]:checked');
+            if (!selectedRadio) {
+                alert('Pilih salah satu metode pembayaran.');
+                return false;
+            }
+            return true;
+        }
+    </script>
+@endsection

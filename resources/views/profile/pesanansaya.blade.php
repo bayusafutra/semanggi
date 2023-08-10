@@ -208,7 +208,7 @@
                                                                                         <strong style="color: black">Jumlah
                                                                                             Harus Dibayar: </strong><span
                                                                                             style="color: #F68037">Rp
-                                                                                            {{ number_format($bel->total, 2, ',', '.') }}</span>
+                                                                                            {{ number_format($bel->subtotal, 2, ',', '.') }}</span>
                                                                                     </div>
                                                                                     <hr class="my-2"
                                                                                         style="border: 1px solid rgb(91, 91, 91)">
@@ -314,7 +314,7 @@
                                                                                         <strong style="color: black">Jumlah
                                                                                             Harus Dibayar: </strong><span
                                                                                             style="color: #F68037">Rp
-                                                                                            {{ number_format($bel->total, 2, ',', '.') }}</span>
+                                                                                            {{ number_format($bel->subtotal, 2, ',', '.') }}</span>
                                                                                     </div>
                                                                                     <hr class="my-2"
                                                                                         style="border: 1px solid rgb(91, 91, 91)">
@@ -420,7 +420,7 @@
                                                                                         <strong style="color: black">Jumlah
                                                                                             Harus Dibayar: </strong><span
                                                                                             style="color: #F68037">Rp
-                                                                                            {{ number_format($bel->total, 2, ',', '.') }}</span>
+                                                                                            {{ number_format($bel->subtotal, 2, ',', '.') }}</span>
                                                                                     </div>
                                                                                     <hr class="my-2"
                                                                                         style="border: 1px solid rgb(91, 91, 91)">
@@ -526,7 +526,7 @@
                                                                                         <strong style="color: black">Total
                                                                                             Pesanan: </strong><span
                                                                                             style="color: #F68037">Rp
-                                                                                            {{ number_format($bel->total, 2, ',', '.') }}</span>
+                                                                                            {{ number_format($bel->subtotal, 2, ',', '.') }}</span>
                                                                                     </div>
                                                                                     <hr class="my-2"
                                                                                         style="border: 1px solid rgb(91, 91, 91)">
@@ -627,7 +627,7 @@
                                                                                         <strong style="color: black">Total
                                                                                             Pesanan: </strong><span
                                                                                             style="color: #F68037">Rp
-                                                                                            {{ number_format($bel->total, 2, ',', '.') }}</span>
+                                                                                            {{ number_format($bel->subtotal, 2, ',', '.') }}</span>
                                                                                     </div>
                                                                                     <hr class="my-2"
                                                                                         style="border: 1px solid rgb(91, 91, 91)">
@@ -730,7 +730,7 @@
                                                                                         <strong style="color: black">Total
                                                                                             Pesanan: </strong><span
                                                                                             style="color: #F68037">Rp
-                                                                                            {{ number_format($bel->total, 2, ',', '.') }}</span>
+                                                                                            {{ number_format($bel->subtotal, 2, ',', '.') }}</span>
                                                                                     </div>
                                                                                     <hr class="my-2"
                                                                                         style="border: 1px solid rgb(91, 91, 91)">
@@ -836,7 +836,7 @@
                                                                                         <strong style="color: black">Total
                                                                                             Pesanan: </strong><span
                                                                                             style="color: #F68037">Rp
-                                                                                            {{ number_format($bel->total, 2, ',', '.') }}</span>
+                                                                                            {{ number_format($bel->subtotal, 2, ',', '.') }}</span>
                                                                                     </div>
                                                                                     <hr class="my-2"
                                                                                         style="border: 1px solid rgb(91, 91, 91)">
@@ -942,7 +942,7 @@
                                                                                         <strong style="color: black">Total
                                                                                             Pesanan: </strong><span
                                                                                             style="color: #F68037">Rp
-                                                                                            {{ number_format($bel->total, 2, ',', '.') }}</span>
+                                                                                            {{ number_format($bel->subtotal, 2, ',', '.') }}</span>
                                                                                     </div>
                                                                                     <hr class="my-2"
                                                                                         style="border: 1px solid rgb(91, 91, 91)">
@@ -964,9 +964,19 @@
                                                                                     </div>
 
                                                                                     <div class="col-5 text-end">
-                                                                                        <a href="" class="btn"
-                                                                                            style="background-color: #5B8C51; color: white">Beli
-                                                                                            Lagi</a>
+                                                                                        @if ($bel->detail()->count() > 1)
+                                                                                            <a href="/cart"
+                                                                                                class="btn px-5"
+                                                                                                style="background-color: #5B8C51; color: white">Beli
+                                                                                                Lagi
+                                                                                            </a>
+                                                                                        @else
+                                                                                            <a href="/detailproduk/{{ $bel->detail[0]->barang->slug }}"
+                                                                                                class="btn px-5"
+                                                                                                style="background-color: #5B8C51; color: white">Beli
+                                                                                                Lagi
+                                                                                            </a>
+                                                                                        @endif
                                                                                     </div>
                                                                                 </div>
                                                                             </div>

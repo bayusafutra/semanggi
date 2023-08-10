@@ -189,6 +189,18 @@
                                     </div>
                                 </a>
                                 <div class="dropdown-divider"></div>
+
+                                <a class="dropdown-item preview-item" href="/dash-tambahmetodepembayaran">
+                                    <div class="preview-thumbnail">
+                                        <div class="preview-icon bg-dark rounded-circle">
+                                            <i class="mdi mdi mdi-cash-usd text-success"></i>
+                                        </div>
+                                    </div>
+                                    <div class="preview-item-content">
+                                        <p class="preview-subject ellipsis mb-1">Produk</p>
+                                    </div>
+                                </a>
+                                <div class="dropdown-divider"></div>
                             </div>
                         </li>
                         <li class="nav-item dropdown border-left">
@@ -341,7 +353,7 @@
                 <footer class="footer">
                     <div class="d-sm-flex justify-content-center justify-content-sm-between">
                         <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright&copy; <a
-                                href="/" style="font-style: italic">Website Bantu Mereka</a> 2023</span>
+                                href="/" style="font-style: italic">Website Srikandi Semanggi</a> 2023</span>
                     </div>
                 </footer>
                 <!-- partial -->

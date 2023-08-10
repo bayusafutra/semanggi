@@ -114,21 +114,29 @@
 
                                         <p class="mt-3">
                                             <strong>Unggah bukti pembayaran Anda!</strong><br><br>
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <label for="fileInput" class="file-selector-button">Pilih Bukti Pembayaran</label>
-                                                </div>
-                                                <div class="col-6">
-                                                    <img class="img-preview img-fluid mb-3"
-                                                        style="height: 200px; width: 125px" id="gambar">
-                                                </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label for="fileInput" class="file-selector-button">Pilih Bukti
+                                                    Pembayaran</label>
                                             </div>
-                                            <input type="file" id="fileInput" class="form-control" name="gambar"
-                                                id="gambar" onchange="previewImage()">
+                                            <div class="col-6">
+                                                <img class="img-preview img-fluid mb-3" style="height: 200px; width: 125px"
+                                                    id="gambar">
+                                            </div>
+                                        </div>
+                                        <input type="file" id="fileInput" class="form-control" name="gambar"
+                                            id="gambar" onchange="previewImage()">
                                         </p>
+
+                                        <div class="batal d-flex justify-content-center">
+                                            <a href="#confirmationModal" class="btn"
+                                                style="background-color: #F68037; color: white; width: 100%; padding: 12px 12px"
+                                                data-bs-toggle="modal" data-bs-target="#confirmationModal">Batalkan
+                                                Pesanan
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                         <div class="col-lg-6">
@@ -222,6 +230,31 @@
                 </form>
             </div>
         </div>
+
+        <div class="modal fade" id="confirmationModal" tabindex="-1"
+            aria-labelledby="confirmationModalLabel"aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <form action="/pesananbatal" method="POST">
+                        @csrf
+                        <input type="hidden" name="pesanan" value="{{ $bayar->pesanan->id }}">
+                        <input type="hidden" name="bayar" value="{{ $bayar->id }}">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="confirmationModalLabel">Apakah Anda yakin untuk membatalkan Pesanan #{{ $bayar->pesanan->nomer }}?</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <label for="">Alasan Pembatalan</label>
+                            <input type="text" name="batal" class="form-control" placeholder="Masukkan alasan pembatalan Anda" required>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-primary">Lanjutkan</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
         </script>
@@ -256,6 +289,7 @@
             if (timeRemaining < 0) {
                 clearInterval(interval);
                 document.getElementById("countdown").innerHTML = "Waktu telah habis!";
+                window.location.href = "/pesanansaya";
             }
         }
 

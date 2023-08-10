@@ -18,6 +18,9 @@ class PembayaranController extends Controller
     }
 
     public function unggah(Request $request){
+        if($request->gambar == null){
+            return back()->with('gagal', "Unggah terlebih dahulu bukti pembayaran Anda");
+        }
         $bayar = Pembayaran::where('id', $request->pembayaran)->first();
         $validatedData = $request->validate([
             "gambar" => 'image|file|max:10240'

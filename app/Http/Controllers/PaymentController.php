@@ -13,14 +13,14 @@ class PaymentController extends Controller
 {
     public function index()
     {
-        return view('payment.index', [
+        return view('admin.payment.index', [
             "title" => "Dashboard | Metode Pembayaran",
             "payment" => Payment::paginate(10)
         ]);
     }
 
     public function create(){
-        return view('payment.createpayment', [
+        return view('admin.payment.createpayment', [
             "title" => "Dashboard | Tambah Metode Pembayaran"
         ]);
     }
@@ -45,7 +45,7 @@ class PaymentController extends Controller
     }
 
     public function edit($slug){
-        return view('payment.updatepayment', [
+        return view('admin.payment.updatepayment', [
             "title" => "Dashboard | Update Metode Pembayaran",
             "payment" => Payment::where('slug', $slug)->first()
         ]);

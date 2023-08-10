@@ -73,40 +73,77 @@
                                 <td>
                                     <div class="row justify-content-center">
                                         <a href="/dash-updatekategori/{{ $kat->slug }}" class="btn btn-light"
-                                            style="margin-right: 5px; border-radius: 5px; background-color: rgb(26, 100, 63); color: white; padding: 12px 27px 12px 27px">Update</a>
-                                        <button type="button" class="btn btn-light" data-bs-toggle="modal"
-                                            data-bs-target="#{{ $kat->id }}"
-                                            style="margin-right: 5px; border-radius: 5px; background-color: rgb(125, 26, 19); color: white; padding: 12px 27px 12px 27px">Non
-                                            Aktif</button>
+                                            style="margin-right: 5px; border-radius: 5px; background-color: rgb(26, 100, 63); color: white; padding: 12px 27px 12px 27px">Update
+                                        </a>
+                                        @if ($kat->status == 1)
+                                            <button type="button" class="btn btn-light" data-bs-toggle="modal"
+                                                data-bs-target="#{{ $kat->id }}"
+                                                style="margin-right: 5px; border-radius: 5px; background-color: rgb(125, 26, 19); color: white; padding: 12px 27px 12px 27px">Non
+                                                Aktif
+                                            </button>
 
-                                        {{-- Modal button hapus --}}
-                                        <div class="modal fade" id="{{ $kat->id }}" tabindex="-1"
-                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered">
-                                                <div class="modal-content"
-                                                    style="background-color: #2A3038; color:white; border-radius: 1rem; width: 1150px;">
-                                                    <div class="modal-header">
-                                                        <h1 class="modal-title fs-1" id="exampleModalLabel">Kategori:
-                                                            {{ ucwords($kat->nama) }}</h1>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        Apakah anda yakin untuk menonaktifkan kategori program ini?
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal"
-                                                            style="margin-right: 5px; border-radius: 5px; background-color: rgb(13, 105, 30); color: white; padding: 12px 27px 12px 27px">Tidak</button>
-                                                        <form action="/dash-nonaktifkankategori" method="POST">
-                                                            @csrf
-                                                            <input type="hidden" name="id"
-                                                                value="{{ $kat->id }}">
-                                                            <button type="submit" class="btn btn-light"
-                                                                style="margin-right: 5px; border-radius: 5px; background-color: rgb(125, 26, 19); color: white; padding: 12px 27px 12px 27px">Iya</button>
-                                                        </form>
+                                            <div class="modal fade" id="{{ $kat->id }}" tabindex="-1"
+                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content"
+                                                        style="background-color: #2A3038; color:white; border-radius: 1rem; width: 1150px;">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-1" id="exampleModalLabel">Kategori:
+                                                                {{ ucwords($kat->nama) }}</h1>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            Apakah anda yakin untuk menonaktifkan kategori program ini?
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-light"
+                                                                data-bs-dismiss="modal"
+                                                                style="margin-right: 5px; border-radius: 5px; background-color: rgb(13, 105, 30); color: white; padding: 12px 27px 12px 27px">Tidak</button>
+                                                            <form action="/dash-nonaktifkankategori" method="POST">
+                                                                @csrf
+                                                                <input type="hidden" name="id"
+                                                                    value="{{ $kat->id }}">
+                                                                <button type="submit" class="btn btn-light"
+                                                                    style="margin-right: 5px; border-radius: 5px; background-color: rgb(125, 26, 19); color: white; padding: 12px 27px 12px 27px">Iya</button>
+                                                            </form>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        {{-- End Modal button hapus --}}
+                                        @else
+                                            <button type="button" class="btn btn-light" data-bs-toggle="modal"
+                                                data-bs-target="#aktif{{ $kat->id }}"
+                                                style="margin-right: 5px; border-radius: 5px; background-color: rgb(103, 7, 98); color: white; padding: 12px 42px 12px 42px">
+                                                Aktif
+                                            </button>
+
+                                            <div class="modal fade" id="aktif{{ $kat->id }}" tabindex="-1"
+                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content"
+                                                        style="background-color: #2A3038; color:white; border-radius: 1rem; width: 1150px;">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-1" id="exampleModalLabel">Kategori:
+                                                                {{ ucwords($kat->nama) }}</h1>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            Apakah anda yakin untuk mengaktifkan kategori program ini kembali?
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-light"
+                                                                data-bs-dismiss="modal"
+                                                                style="margin-right: 5px; border-radius: 5px; background-color: rgb(13, 105, 30); color: white; padding: 12px 27px 12px 27px">Tidak</button>
+                                                            <form action="/dash-aktifkankategori" method="POST">
+                                                                @csrf
+                                                                <input type="hidden" name="id"
+                                                                    value="{{ $kat->id }}">
+                                                                <button type="submit" class="btn btn-light"
+                                                                    style="margin-right: 5px; border-radius: 5px; background-color: rgb(125, 26, 19); color: white; padding: 12px 27px 12px 27px">Iya</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endif
 
                                     </div>
                                 </td>

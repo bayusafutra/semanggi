@@ -93,6 +93,18 @@ class PesananController extends Controller
         $validatedData["status"] = 2;
         $validatedData["payment_id"] = $request->payment;
 
+        if($request->pembayaran == 2 && $pesanan->alamat_id == null){
+            if($request->payment){
+                $update["payment_id"] = $request->payment;
+                $pesanan->update($update);
+            }
+            if($request->catatan){
+                $update2["catatan"] = $request->catatan;
+                $pesanan->update($update2);
+            }
+            return back()->with("alamat", "Pilih alamat pengiriman Anda terlebih dahulu");
+        }
+
         $pesanan->update($validatedData);
 
         $create["pesanan_id"] = $pesanan->id;
@@ -104,5 +116,19 @@ class PesananController extends Controller
 
         $bayar = Pembayaran::create($create);
         return redirect("/pembayaran/$bayar->slug");
+    }
+
+    public function batal(Request $request){
+        $bayar = Pembayaran::where('id', $request->bayar)->first();
+        $update["status"] = 4;
+        $bayar->update($update);
+
+        $pesanan = Pesanan::where('id', $request->pesanan)->first();
+        $capek["status"] = 8;
+        $capek["deadlinePaid"] = null;
+        $capek["pesanbatal"] = $request->batal;
+        $pesanan->update($capek);
+
+        return redirect('/pesanansaya');
     }
 }

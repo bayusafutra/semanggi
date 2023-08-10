@@ -76,6 +76,7 @@ Route::post('/pesan', [PesananController::class, 'store'])->middleware('auth');
 Route::post('/pesanproduk', [PesananController::class, 'create'])->middleware('auth');
 Route::get('/detailpesanan/{slug}', [PesananController::class, 'index'])->middleware(['auth', 'checkout']);
 Route::post('/checkout', [PesananController::class, 'checkout'])->middleware('auth');
+Route::post('/pesananbatal', [PesananController::class, 'batal'])->middleware('auth');
 
 Route::get('inputProvinsi', [AlamatController::class, 'provinsi'])->name('pilihProv');
 Route::get('inputKota/{id}', [AlamatController::class, 'regency'])->name('pilihKota');
@@ -109,6 +110,7 @@ Route::get('/dash-daftarproduk/{slug}', [KategoriController::class, 'listprogram
 Route::get('/dash-updatekategori/{slug}', [KategoriController::class, 'indexupdate'])->name('updatekategori')->middleware('admin');
 Route::post('/dash-updatekategori', [KategoriController::class, 'update'])->middleware('admin');
 Route::post('/dash-nonaktifkankategori', [KategoriController::class, 'nonaktif'])->middleware('admin');
+Route::post('/dash-aktifkankategori', [KategoriController::class, 'aktif'])->middleware('admin');
 
 Route::get('/dash-produk', [BarangController::class, 'index'])->middleware('admin');
 Route::get('/dash-buatproduk', [BarangController::class, 'indexcreate'])->middleware('admin');

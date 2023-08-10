@@ -67,7 +67,9 @@
                                     <span class="pl-2">{{ ucwords($kat->nama) }}</span>
                                 </td>
                                 <td> {{ $kat->nomer }} </td>
-                                <td> - </td>
+                                <td>
+                                    <img class="img-fluid" src="{{ asset('storage/'.$kat->logo) }}" style="height: 40px; width: 65px; background: white" alt="">
+                                </td>
                                 <td> - </td>
                                 <td>
                                     @if ($kat->status == 1)
