@@ -103,12 +103,6 @@
                                                                                 <div class="utama" style="color: #5B8C51; margin-top: -17px; margin-bottom: -13px">
                                                                                     @if ($al->status == 1)
                                                                                         [Alamat Utama]
-                                                                                    @else
-                                                                                        <form action="/hapusalamat" method="post">
-                                                                                            @csrf
-                                                                                            <input type="hidden" name="hapus" value="{{ $al->id }}">
-                                                                                            <button style="color: red; border: none; background: none; margin-left: -6px">[Hapus Alamat]</button>
-                                                                                        </form>
                                                                                     @endif
                                                                                 </div>
                                                                             </p>

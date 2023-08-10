@@ -112,8 +112,12 @@ class AlamatController extends Controller
 
     public function edit($slug){
         session(['previous_route' => url()->previous()]);
+        $alamat = Alamat::where('slug', $slug)->first();
+        $pesanan = Pesanan::where('alamat_id', $alamat->id)->where('status', 1)
+        ->get();
         return view('alamat.editalamat', [
-            "alamat" => Alamat::where('slug', $slug)->first()
+            "alamat" => $alamat,
+            "pesanan" => $pesanan
         ]);
     }
 
@@ -152,6 +156,6 @@ class AlamatController extends Controller
         $alamat = Alamat::where('id', $request->hapus)->first();
         $validatedData["aktif"] = 2;
         $alamat->update($validatedData);
-        return back()->with("hapus", "Alamat pengiriman berhasil dihapus");
+        return redirect(session('previous_route'))->with('success', "Alamat pengiriman berhasil dihapus");
     }
 }

@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Alamat;
+use App\Models\Pembayaran;
 use App\Models\Pesanan;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class ProfileController extends Controller
 {
@@ -61,14 +63,26 @@ class ProfileController extends Controller
 
     public function pesanan()
     {
-        $belumco = Pesanan::where('user_id', auth()->user()->id)->where('status', 1)->get();
-        $belumbayar = Pesanan::where('user_id', auth()->user()->id)->where('status', 2)->get();
-        $verifikasi = Pesanan::where('user_id', auth()->user()->id)->where('status', 3)->get();
-        $dikemas = Pesanan::where('user_id', auth()->user()->id)->where('status', 4)->get();
-        $dikirim = Pesanan::where('user_id', auth()->user()->id)->where('status', 5)->get();
-        $ambil = Pesanan::where('user_id', auth()->user()->id)->where('status', 6)->get();
-        $selesai = Pesanan::where('user_id', auth()->user()->id)->where('status', 7)->get();
-        $batal = Pesanan::where('user_id', auth()->user()->id)->where('status', 8)->get();
+        $belumco = Pesanan::where('user_id', auth()->user()->id)->where('status', 1)->orderBy('updated_at', 'desc')->get();
+        $belumbayar = Pesanan::where('user_id', auth()->user()->id)->where('status', 2)->orderBy('updated_at', 'desc')->get();
+        $verifikasi = Pesanan::where('user_id', auth()->user()->id)->where('status', 3)->orderBy('updated_at', 'desc')->get();
+        $dikemas = Pesanan::where('user_id', auth()->user()->id)->where('status', 4)->orderBy('updated_at', 'desc')->get();
+        $dikirim = Pesanan::where('user_id', auth()->user()->id)->where('status', 5)->orderBy('updated_at', 'desc')->get();
+        $ambil = Pesanan::where('user_id', auth()->user()->id)->where('status', 6)->orderBy('updated_at', 'desc')->get();
+        $selesai = Pesanan::where('user_id', auth()->user()->id)->where('status', 7)->orderBy('updated_at', 'desc')->get();
+        $batal = Pesanan::where('user_id', auth()->user()->id)->where('status', 8)->orderBy('updated_at', 'desc')->get();
+
+        $pesanan = Pesanan::where('deadlinePaid', '<', Carbon::now())->get();
+        if($pesanan){
+            foreach ($pesanan as $pes) {
+                $update["status"] = 8;
+                $pes->update($update);
+
+                $bayar = Pembayaran::where('id', $pes->pembayaran->id)->first();
+                $hayo["status"] = 4;
+                $bayar->update($hayo);
+            }
+        }
         return view('profile.pesanansaya', [
             "belumco" => $belumco,
             "belumbayar" => $belumbayar,

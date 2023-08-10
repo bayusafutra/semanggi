@@ -112,6 +112,20 @@
                         </div>
                     </div>
                 </form>
+                <div class="row mt-4">
+                    <div class="col-9">
+                        <div class="hapusalamat d-flex justify-content-center">
+                            @if ($alamat->status != 1 && $pesanan->count() == 0)
+                                <form action="/hapusalamat" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="hapus" value="{{ $alamat->id }}">
+                                    <button type="submit" class="btn px-5 py-2" style="background-color: #551010; color: white">Hapus Alamat</button>
+                                </form>
+                            @endif
+
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

@@ -77,6 +77,7 @@ Route::post('/pesanproduk', [PesananController::class, 'create'])->middleware('a
 Route::get('/detailpesanan/{slug}', [PesananController::class, 'index'])->middleware(['auth', 'checkout']);
 Route::post('/checkout', [PesananController::class, 'checkout'])->middleware('auth');
 Route::post('/pesananbatal', [PesananController::class, 'batal'])->middleware('auth');
+Route::post('/waktuhabis', [PesananController::class, 'waktuhabis'])->middleware('auth');
 
 Route::get('inputProvinsi', [AlamatController::class, 'provinsi'])->name('pilihProv');
 Route::get('inputKota/{id}', [AlamatController::class, 'regency'])->name('pilihKota');
@@ -88,9 +89,9 @@ Route::get('/ubahAlamat/{slug}', [AlamatController::class, 'index'])->middleware
 Route::post('/ubahalamat', [AlamatController::class, 'ubahalamat'])->middleware('auth');
 Route::get('/tambahAlamat/{slug}', [AlamatController::class, 'create'])->middleware(['auth', 'checkout']);
 Route::post('/createalamat', [AlamatController::class, 'store'])->middleware('auth');
-Route::get('/editalamat/{slug}', [AlamatController::class, 'edit'])->middleware(['auth', 'checkout']);
+Route::get('/editalamat/{slug}', [AlamatController::class, 'edit'])->middleware('auth');
 Route::post('/editalamat', [AlamatController::class, 'update'])->middleware('auth');
-Route::post('/hapusalamat', [AlamatController::class, 'destroy'])->middleware(['auth', 'checkout']);
+Route::post('/hapusalamat', [AlamatController::class, 'destroy'])->middleware('auth');
 
 Route::get('/pembayaran/{slug}', [PembayaranController::class, 'index'])->middleware(['auth', 'bayar']);
 Route::post('/unggahbukti', [PembayaranController::class, 'unggah'])->middleware('auth');

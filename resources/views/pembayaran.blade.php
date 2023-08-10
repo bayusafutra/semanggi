@@ -1,4 +1,7 @@
 @extends('layouts.mainSC')
+@section('meta')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+@endsection
 @section('css')
     <style>
         #bi-quote::before {
@@ -240,12 +243,15 @@
                         <input type="hidden" name="pesanan" value="{{ $bayar->pesanan->id }}">
                         <input type="hidden" name="bayar" value="{{ $bayar->id }}">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="confirmationModalLabel">Apakah Anda yakin untuk membatalkan Pesanan #{{ $bayar->pesanan->nomer }}?</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <h5 class="modal-title" id="confirmationModalLabel">Apakah Anda yakin untuk membatalkan
+                                Pesanan #{{ $bayar->pesanan->nomer }}?</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <label for="">Alasan Pembatalan</label>
-                            <input type="text" name="batal" class="form-control" placeholder="Masukkan alasan pembatalan Anda" required>
+                            <input type="text" name="batal" class="form-control"
+                                placeholder="Masukkan alasan pembatalan Anda" required>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
@@ -289,12 +295,35 @@
             if (timeRemaining < 0) {
                 clearInterval(interval);
                 document.getElementById("countdown").innerHTML = "Waktu telah habis!";
-                window.location.href = "/pesanansaya";
+                updateStatus(); // Panggil fungsi untuk memperbarui status
+                // window.location.href = "/pesanansaya"; // Tidak perlu alihkan halaman di sini
             }
         }
-
         // Memanggil fungsi updateCountdown setiap 1 detik
         var interval = setInterval(updateCountdown, 1000);
+
+        function updateStatus() {
+            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            // Lakukan permintaan ke server untuk mengubah status pesanan menjadi 8
+            fetch('/waktuhabis', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': csrfToken // Sertakan token CSRF dalam header
+                    },
+                    body: JSON.stringify({
+                        orderId: {{ $bayar->pesanan->id }} // Ganti dengan orderId yang sesuai
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data.message);
+                    window.location.href = "/pesanansaya";
+                })
+                .catch(error => {
+                    console.error('Terjadi kesalahan:', error);
+                });
+        }
     </script>
 
     <script>

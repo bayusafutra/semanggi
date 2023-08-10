@@ -49,7 +49,7 @@
                             </thead>
 
                             <tbody class="text-center">
-                                @if ($kategori->count() == 0)
+                                @if ($all->count() == 0)
                             </tbody>
                         </table>
                         <div class="text-center mt-3">

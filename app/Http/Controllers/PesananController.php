@@ -12,6 +12,8 @@ use App\Models\Cart;
 use App\Models\DetailPesananan;
 use App\Models\Payment;
 use App\Models\Pembayaran;
+use Illuminate\Support\Facades\Log;
+
 
 class PesananController extends Controller
 {
@@ -35,13 +37,13 @@ class PesananController extends Controller
         $validatedData["slug"] = Str::random(40);
         $validatedData["total"] = $request->price;
         $alamat = Alamat::where('user_id', auth()->user()->id)->where('status', 1)->first();
-        if($alamat){
+        if ($alamat) {
             $validatedData["alamat_id"] = $alamat->id;
         }
         $pesanan = Pesanan::create($validatedData);
 
         $swap = strtoupper(Str::random(5));
-        $hayo["nomer"] = "SS".$swap.$pesanan->created_at->format('YmdHi').$pesanan->id;
+        $hayo["nomer"] = "SS" . $swap . $pesanan->created_at->format('YmdHi') . $pesanan->id;
         $pesanan->update($hayo);
 
         $keranjang = Cart::where('user_id', auth()->user()->id)->get();
@@ -60,13 +62,13 @@ class PesananController extends Controller
         $validatedData["slug"] = Str::random(40);
         $validatedData["total"] = $request->hayo;
         $alamat = Alamat::where('user_id', auth()->user()->id)->where('status', 1)->first();
-        if($alamat){
+        if ($alamat) {
             $validatedData["alamat_id"] = $alamat->id;
         }
         $pesanan = Pesanan::create($validatedData);
 
         $swap = strtoupper(Str::random(5));
-        $hayo["nomer"] = "SS".$swap.$pesanan->created_at->format('YmdHi').$pesanan->id;
+        $hayo["nomer"] = "SS" . $swap . $pesanan->created_at->format('YmdHi') . $pesanan->id;
         $pesanan->update($hayo);
 
         $rules["barang_id"] = $request->barang;
@@ -77,28 +79,29 @@ class PesananController extends Controller
         return redirect("/detailpesanan/$pesanan->slug");
     }
 
-    public function checkout(Request $request){
+    public function checkout(Request $request)
+    {
         $pesanan = Pesanan::where('id', $request->pesanan)->first();
-        if($request->pembayaran == 1){
+        if ($request->pembayaran == 1) {
             $validatedData["alamat_id"] = null;
             $validatedData["subtotal"] = $pesanan->total;
-        }else{
-            $validatedData["subtotal"] = $pesanan->total+7000;
+        } else {
+            $validatedData["subtotal"] = $pesanan->total + 7000;
         }
 
-        if($request->catatan){
+        if ($request->catatan) {
             $validatedData["catatan"] = $request->catatan;
         }
         $validatedData["deadlinePaid"] = now()->addDays(1);
         $validatedData["status"] = 2;
         $validatedData["payment_id"] = $request->payment;
 
-        if($request->pembayaran == 2 && $pesanan->alamat_id == null){
-            if($request->payment){
+        if ($request->pembayaran == 2 && $pesanan->alamat_id == null) {
+            if ($request->payment) {
                 $update["payment_id"] = $request->payment;
                 $pesanan->update($update);
             }
-            if($request->catatan){
+            if ($request->catatan) {
                 $update2["catatan"] = $request->catatan;
                 $pesanan->update($update2);
             }
@@ -112,13 +115,14 @@ class PesananController extends Controller
         $create["slug"] = Str::random(40);
 
         $swap = strtoupper(Str::random(5));
-        $create["nomer"] = "SSPAY".$swap.$pesanan->deadlinePaid->format('YmdHi').$pesanan->id;
+        $create["nomer"] = "SSPAY" . $swap . $pesanan->deadlinePaid->format('YmdHi') . $pesanan->id;
 
         $bayar = Pembayaran::create($create);
         return redirect("/pembayaran/$bayar->slug");
     }
 
-    public function batal(Request $request){
+    public function batal(Request $request)
+    {
         $bayar = Pembayaran::where('id', $request->bayar)->first();
         $update["status"] = 4;
         $bayar->update($update);
@@ -130,5 +134,24 @@ class PesananController extends Controller
         $pesanan->update($capek);
 
         return redirect('/pesanansaya');
+    }
+
+    public function waktuhabis(Request $request)
+    {
+        $orderId = $request->input('orderId');
+        // Temukan pesanan berdasarkan orderId dan perbarui status menjadi 8
+        $order = Pesanan::where('id', $orderId)->first();
+        if ($order) {
+            $update = ['status' => 8]; // Perubahan ini
+            $order->update($update);   // Menggunakan variabel $update
+
+            $bayar = Pembayaran::where('id', $order->pembayaran->id)->first();
+            $hayo["status"] = 4;
+            $bayar->update($hayo);
+
+            return response()->json(['message' => 'Status pesanan diperbarui']);
+        } else {
+            return response()->json(['message' => 'Pesanan tidak ditemukan'], 404);
+        }
     }
 }

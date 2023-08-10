@@ -118,7 +118,7 @@
                     </a>
                     <div class="collapse" id="master">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"><a class="nav-link" href="/dash-user">User</a></li>
+                            {{-- <li class="nav-item"><a class="nav-link" href="/dash-user">User</a></li> --}}
                             <li class="nav-item"><a class="nav-link" href="/dash-kategori">Kategori Produk</a>
                             </li>
                             <li class="nav-item"><a class="nav-link" href="/dash-produk">Produk</a></li>
@@ -197,7 +197,7 @@
                                         </div>
                                     </div>
                                     <div class="preview-item-content">
-                                        <p class="preview-subject ellipsis mb-1">Produk</p>
+                                        <p class="preview-subject ellipsis mb-1">Metode Pembayaran</p>
                                     </div>
                                 </a>
                                 <div class="dropdown-divider"></div>

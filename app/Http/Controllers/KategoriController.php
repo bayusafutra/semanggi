@@ -15,7 +15,8 @@ class KategoriController extends Controller
     {
         return view('admin.kategori.index', [
             "title" => "Dashboard | Kategori",
-            "kategori" => Kategori::where('status', 1)->paginate(10)
+            "kategori" => Kategori::where('status', 1)->paginate(10),
+            "all" => Kategori::where('status', 1)->get()
         ]);
     }
 

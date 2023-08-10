@@ -7,6 +7,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
+    @yield('meta')
     <!-- Google Font -->
     <link href="{{ asset('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap') }}" rel="stylesheet">
     <!-- Dalam bagian head -->
