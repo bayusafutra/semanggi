@@ -208,7 +208,7 @@
                                                                                         <strong style="color: black">Jumlah
                                                                                             Harus Dibayar: </strong><span
                                                                                             style="color: #F68037">Rp
-                                                                                            {{ number_format($bel->subtotal, 2, ',', '.') }}</span>
+                                                                                            {{ number_format($bel->total, 2, ',', '.') }}</span>
                                                                                     </div>
                                                                                     <hr class="my-2"
                                                                                         style="border: 1px solid rgb(91, 91, 91)">
@@ -324,12 +324,21 @@
                                                                                             sebelum
                                                                                             {{ \Carbon\Carbon::parse($bel->deadlinePaid)->translatedFormat('l, d F Y H:i') }}</span>
                                                                                     </div>
-                                                                                    <div class="col-4 text-end">
-                                                                                        <a href="/pembayaran/{{ $bel->pembayaran->slug }}"
-                                                                                            class="btn"
-                                                                                            style="background-color: #5B8C51; color: white">Bayar
-                                                                                            Sekarang</a>
-                                                                                    </div>
+                                                                                    @if ($bel->pembayaran->status == 2)
+                                                                                        <div class="col-4 text-end">
+                                                                                            <a href="/pembayaran/{{ $bel->pembayaran->slug }}"
+                                                                                                class="btn"
+                                                                                                style="background-color: #5B8C51; color: white">Bayar
+                                                                                                Sekarang</a>
+                                                                                        </div>
+                                                                                    @else
+                                                                                        <div class="col-4 text-end">
+                                                                                            <a href="/revisipembayaran/{{ $bel->pembayaran->slug }}"
+                                                                                                class="btn"
+                                                                                                style="background-color: #5B8C51; color: white">Bayar
+                                                                                                Sekarang</a>
+                                                                                        </div>
+                                                                                    @endif
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -631,9 +640,8 @@
                                                                                     </div>
                                                                                     <hr class="my-2"
                                                                                         style="border: 1px solid rgb(91, 91, 91)">
-                                                                                    <div
-                                                                                        class="col-6 d-flex align-items-center">
-                                                                                        <span style="color: black"></span>
+                                                                                    <div class="col-6 d-flex align-items-center">
+                                                                                        <span style="color: black">Pesanan Dikirim pada {{ \Carbon\Carbon::parse($bel->timekirim)->translatedFormat('l, d F Y H:i') }}</span>
                                                                                     </div>
                                                                                     <div class="col-6 text-end">
                                                                                         <a href="" class="btn"

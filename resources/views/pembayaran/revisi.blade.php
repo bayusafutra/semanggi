@@ -38,10 +38,18 @@
     <section class="checkout spad">
         <div class="container">
             <div class="checkout__form">
+                @if (session()->has('gagal'))
+                    <div class="row justify-content-center">
+                        <div class="alert alert-success alert-dismissible text-center col-lg-6 fade show" role="alert">
+                            {{ session('gagal') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    </div>
+                @endif
                 <h4><a type="button" class="btn p-0 ms-auto btn-lg me-md-2" href="/pesanansaya"><i
                             class="bi bi-arrow-left"></i>
-                    </a>Pembayaran Pesanan</h4>
-                <form action="/unggahbukti" method="POST" enctype="multipart/form-data">
+                    </a>Revisi Pembayaran Pesanan</h4>
+                <form action="/revisiunggahbukti" method="POST" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="pembayaran" value="{{ $bayar->id }}">
                     <input type="hidden" name="pesanan" value="{{ $bayar->pesanan->id }}">
@@ -87,6 +95,9 @@
                                                 Rp {{ number_format($bayar->pesanan->subtotal, 2, ',', '.') }}
                                             </span>
                                         </p>
+                                        <p>
+                                            Alasan pengulangan transaksi pembayaran Anda : <strong>{{ $bayar->tolakaudit }}</strong>
+                                        </p>
 
                                         <p>
                                         <div class="spedah p-3" style="max-height: 250px; overflow-y: auto">
@@ -127,17 +138,9 @@
                                                     id="gambar">
                                             </div>
                                         </div>
-                                        <input type="file" id="fileInput" class="form-control" name="gambar"
+                                        <input type="file" id="fileInput" class="form-control" name="revisibukti"
                                             id="gambar" onchange="previewImage()">
                                         </p>
-
-                                        <div class="batal d-flex justify-content-center">
-                                            <a href="#confirmationModal" class="btn"
-                                                style="background-color: #F68037; color: white; width: 100%; padding: 12px 12px"
-                                                data-bs-toggle="modal" data-bs-target="#confirmationModal">Batalkan
-                                                Pesanan
-                                            </a>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -234,33 +237,6 @@
             </div>
         </div>
 
-        <div class="modal fade" id="confirmationModal" tabindex="-1"
-            aria-labelledby="confirmationModalLabel"aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content">
-                    <form action="/pesananbatal" method="POST">
-                        @csrf
-                        <input type="hidden" name="pesanan" value="{{ $bayar->pesanan->id }}">
-                        <input type="hidden" name="bayar" value="{{ $bayar->id }}">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="confirmationModalLabel">Apakah Anda yakin untuk membatalkan
-                                Pesanan #{{ $bayar->pesanan->nomer }}?</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <label for="">Alasan Pembatalan</label>
-                            <input type="text" name="batal" class="form-control"
-                                placeholder="Masukkan alasan pembatalan Anda" required>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                            <button type="submit" class="btn btn-primary">Lanjutkan</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
         </script>

@@ -94,7 +94,9 @@ Route::post('/editalamat', [AlamatController::class, 'update'])->middleware('aut
 Route::post('/hapusalamat', [AlamatController::class, 'destroy'])->middleware('auth');
 
 Route::get('/pembayaran/{slug}', [PembayaranController::class, 'index'])->middleware(['auth', 'bayar']);
+Route::get('/revisipembayaran/{slug}', [PembayaranController::class, 'revisi'])->middleware(['auth', 'bayar']);
 Route::post('/unggahbukti', [PembayaranController::class, 'unggah'])->middleware('auth');
+Route::post('/revisiunggahbukti', [PembayaranController::class, 'unggahrevisi'])->middleware('auth');
 
 Route::get('/pembayaran/kode-unik', function () {
     return view('kodepembayaran');
@@ -105,6 +107,9 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('adm
 Route::get('/dash-audit', [DashboardController::class, 'audit'])->middleware('admin');
 Route::post('/dash-audit', [PesananController::class, 'audit'])->middleware('admin');
 Route::post('/dash-tolakaudit', [PesananController::class, 'tolakaudit'])->middleware('admin');
+Route::get('/dash-dikemas', [DashboardController::class, 'dikemas'])->middleware('admin');
+Route::post('/dash-dikemas', [DashboardController::class, 'dikemaspost'])->middleware('admin');
+Route::post('/dash-jaskir', [DashboardController::class, 'jaskir'])->middleware('admin');
 
 Route::get('/dash-kategori', [KategoriController::class, 'index'])->middleware('admin');
 Route::get('/dash-buatkategori', [KategoriController::class, 'create'])->middleware('admin');

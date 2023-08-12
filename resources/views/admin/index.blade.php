@@ -23,7 +23,7 @@
             </a>
         </div>
         <div class="col-sm-4 grid-margin">
-            <a href="">
+            <a href="/dash-dikemas">
                 <div class="card">
                     <div class="card-body">
                         <h5>Pesanan Dikemas</h5>
