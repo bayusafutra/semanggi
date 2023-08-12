@@ -102,6 +102,9 @@ Route::get('/pembayaran/kode-unik', function () {
 
 //////////////////////////ADMIN////////////////////////////
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('admin');
+Route::get('/dash-audit', [DashboardController::class, 'audit'])->middleware('admin');
+Route::post('/dash-audit', [PesananController::class, 'audit'])->middleware('admin');
+Route::post('/dash-tolakaudit', [PesananController::class, 'tolakaudit'])->middleware('admin');
 
 Route::get('/dash-kategori', [KategoriController::class, 'index'])->middleware('admin');
 Route::get('/dash-buatkategori', [KategoriController::class, 'create'])->middleware('admin');

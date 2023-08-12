@@ -154,4 +154,35 @@ class PesananController extends Controller
             return response()->json(['message' => 'Pesanan tidak ditemukan'], 404);
         }
     }
+
+    ////////////////////////admin/////////////////
+
+    public function audit(Request $request){
+        $pesanan = Pesanan::where('id', $request->terima)->first();
+        $update["status"] = 4;
+        $update["timebataskirim"] = now()->addDays(3);
+        $pesanan->update($update);
+
+        $pembayaran = Pembayaran::where('pesanan_id', $request->terima)->first();
+        $update2["status"] = 3;
+        $update2["tolakaudit"] = null;
+        $pembayaran->update($update2);
+
+        return back()->with('success', "Pembayaran pesanan berhasil diterima, Pesanan dialihkan ke menu Pesanan Dikemas");
+    }
+
+    public function tolakaudit(Request $request){
+        $pesanan = Pesanan::where('id', $request->tolak)->first();
+        $update["status"] = 2;
+        $update["paidTime"] = null;
+        $update["deadlinePaid"] = now()->addDays(1);
+        $pesanan->update($update);
+
+        $pembayaran = Pembayaran::where('pesanan_id', $request->tolak)->first();
+        $update2["status"] = 5;
+        $update2["tolakaudit"] = $request->pesantolak;
+        $pembayaran->update($update2);
+
+        return back()->with('success', "Pembayaran pesanan berhasil ditolak, kini menunggu pelanggan untuk melakukan proses Pembayaran kembali");
+    }
 }
