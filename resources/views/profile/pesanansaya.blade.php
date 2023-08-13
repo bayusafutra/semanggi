@@ -64,11 +64,17 @@
                                 </a>
                             </li>
                             <li style="width: 100%">
-                                <a class="d-flex align-items-center justify-content-between" href=""
+                                <a class="d-flex align-items-center justify-content-between" href="/penilaiansaya"
                                     style="padding: 0px 15px 0px 15px"><i class="fa fa-star-o" style="color: #89817F">
                                         Penilaian Saya</i>
                                     <span class="label pull-right r-activity m-2"
-                                        style="background: #5B8C51; color: white; padding: 1px 10px 1px 10px;">0</span>
+                                        style="background: #5B8C51; color: white; padding: 1px 10px 1px 10px;">
+                                        @php
+                                            use App\Models\Rating;
+                                            $rating = Rating::where('user_id', auth()->user()->id)->get();
+                                            echo $rating->count();
+                                        @endphp
+                                    </span>
                                 </a>
                             </li>
                             <li style="width: 100%">
@@ -96,43 +102,43 @@
                                                     <ul
                                                         class="produk nav nav-pills d-flex mx-auto justify-content-center mb-3">
 
-                                                        <li class="nav-item me-2 mb-2">
+                                                        <li class="nav-item me-2 my-1">
                                                             <a class="btn btn-outline-primary border-2 active"
                                                                 data-bs-toggle="pill" href="#tab-1">Belum Checkout</a>
                                                         </li>
 
-                                                        <li class="nav-item me-2 mb-2">
+                                                        <li class="nav-item me-2 my-1">
                                                             <a class="btn btn-outline-primary border-2"
                                                                 data-bs-toggle="pill" href="#tab-8">Belum Bayar</a>
                                                         </li>
 
-                                                        <li class="nav-item me-2 mb-2">
+                                                        <li class="nav-item me-2 my-1">
                                                             <a class="btn btn-outline-primary border-2"
                                                                 data-bs-toggle="pill" href="#tab-2">Verifikasi</a>
                                                         </li>
 
-                                                        <li class="nav-item me-2 mb-2">
+                                                        <li class="nav-item me-2 my-1">
                                                             <a class="btn btn-outline-primary border-2"
                                                                 data-bs-toggle="pill" href="#tab-3">Dikemas</a>
                                                         </li>
 
-                                                        <li class="nav-item me-2 mb-2">
+                                                        <li class="nav-item me-2 my-1">
                                                             <a class="btn btn-outline-primary border-2"
                                                                 data-bs-toggle="pill" href="#tab-4">Dikirim</a>
                                                         </li>
 
-                                                        <li class="nav-item me-2 mb-2">
+                                                        <li class="nav-item me-2 my-1">
                                                             <a class="btn btn-outline-primary border-2"
                                                                 data-bs-toggle="pill" href="#tab-5">Menunggu
                                                                 Pengambilan</a>
                                                         </li>
 
-                                                        <li class="nav-item me-2 mb-2">
+                                                        <li class="nav-item me-2 my-1">
                                                             <a class="btn btn-outline-primary border-2"
                                                                 data-bs-toggle="pill" href="#tab-6">Selesai</a>
                                                         </li>
 
-                                                        <li class="nav-item me-2 mb-2">
+                                                        <li class="nav-item me-2 my-1">
                                                             <a class="btn btn-outline-primary border-2"
                                                                 data-bs-toggle="pill" href="#tab-7">Batal</a>
                                                         </li>
@@ -152,10 +158,8 @@
                                                                     <div class="card-title">
                                                                         <div class="row d-flex justify-content-between">
                                                                             <div class="col-7">
-                                                                                <strong class="fw-bold fs-5"><a
-                                                                                        title="Lihat detail pesanan"
-                                                                                        style="color: black"
-                                                                                        href="/detailpesanan/{{ $bel->slug }}">#{{ $bel->nomer }}</a></strong>
+                                                                                <strong class="fw-bold fs-5"
+                                                                                    style="color: black">#{{ $bel->nomer }}</strong>
                                                                             </div>
                                                                             <div class="col-5 text-end">
                                                                                 <small
@@ -192,8 +196,85 @@
                                                                                         <hr class="my-2"
                                                                                             style="border: 1px solid rgb(91, 91, 91)">
                                                                                         <div class="col-12 text-center">
-                                                                                            <a href="">Tampilkan
-                                                                                                produk pembelian lainnya</a>
+                                                                                            <a href=""
+                                                                                                data-bs-toggle="modal"
+                                                                                                data-bs-target="#confirmationModal{{ $bel->id }}">Tampilkan
+                                                                                                produk pembelian lainnya
+                                                                                            </a>
+
+                                                                                            <div class="modal fade"
+                                                                                                id="confirmationModal{{ $bel->id }}"
+                                                                                                tabindex="-1"
+                                                                                                aria-labelledby="confirmationModalLabel"aria-hidden="true">
+                                                                                                <div
+                                                                                                    class="modal-dialog modal-dialog-centered modal-lg">
+                                                                                                    <div
+                                                                                                        class="modal-content">
+                                                                                                        <div
+                                                                                                            class="modal-header">
+                                                                                                            <h5 class="modal-title"
+                                                                                                                id="confirmationModalLabel">
+                                                                                                                Produk
+                                                                                                                Pesanan
+                                                                                                                Lainnya
+                                                                                                            </h5>
+                                                                                                            <button
+                                                                                                                type="button"
+                                                                                                                class="btn-close"
+                                                                                                                data-bs-dismiss="modal"
+                                                                                                                aria-label="Close"></button>
+                                                                                                        </div>
+                                                                                                        <div
+                                                                                                            class="modal-body">
+                                                                                                            @foreach ($bel->detail()->get() as $well)
+                                                                                                                <div
+                                                                                                                    class="row my-2">
+                                                                                                                    <div
+                                                                                                                        class="col-2">
+                                                                                                                        <img src="{{ asset('storage/' . $well->barang->gambar) }}"
+                                                                                                                            style="height: 77px; width: 77px"
+                                                                                                                            alt="">
+                                                                                                                    </div>
+                                                                                                                    <div
+                                                                                                                        class="col-10 text-start">
+                                                                                                                        <span
+                                                                                                                            style="color:black; 500; font-size: 20px font-family: Verdana, Geneva, Tahoma, sans-serif;">{{ ucwords($well->barang->nama) }}
+                                                                                                                        </span><br>
+                                                                                                                        <div
+                                                                                                                            class="row">
+                                                                                                                            <div
+                                                                                                                                class="col-6">
+                                                                                                                                <span
+                                                                                                                                    style="color: black">{{ $well->barang->berat }}</span>
+                                                                                                                            </div>
+                                                                                                                            <div
+                                                                                                                                class="col-6 text-end">
+                                                                                                                                <span
+                                                                                                                                    style="color: black">x{{ $well->qtyitem }}
+                                                                                                                                    {{ $well->barang->quantity }}</span>
+                                                                                                                            </div>
+                                                                                                                            <div
+                                                                                                                                class="col-12 text-end">
+                                                                                                                                <span
+                                                                                                                                    style="color: #F68037">Rp
+                                                                                                                                    {{ number_format($well->barang->harga, 2, ',', '.') }}</span>
+                                                                                                                            </div>
+                                                                                                                        </div>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            @endforeach
+                                                                                                        </div>
+                                                                                                        <div
+                                                                                                            class="modal-footer">
+                                                                                                            <button
+                                                                                                                type="button"
+                                                                                                                class="btn btn-secondary"
+                                                                                                                data-bs-dismiss="modal">Tutup</button>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+
                                                                                         </div>
                                                                                     @endif
 
@@ -219,7 +300,7 @@
                                                                                             Anda</span>
                                                                                     </div>
                                                                                     <div class="col-5 text-end">
-                                                                                        <a href="/detailpesanan/{{ $bel->slug }}"
+                                                                                        <a href="/checkout/{{ $bel->slug }}"
                                                                                             class="btn"
                                                                                             style="background-color: #5B8C51; color: white">Checkout
                                                                                             Sekarang</a>
@@ -258,10 +339,8 @@
                                                                     <div class="card-title">
                                                                         <div class="row d-flex justify-content-between">
                                                                             <div class="col-7">
-                                                                                <strong class="fw-bold fs-5"><a
-                                                                                        title="Lihat detail pesanan"
-                                                                                        style="color: black"
-                                                                                        href="">#{{ $bel->nomer }}</a></strong>
+                                                                                <strong class="fw-bold fs-5"
+                                                                                    style="color: black">#{{ $bel->nomer }}</strong>
                                                                             </div>
                                                                             <div class="col-5 text-end">
                                                                                 <small
@@ -298,8 +377,85 @@
                                                                                         <hr class="my-2"
                                                                                             style="border: 1px solid rgb(91, 91, 91)">
                                                                                         <div class="col-12 text-center">
-                                                                                            <a href="">Tampilkan
-                                                                                                produk pembelian lainnya</a>
+                                                                                            <a href=""
+                                                                                                data-bs-toggle="modal"
+                                                                                                data-bs-target="#confirmationModal{{ $bel->id }}">Tampilkan
+                                                                                                produk pembelian lainnya
+                                                                                            </a>
+
+                                                                                            <div class="modal fade"
+                                                                                                id="confirmationModal{{ $bel->id }}"
+                                                                                                tabindex="-1"
+                                                                                                aria-labelledby="confirmationModalLabel"aria-hidden="true">
+                                                                                                <div
+                                                                                                    class="modal-dialog modal-dialog-centered modal-lg">
+                                                                                                    <div
+                                                                                                        class="modal-content">
+                                                                                                        <div
+                                                                                                            class="modal-header">
+                                                                                                            <h5 class="modal-title"
+                                                                                                                id="confirmationModalLabel">
+                                                                                                                Produk
+                                                                                                                Pesanan
+                                                                                                                Lainnya
+                                                                                                            </h5>
+                                                                                                            <button
+                                                                                                                type="button"
+                                                                                                                class="btn-close"
+                                                                                                                data-bs-dismiss="modal"
+                                                                                                                aria-label="Close"></button>
+                                                                                                        </div>
+                                                                                                        <div
+                                                                                                            class="modal-body">
+                                                                                                            @foreach ($bel->detail()->get() as $well)
+                                                                                                                <div
+                                                                                                                    class="row my-2">
+                                                                                                                    <div
+                                                                                                                        class="col-2">
+                                                                                                                        <img src="{{ asset('storage/' . $well->barang->gambar) }}"
+                                                                                                                            style="height: 77px; width: 77px"
+                                                                                                                            alt="">
+                                                                                                                    </div>
+                                                                                                                    <div
+                                                                                                                        class="col-10 text-start">
+                                                                                                                        <span
+                                                                                                                            style="color:black; 500; font-size: 20px font-family: Verdana, Geneva, Tahoma, sans-serif;">{{ ucwords($well->barang->nama) }}
+                                                                                                                        </span><br>
+                                                                                                                        <div
+                                                                                                                            class="row">
+                                                                                                                            <div
+                                                                                                                                class="col-6">
+                                                                                                                                <span
+                                                                                                                                    style="color: black">{{ $well->barang->berat }}</span>
+                                                                                                                            </div>
+                                                                                                                            <div
+                                                                                                                                class="col-6 text-end">
+                                                                                                                                <span
+                                                                                                                                    style="color: black">x{{ $well->qtyitem }}
+                                                                                                                                    {{ $well->barang->quantity }}</span>
+                                                                                                                            </div>
+                                                                                                                            <div
+                                                                                                                                class="col-12 text-end">
+                                                                                                                                <span
+                                                                                                                                    style="color: #F68037">Rp
+                                                                                                                                    {{ number_format($well->barang->harga, 2, ',', '.') }}</span>
+                                                                                                                            </div>
+                                                                                                                        </div>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            @endforeach
+                                                                                                        </div>
+                                                                                                        <div
+                                                                                                            class="modal-footer">
+                                                                                                            <button
+                                                                                                                type="button"
+                                                                                                                class="btn btn-secondary"
+                                                                                                                data-bs-dismiss="modal">Tutup</button>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+
                                                                                         </div>
                                                                                     @endif
 
@@ -373,10 +529,8 @@
                                                                     <div class="card-title">
                                                                         <div class="row d-flex justify-content-between">
                                                                             <div class="col-7">
-                                                                                <strong class="fw-bold fs-5"><a
-                                                                                        title="Lihat detail pesanan"
-                                                                                        style="color: black"
-                                                                                        href="">#{{ $bel->nomer }}</a></strong>
+                                                                                <strong class="fw-bold fs-5"
+                                                                                    style="color: black">#{{ $bel->nomer }}</strong>
                                                                             </div>
                                                                             <div class="col-5 text-end">
                                                                                 <small
@@ -413,8 +567,85 @@
                                                                                         <hr class="my-2"
                                                                                             style="border: 1px solid rgb(91, 91, 91)">
                                                                                         <div class="col-12 text-center">
-                                                                                            <a href="">Tampilkan
-                                                                                                produk pembelian lainnya</a>
+                                                                                            <a href=""
+                                                                                                data-bs-toggle="modal"
+                                                                                                data-bs-target="#confirmationModal{{ $bel->id }}">Tampilkan
+                                                                                                produk pembelian lainnya
+                                                                                            </a>
+
+                                                                                            <div class="modal fade"
+                                                                                                id="confirmationModal{{ $bel->id }}"
+                                                                                                tabindex="-1"
+                                                                                                aria-labelledby="confirmationModalLabel"aria-hidden="true">
+                                                                                                <div
+                                                                                                    class="modal-dialog modal-dialog-centered modal-lg">
+                                                                                                    <div
+                                                                                                        class="modal-content">
+                                                                                                        <div
+                                                                                                            class="modal-header">
+                                                                                                            <h5 class="modal-title"
+                                                                                                                id="confirmationModalLabel">
+                                                                                                                Produk
+                                                                                                                Pesanan
+                                                                                                                Lainnya
+                                                                                                            </h5>
+                                                                                                            <button
+                                                                                                                type="button"
+                                                                                                                class="btn-close"
+                                                                                                                data-bs-dismiss="modal"
+                                                                                                                aria-label="Close"></button>
+                                                                                                        </div>
+                                                                                                        <div
+                                                                                                            class="modal-body">
+                                                                                                            @foreach ($bel->detail()->get() as $well)
+                                                                                                                <div
+                                                                                                                    class="row my-2">
+                                                                                                                    <div
+                                                                                                                        class="col-2">
+                                                                                                                        <img src="{{ asset('storage/' . $well->barang->gambar) }}"
+                                                                                                                            style="height: 77px; width: 77px"
+                                                                                                                            alt="">
+                                                                                                                    </div>
+                                                                                                                    <div
+                                                                                                                        class="col-10 text-start">
+                                                                                                                        <span
+                                                                                                                            style="color:black; 500; font-size: 20px font-family: Verdana, Geneva, Tahoma, sans-serif;">{{ ucwords($well->barang->nama) }}
+                                                                                                                        </span><br>
+                                                                                                                        <div
+                                                                                                                            class="row">
+                                                                                                                            <div
+                                                                                                                                class="col-6">
+                                                                                                                                <span
+                                                                                                                                    style="color: black">{{ $well->barang->berat }}</span>
+                                                                                                                            </div>
+                                                                                                                            <div
+                                                                                                                                class="col-6 text-end">
+                                                                                                                                <span
+                                                                                                                                    style="color: black">x{{ $well->qtyitem }}
+                                                                                                                                    {{ $well->barang->quantity }}</span>
+                                                                                                                            </div>
+                                                                                                                            <div
+                                                                                                                                class="col-12 text-end">
+                                                                                                                                <span
+                                                                                                                                    style="color: #F68037">Rp
+                                                                                                                                    {{ number_format($well->barang->harga, 2, ',', '.') }}</span>
+                                                                                                                            </div>
+                                                                                                                        </div>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            @endforeach
+                                                                                                        </div>
+                                                                                                        <div
+                                                                                                            class="modal-footer">
+                                                                                                            <button
+                                                                                                                type="button"
+                                                                                                                class="btn btn-secondary"
+                                                                                                                data-bs-dismiss="modal">Tutup</button>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+
                                                                                         </div>
                                                                                     @endif
 
@@ -479,10 +710,8 @@
                                                                     <div class="card-title">
                                                                         <div class="row d-flex justify-content-between">
                                                                             <div class="col-7">
-                                                                                <strong class="fw-bold fs-5"><a
-                                                                                        title="Lihat detail pesanan"
-                                                                                        style="color: black"
-                                                                                        href="">#{{ $bel->nomer }}</a></strong>
+                                                                                <strong class="fw-bold fs-5"
+                                                                                    style="color: black">#{{ $bel->nomer }}</strong>
                                                                             </div>
                                                                             <div class="col-5 text-end">
                                                                                 <small
@@ -519,8 +748,85 @@
                                                                                         <hr class="my-2"
                                                                                             style="border: 1px solid rgb(91, 91, 91)">
                                                                                         <div class="col-12 text-center">
-                                                                                            <a href="">Tampilkan
-                                                                                                produk pembelian lainnya</a>
+                                                                                            <a href=""
+                                                                                                data-bs-toggle="modal"
+                                                                                                data-bs-target="#confirmationModal{{ $bel->id }}">Tampilkan
+                                                                                                produk pembelian lainnya
+                                                                                            </a>
+
+                                                                                            <div class="modal fade"
+                                                                                                id="confirmationModal{{ $bel->id }}"
+                                                                                                tabindex="-1"
+                                                                                                aria-labelledby="confirmationModalLabel"aria-hidden="true">
+                                                                                                <div
+                                                                                                    class="modal-dialog modal-dialog-centered modal-lg">
+                                                                                                    <div
+                                                                                                        class="modal-content">
+                                                                                                        <div
+                                                                                                            class="modal-header">
+                                                                                                            <h5 class="modal-title"
+                                                                                                                id="confirmationModalLabel">
+                                                                                                                Produk
+                                                                                                                Pesanan
+                                                                                                                Lainnya
+                                                                                                            </h5>
+                                                                                                            <button
+                                                                                                                type="button"
+                                                                                                                class="btn-close"
+                                                                                                                data-bs-dismiss="modal"
+                                                                                                                aria-label="Close"></button>
+                                                                                                        </div>
+                                                                                                        <div
+                                                                                                            class="modal-body">
+                                                                                                            @foreach ($bel->detail()->get() as $well)
+                                                                                                                <div
+                                                                                                                    class="row my-2">
+                                                                                                                    <div
+                                                                                                                        class="col-2">
+                                                                                                                        <img src="{{ asset('storage/' . $well->barang->gambar) }}"
+                                                                                                                            style="height: 77px; width: 77px"
+                                                                                                                            alt="">
+                                                                                                                    </div>
+                                                                                                                    <div
+                                                                                                                        class="col-10 text-start">
+                                                                                                                        <span
+                                                                                                                            style="color:black; 500; font-size: 20px font-family: Verdana, Geneva, Tahoma, sans-serif;">{{ ucwords($well->barang->nama) }}
+                                                                                                                        </span><br>
+                                                                                                                        <div
+                                                                                                                            class="row">
+                                                                                                                            <div
+                                                                                                                                class="col-6">
+                                                                                                                                <span
+                                                                                                                                    style="color: black">{{ $well->barang->berat }}</span>
+                                                                                                                            </div>
+                                                                                                                            <div
+                                                                                                                                class="col-6 text-end">
+                                                                                                                                <span
+                                                                                                                                    style="color: black">x{{ $well->qtyitem }}
+                                                                                                                                    {{ $well->barang->quantity }}</span>
+                                                                                                                            </div>
+                                                                                                                            <div
+                                                                                                                                class="col-12 text-end">
+                                                                                                                                <span
+                                                                                                                                    style="color: #F68037">Rp
+                                                                                                                                    {{ number_format($well->barang->harga, 2, ',', '.') }}</span>
+                                                                                                                            </div>
+                                                                                                                        </div>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            @endforeach
+                                                                                                        </div>
+                                                                                                        <div
+                                                                                                            class="modal-footer">
+                                                                                                            <button
+                                                                                                                type="button"
+                                                                                                                class="btn btn-secondary"
+                                                                                                                data-bs-dismiss="modal">Tutup</button>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+
                                                                                         </div>
                                                                                     @endif
 
@@ -580,10 +886,8 @@
                                                                     <div class="card-title">
                                                                         <div class="row d-flex justify-content-between">
                                                                             <div class="col-7">
-                                                                                <strong class="fw-bold fs-5"><a
-                                                                                        title="Lihat detail pesanan"
-                                                                                        style="color: black"
-                                                                                        href="">#{{ $bel->nomer }}</a></strong>
+                                                                                <strong class="fw-bold fs-5"
+                                                                                    style="color: black">#{{ $bel->nomer }}</strong>
                                                                             </div>
                                                                             <div class="col-5 text-end">
                                                                                 <small
@@ -620,8 +924,85 @@
                                                                                         <hr class="my-2"
                                                                                             style="border: 1px solid rgb(91, 91, 91)">
                                                                                         <div class="col-12 text-center">
-                                                                                            <a href="">Tampilkan
-                                                                                                produk pembelian lainnya</a>
+                                                                                            <a href=""
+                                                                                                data-bs-toggle="modal"
+                                                                                                data-bs-target="#confirmationModal{{ $bel->id }}">Tampilkan
+                                                                                                produk pembelian lainnya
+                                                                                            </a>
+
+                                                                                            <div class="modal fade"
+                                                                                                id="confirmationModal{{ $bel->id }}"
+                                                                                                tabindex="-1"
+                                                                                                aria-labelledby="confirmationModalLabel"aria-hidden="true">
+                                                                                                <div
+                                                                                                    class="modal-dialog modal-dialog-centered modal-lg">
+                                                                                                    <div
+                                                                                                        class="modal-content">
+                                                                                                        <div
+                                                                                                            class="modal-header">
+                                                                                                            <h5 class="modal-title"
+                                                                                                                id="confirmationModalLabel">
+                                                                                                                Produk
+                                                                                                                Pesanan
+                                                                                                                Lainnya
+                                                                                                            </h5>
+                                                                                                            <button
+                                                                                                                type="button"
+                                                                                                                class="btn-close"
+                                                                                                                data-bs-dismiss="modal"
+                                                                                                                aria-label="Close"></button>
+                                                                                                        </div>
+                                                                                                        <div
+                                                                                                            class="modal-body">
+                                                                                                            @foreach ($bel->detail()->get() as $well)
+                                                                                                                <div
+                                                                                                                    class="row my-2">
+                                                                                                                    <div
+                                                                                                                        class="col-2">
+                                                                                                                        <img src="{{ asset('storage/' . $well->barang->gambar) }}"
+                                                                                                                            style="height: 77px; width: 77px"
+                                                                                                                            alt="">
+                                                                                                                    </div>
+                                                                                                                    <div
+                                                                                                                        class="col-10 text-start">
+                                                                                                                        <span
+                                                                                                                            style="color:black; 500; font-size: 20px font-family: Verdana, Geneva, Tahoma, sans-serif;">{{ ucwords($well->barang->nama) }}
+                                                                                                                        </span><br>
+                                                                                                                        <div
+                                                                                                                            class="row">
+                                                                                                                            <div
+                                                                                                                                class="col-6">
+                                                                                                                                <span
+                                                                                                                                    style="color: black">{{ $well->barang->berat }}</span>
+                                                                                                                            </div>
+                                                                                                                            <div
+                                                                                                                                class="col-6 text-end">
+                                                                                                                                <span
+                                                                                                                                    style="color: black">x{{ $well->qtyitem }}
+                                                                                                                                    {{ $well->barang->quantity }}</span>
+                                                                                                                            </div>
+                                                                                                                            <div
+                                                                                                                                class="col-12 text-end">
+                                                                                                                                <span
+                                                                                                                                    style="color: #F68037">Rp
+                                                                                                                                    {{ number_format($well->barang->harga, 2, ',', '.') }}</span>
+                                                                                                                            </div>
+                                                                                                                        </div>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            @endforeach
+                                                                                                        </div>
+                                                                                                        <div
+                                                                                                            class="modal-footer">
+                                                                                                            <button
+                                                                                                                type="button"
+                                                                                                                class="btn btn-secondary"
+                                                                                                                data-bs-dismiss="modal">Tutup</button>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+
                                                                                         </div>
                                                                                     @endif
 
@@ -640,13 +1021,24 @@
                                                                                     </div>
                                                                                     <hr class="my-2"
                                                                                         style="border: 1px solid rgb(91, 91, 91)">
-                                                                                    <div class="col-6 d-flex align-items-center">
-                                                                                        <span style="color: black">Pesanan Dikirim pada {{ \Carbon\Carbon::parse($bel->timekirim)->translatedFormat('l, d F Y H:i') }}</span>
+                                                                                    <div
+                                                                                        class="col-6 d-flex align-items-center">
+                                                                                        <span style="color: black">Pesanan
+                                                                                            Dikirim pada <br>
+                                                                                            {{ \Carbon\Carbon::parse($bel->timekirim)->translatedFormat('l, d F Y H:i') }}</span>
                                                                                     </div>
                                                                                     <div class="col-6 text-end">
-                                                                                        <a href="" class="btn"
-                                                                                            style="background-color: #5B8C51; color: white">Pesanan
-                                                                                            Diterima</a>
+                                                                                        <form action="/terimapesanan"
+                                                                                            method="POST">
+                                                                                            @csrf
+                                                                                            <input type="hidden"
+                                                                                                name="id"
+                                                                                                value="{{ $bel->id }}">
+                                                                                            <button type="submit"
+                                                                                                class="btn"
+                                                                                                style="background-color: #5B8C51; color: white">Pesanan
+                                                                                                Diterima</button>
+                                                                                        </form>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -682,10 +1074,8 @@
                                                                     <div class="card-title">
                                                                         <div class="row d-flex justify-content-between">
                                                                             <div class="col-7">
-                                                                                <strong class="fw-bold fs-5"><a
-                                                                                        title="Lihat detail pesanan"
-                                                                                        style="color: black"
-                                                                                        href="">#{{ $bel->nomer }}</a></strong>
+                                                                                <strong class="fw-bold fs-5"
+                                                                                    style="color: black">#{{ $bel->nomer }}</strong>
                                                                             </div>
                                                                             <div class="col-5 text-end">
                                                                                 <small
@@ -722,8 +1112,85 @@
                                                                                         <hr class="my-2"
                                                                                             style="border: 1px solid rgb(91, 91, 91)">
                                                                                         <div class="col-12 text-center">
-                                                                                            <a href="">Tampilkan
-                                                                                                produk pembelian lainnya</a>
+                                                                                            <a href=""
+                                                                                                data-bs-toggle="modal"
+                                                                                                data-bs-target="#confirmationModal{{ $bel->id }}">Tampilkan
+                                                                                                produk pembelian lainnya
+                                                                                            </a>
+
+                                                                                            <div class="modal fade"
+                                                                                                id="confirmationModal{{ $bel->id }}"
+                                                                                                tabindex="-1"
+                                                                                                aria-labelledby="confirmationModalLabel"aria-hidden="true">
+                                                                                                <div
+                                                                                                    class="modal-dialog modal-dialog-centered modal-lg">
+                                                                                                    <div
+                                                                                                        class="modal-content">
+                                                                                                        <div
+                                                                                                            class="modal-header">
+                                                                                                            <h5 class="modal-title"
+                                                                                                                id="confirmationModalLabel">
+                                                                                                                Produk
+                                                                                                                Pesanan
+                                                                                                                Lainnya
+                                                                                                            </h5>
+                                                                                                            <button
+                                                                                                                type="button"
+                                                                                                                class="btn-close"
+                                                                                                                data-bs-dismiss="modal"
+                                                                                                                aria-label="Close"></button>
+                                                                                                        </div>
+                                                                                                        <div
+                                                                                                            class="modal-body">
+                                                                                                            @foreach ($bel->detail()->get() as $well)
+                                                                                                                <div
+                                                                                                                    class="row my-2">
+                                                                                                                    <div
+                                                                                                                        class="col-2">
+                                                                                                                        <img src="{{ asset('storage/' . $well->barang->gambar) }}"
+                                                                                                                            style="height: 77px; width: 77px"
+                                                                                                                            alt="">
+                                                                                                                    </div>
+                                                                                                                    <div
+                                                                                                                        class="col-10 text-start">
+                                                                                                                        <span
+                                                                                                                            style="color:black; 500; font-size: 20px font-family: Verdana, Geneva, Tahoma, sans-serif;">{{ ucwords($well->barang->nama) }}
+                                                                                                                        </span><br>
+                                                                                                                        <div
+                                                                                                                            class="row">
+                                                                                                                            <div
+                                                                                                                                class="col-6">
+                                                                                                                                <span
+                                                                                                                                    style="color: black">{{ $well->barang->berat }}</span>
+                                                                                                                            </div>
+                                                                                                                            <div
+                                                                                                                                class="col-6 text-end">
+                                                                                                                                <span
+                                                                                                                                    style="color: black">x{{ $well->qtyitem }}
+                                                                                                                                    {{ $well->barang->quantity }}</span>
+                                                                                                                            </div>
+                                                                                                                            <div
+                                                                                                                                class="col-12 text-end">
+                                                                                                                                <span
+                                                                                                                                    style="color: #F68037">Rp
+                                                                                                                                    {{ number_format($well->barang->harga, 2, ',', '.') }}</span>
+                                                                                                                            </div>
+                                                                                                                        </div>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            @endforeach
+                                                                                                        </div>
+                                                                                                        <div
+                                                                                                            class="modal-footer">
+                                                                                                            <button
+                                                                                                                type="button"
+                                                                                                                class="btn btn-secondary"
+                                                                                                                data-bs-dismiss="modal">Tutup</button>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+
                                                                                         </div>
                                                                                     @endif
 
@@ -750,9 +1217,17 @@
                                                                                             Semanggi</span>
                                                                                     </div>
                                                                                     <div class="col-5 text-end">
-                                                                                        <a href="" class="btn"
-                                                                                            style="background-color: #5B8C51; color: white">Pesanan
-                                                                                            Diterima</a>
+                                                                                        <form action="/terimapesanan"
+                                                                                            method="POST">
+                                                                                            @csrf
+                                                                                            <input type="hidden"
+                                                                                                name="id"
+                                                                                                value="{{ $bel->id }}">
+                                                                                            <button type="submit"
+                                                                                                class="btn"
+                                                                                                style="background-color: #5B8C51; color: white">Pesanan
+                                                                                                Diterima</button>
+                                                                                        </form>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -788,10 +1263,8 @@
                                                                     <div class="card-title">
                                                                         <div class="row d-flex justify-content-between">
                                                                             <div class="col-7">
-                                                                                <strong class="fw-bold fs-5"><a
-                                                                                        title="Lihat detail pesanan"
-                                                                                        style="color: black"
-                                                                                        href="">#{{ $bel->nomer }}</a></strong>
+                                                                                <strong class="fw-bold fs-5"
+                                                                                    style="color: black">#{{ $bel->nomer }}</strong>
                                                                             </div>
                                                                             <div class="col-5 text-end">
                                                                                 <small
@@ -828,8 +1301,85 @@
                                                                                         <hr class="my-2"
                                                                                             style="border: 1px solid rgb(91, 91, 91)">
                                                                                         <div class="col-12 text-center">
-                                                                                            <a href="">Tampilkan
-                                                                                                produk pembelian lainnya</a>
+                                                                                            <a href=""
+                                                                                                data-bs-toggle="modal"
+                                                                                                data-bs-target="#confirmationModal{{ $bel->id }}">Tampilkan
+                                                                                                produk pembelian lainnya
+                                                                                            </a>
+
+                                                                                            <div class="modal fade"
+                                                                                                id="confirmationModal{{ $bel->id }}"
+                                                                                                tabindex="-1"
+                                                                                                aria-labelledby="confirmationModalLabel"aria-hidden="true">
+                                                                                                <div
+                                                                                                    class="modal-dialog modal-dialog-centered modal-lg">
+                                                                                                    <div
+                                                                                                        class="modal-content">
+                                                                                                        <div
+                                                                                                            class="modal-header">
+                                                                                                            <h5 class="modal-title"
+                                                                                                                id="confirmationModalLabel">
+                                                                                                                Produk
+                                                                                                                Pesanan
+                                                                                                                Lainnya
+                                                                                                            </h5>
+                                                                                                            <button
+                                                                                                                type="button"
+                                                                                                                class="btn-close"
+                                                                                                                data-bs-dismiss="modal"
+                                                                                                                aria-label="Close"></button>
+                                                                                                        </div>
+                                                                                                        <div
+                                                                                                            class="modal-body">
+                                                                                                            @foreach ($bel->detail()->get() as $well)
+                                                                                                                <div
+                                                                                                                    class="row my-2">
+                                                                                                                    <div
+                                                                                                                        class="col-2">
+                                                                                                                        <img src="{{ asset('storage/' . $well->barang->gambar) }}"
+                                                                                                                            style="height: 77px; width: 77px"
+                                                                                                                            alt="">
+                                                                                                                    </div>
+                                                                                                                    <div
+                                                                                                                        class="col-10 text-start">
+                                                                                                                        <span
+                                                                                                                            style="color:black; 500; font-size: 20px font-family: Verdana, Geneva, Tahoma, sans-serif;">{{ ucwords($well->barang->nama) }}
+                                                                                                                        </span><br>
+                                                                                                                        <div
+                                                                                                                            class="row">
+                                                                                                                            <div
+                                                                                                                                class="col-6">
+                                                                                                                                <span
+                                                                                                                                    style="color: black">{{ $well->barang->berat }}</span>
+                                                                                                                            </div>
+                                                                                                                            <div
+                                                                                                                                class="col-6 text-end">
+                                                                                                                                <span
+                                                                                                                                    style="color: black">x{{ $well->qtyitem }}
+                                                                                                                                    {{ $well->barang->quantity }}</span>
+                                                                                                                            </div>
+                                                                                                                            <div
+                                                                                                                                class="col-12 text-end">
+                                                                                                                                <span
+                                                                                                                                    style="color: #F68037">Rp
+                                                                                                                                    {{ number_format($well->barang->harga, 2, ',', '.') }}</span>
+                                                                                                                            </div>
+                                                                                                                        </div>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            @endforeach
+                                                                                                        </div>
+                                                                                                        <div
+                                                                                                            class="modal-footer">
+                                                                                                            <button
+                                                                                                                type="button"
+                                                                                                                class="btn btn-secondary"
+                                                                                                                data-bs-dismiss="modal">Tutup</button>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+
                                                                                         </div>
                                                                                     @endif
 
@@ -856,9 +1406,26 @@
                                                                                             <strong>{{ \Carbon\Carbon::parse($bel->timebatasnilai)->translatedFormat('l, d F Y') }}</strong></span>
                                                                                     </div>
                                                                                     <div class="col-5 text-end">
-                                                                                        <a href="" class="btn"
-                                                                                            style="background-color: #5B8C51; color: white">Beri
-                                                                                            Penilaian</a>
+                                                                                        @if (now() < $bel->timebatasnilai)
+                                                                                            <a href=""
+                                                                                                class="btn"
+                                                                                                style="background-color: #5B8C51; color: white">Beri
+                                                                                                Penilaian</a>
+                                                                                        @else
+                                                                                            @if ($bel->detail()->count() > 1)
+                                                                                                <a href="/cart"
+                                                                                                    class="btn px-5"
+                                                                                                    style="background-color: #5B8C51; color: white">Beli
+                                                                                                    Lagi
+                                                                                                </a>
+                                                                                            @else
+                                                                                                <a href="/detailproduk/{{ $bel->detail[0]->barang->slug }}"
+                                                                                                    class="btn px-5"
+                                                                                                    style="background-color: #5B8C51; color: white">Beli
+                                                                                                    Lagi
+                                                                                                </a>
+                                                                                            @endif
+                                                                                        @endif
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -894,10 +1461,8 @@
                                                                     <div class="card-title">
                                                                         <div class="row d-flex justify-content-between">
                                                                             <div class="col-7">
-                                                                                <strong class="fw-bold fs-5"><a
-                                                                                        title="Lihat detail pesanan"
-                                                                                        style="color: black"
-                                                                                        href="">#{{ $bel->nomer }}</a></strong>
+                                                                                <strong class="fw-bold fs-5"
+                                                                                    style="color: black">#{{ $bel->nomer }}</strong>
                                                                             </div>
                                                                             <div class="col-5 text-end">
                                                                                 <small
@@ -934,8 +1499,85 @@
                                                                                         <hr class="my-2"
                                                                                             style="border: 1px solid rgb(91, 91, 91)">
                                                                                         <div class="col-12 text-center">
-                                                                                            <a href="">Tampilkan
-                                                                                                produk pembelian lainnya</a>
+                                                                                            <a href=""
+                                                                                                data-bs-toggle="modal"
+                                                                                                data-bs-target="#confirmationModal{{ $bel->id }}">Tampilkan
+                                                                                                produk pembelian lainnya
+                                                                                            </a>
+
+                                                                                            <div class="modal fade"
+                                                                                                id="confirmationModal{{ $bel->id }}"
+                                                                                                tabindex="-1"
+                                                                                                aria-labelledby="confirmationModalLabel"aria-hidden="true">
+                                                                                                <div
+                                                                                                    class="modal-dialog modal-dialog-centered modal-lg">
+                                                                                                    <div
+                                                                                                        class="modal-content">
+                                                                                                        <div
+                                                                                                            class="modal-header">
+                                                                                                            <h5 class="modal-title"
+                                                                                                                id="confirmationModalLabel">
+                                                                                                                Produk
+                                                                                                                Pesanan
+                                                                                                                Lainnya
+                                                                                                            </h5>
+                                                                                                            <button
+                                                                                                                type="button"
+                                                                                                                class="btn-close"
+                                                                                                                data-bs-dismiss="modal"
+                                                                                                                aria-label="Close"></button>
+                                                                                                        </div>
+                                                                                                        <div
+                                                                                                            class="modal-body">
+                                                                                                            @foreach ($bel->detail()->get() as $well)
+                                                                                                                <div
+                                                                                                                    class="row my-2">
+                                                                                                                    <div
+                                                                                                                        class="col-2">
+                                                                                                                        <img src="{{ asset('storage/' . $well->barang->gambar) }}"
+                                                                                                                            style="height: 77px; width: 77px"
+                                                                                                                            alt="">
+                                                                                                                    </div>
+                                                                                                                    <div
+                                                                                                                        class="col-10 text-start">
+                                                                                                                        <span
+                                                                                                                            style="color:black; 500; font-size: 20px font-family: Verdana, Geneva, Tahoma, sans-serif;">{{ ucwords($well->barang->nama) }}
+                                                                                                                        </span><br>
+                                                                                                                        <div
+                                                                                                                            class="row">
+                                                                                                                            <div
+                                                                                                                                class="col-6">
+                                                                                                                                <span
+                                                                                                                                    style="color: black">{{ $well->barang->berat }}</span>
+                                                                                                                            </div>
+                                                                                                                            <div
+                                                                                                                                class="col-6 text-end">
+                                                                                                                                <span
+                                                                                                                                    style="color: black">x{{ $well->qtyitem }}
+                                                                                                                                    {{ $well->barang->quantity }}</span>
+                                                                                                                            </div>
+                                                                                                                            <div
+                                                                                                                                class="col-12 text-end">
+                                                                                                                                <span
+                                                                                                                                    style="color: #F68037">Rp
+                                                                                                                                    {{ number_format($well->barang->harga, 2, ',', '.') }}</span>
+                                                                                                                            </div>
+                                                                                                                        </div>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            @endforeach
+                                                                                                        </div>
+                                                                                                        <div
+                                                                                                            class="modal-footer">
+                                                                                                            <button
+                                                                                                                type="button"
+                                                                                                                class="btn btn-secondary"
+                                                                                                                data-bs-dismiss="modal">Tutup</button>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+
                                                                                         </div>
                                                                                     @endif
 
@@ -959,12 +1601,13 @@
                                                                                         class="col-7 d-flex align-items-center">
                                                                                         @if ($bel->pesanbatal)
                                                                                             <span
-                                                                                                style="color: black">Dibatalkan
-                                                                                                oleh Anda
+                                                                                                style="color: black">{{ \Carbon\Carbon::parse($bel->timebatal)->translatedFormat('l, d F Y H:i') }}
+                                                                                                <br>Dibatalkan oleh Anda
                                                                                             </span>
                                                                                         @else
                                                                                             <span
-                                                                                                style="color: black">Dibatalkan
+                                                                                                style="color: black">{{ \Carbon\Carbon::parse($bel->timebatal)->translatedFormat('l, d F Y H:i') }}
+                                                                                                <br>Dibatalkan
                                                                                                 secara otomatis oleh
                                                                                                 sistem
                                                                                             </span>
@@ -1009,6 +1652,7 @@
                                                     @endif
                                                 </div>
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>

@@ -6,6 +6,7 @@ use App\Models\Cart;
 use App\Models\Kategori;
 use App\Models\User;
 use App\Models\DetailPesananan;
+use App\Models\DetailRating;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -28,5 +29,9 @@ class Barang extends Model
 
     public function detail(){
         return $this->hasMany(DetailPesananan::class, 'barang_id');
+    }
+
+    public function rate(){
+        return $this->hasMany(DetailRating::class, 'barang_id');
     }
 }

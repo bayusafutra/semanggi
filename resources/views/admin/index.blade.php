@@ -44,7 +44,7 @@
             </a>
         </div>
         <div class="col-sm-4 grid-margin">
-            <a href="">
+            <a href="/dash-dikirim">
                 <div class="card">
                     <div class="card-body">
                         <h5>Kirim Pesanan</h5>
@@ -65,7 +65,7 @@
             </a>
         </div>
         <div class="col-sm-4 grid-margin">
-            <a href="">
+            <a href="/dash-diambil">
                 <div class="card">
                     <div class="card-body">
                         <h5>Pesanan Menunggu Diambil</h5>
@@ -86,7 +86,7 @@
             </a>
         </div>
         <div class="col-sm-4 grid-margin">
-            <a href="">
+            <a href="/dash-batal">
                 <div class="card">
                     <div class="card-body">
                         <h5>Pesanan Batal</h5>
@@ -107,7 +107,7 @@
             </a>
         </div>
         <div class="col-sm-4 grid-margin">
-            <a href="">
+            <a href="/dash-selesai">
                 <div class="card">
                     <div class="card-body">
                         <h5>Pesanan Selesai</h5>

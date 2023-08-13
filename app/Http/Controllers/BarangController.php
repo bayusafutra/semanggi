@@ -9,6 +9,8 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreBarangRequest;
 use App\Http\Requests\UpdateBarangRequest;
+use App\Models\DetailRating;
+use App\Models\Rating;
 
 class BarangController extends Controller
 {
@@ -56,8 +58,11 @@ class BarangController extends Controller
 
     public function show($slug)
     {
+        $barang = Barang::where('slug', $slug)->first();
+        $rate = DetailRating::where('barang_id', $barang->id)->get();
         return view('detailproduk', [
-            "produk" => Barang::where('slug', $slug)->get()
+            "produk" => $barang,
+            "rate" => $rate
         ]);
     }
 

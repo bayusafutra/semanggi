@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Alamat;
 use App\Models\Pembayaran;
 use App\Models\Pesanan;
+use App\Models\Rating;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
@@ -76,6 +77,7 @@ class ProfileController extends Controller
         if($pesanan){
             foreach ($pesanan as $pes) {
                 $update["status"] = 8;
+            $update["timebatal"] = now();
                 $pes->update($update);
 
                 $bayar = Pembayaran::where('id', $pes->pembayaran->id)->first();
@@ -92,6 +94,21 @@ class ProfileController extends Controller
             "ambil" => $ambil,
             "selesai" => $selesai,
             "batal" => $batal
+        ]);
+    }
+
+    public function penilaian(){
+        $aktif = Rating::where('user_id', auth()->user()->id)->where('status', 1)->get();
+        $nonaktif = Rating::where('user_id', auth()->user()->id)->where('status', 2)->get();
+        return view('profile.penilaiansaya', [
+            "aktif" => $aktif,
+            "nonaktif" => $nonaktif
+        ]);
+    }
+
+    public function detail($slug){
+        return view('profile.detailrating', [
+            "hayo" => Rating::where('slug', $slug)->first()
         ]);
     }
 }

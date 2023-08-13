@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pembayaran;
 use App\Models\Pesanan;
 use Illuminate\Http\Request;
 
@@ -60,5 +61,59 @@ class DashboardController extends Controller
         $pesanan->update($validatedData);
 
         return back()->with('success', "Data pengiriman pesanan berhasil ditambahkan");
+    }
+
+    public function dikirim(){
+        $pesanan = Pesanan::where('status', 5)->get();
+        return view('admin.pesanan.dikirim', [
+            "title" => "Dashboard | Pengiriman Pesanan",
+            "all" => $pesanan,
+            "dikirim" => Pesanan::where('status', 5)->paginate(10)
+        ]);
+    }
+
+    public function diambil(){
+        $pesanan = Pesanan::where('status', 6)->get();
+        return view('admin.pesanan.diambil', [
+            "title" => "Dashboard | Menunggu Pengambilan",
+            "diambil" => Pesanan::where('status', 6)->paginate(10),
+            "all" => $pesanan
+        ]);
+    }
+
+    public function batal(){
+        $pesanan = Pesanan::where('status', 8)->get();
+        return view('admin.pesanan.batal', [
+            "title" => "Dashboard | Pesanan Batal",
+            "all" => $pesanan,
+            "batal" => Pesanan::where('status', 8)->paginate(10)
+        ]);
+    }
+
+    public function selesai(){
+        $pesanan = Pesanan::where('status', 7)->get();
+        return view('admin.pesanan.selesai', [
+            "selesai" => Pesanan::where('status', 7)->paginate(10),
+            "all" => $pesanan,
+            "title" => "Dashboard | Pesanan Selesai"
+        ]);
+    }
+
+    public function pesanan(){
+        $pesanan = Pesanan::all();
+        return view('admin.transaksi.pesanan', [
+            "all" => $pesanan,
+            "pesanan" => Pesanan::paginate(10),
+            "title" => "Dashboard | Transaksi Pesanan"
+        ]);
+    }
+
+    public function pembayaran(){
+        $pembayaran = Pembayaran::all();
+        return view('admin.transaksi.pembayaran', [
+            "all" => $pembayaran,
+            "pembayaran" => Pembayaran::paginate(10),
+            "title" => "Dashboard | Transaksi Pembayaran"
+        ]);
     }
 }

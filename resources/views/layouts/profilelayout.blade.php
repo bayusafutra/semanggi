@@ -49,6 +49,10 @@
 
     <!-- Template Stylesheet -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    {{-- <link rel="stylesheet" href="{{ asset('https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css') }}">
+    <script src="{{ asset('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js') }}"></script>
+    <script src="{{ asset('https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js') }}"></script> --}}
+    <link rel="stylesheet" href="{{ asset('css/rating/style.css') }}">
     @yield('css')
     <style type="text/css">
         .pull-right {
@@ -536,7 +540,8 @@
                         <form action="/catalog#listproduk">
                             <div class="input-group d-flex flex-end-center" style="width: 16cm">
                                 <input class="form-control form-eduprixsearch-control rounded-pill"
-                                    id="formGroupExampleInput" type="text" name="search" value="{{ request('search') }}"
+                                    id="formGroupExampleInput" type="text" name="search"
+                                    value="{{ request('search') }}"
                                     placeholder="Produk apa yang anda cari hari ini?" />
                             </div>
                         </form>
@@ -545,13 +550,14 @@
             </div>
 
             <a href="/cart" class="btn p-0 ms-auto position-relative"><i class="fa fa-shopping-cart fs-4"></i>
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill" style="background-color: #F68037">
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill"
+                    style="background-color: #F68037">
                     @php
                         use App\Models\Cart;
-                        if(auth()->user()){
-                            $cart = Cart::where("user_id", auth()->user()->id)->get();
+                        if (auth()->user()) {
+                            $cart = Cart::where('user_id', auth()->user()->id)->get();
                             echo $cart->count();
-                        }else {
+                        } else {
                             echo 0;
                         }
                     @endphp
@@ -567,8 +573,10 @@
                             <a href="/dashboard" class="dropdown-item py-2">Administrator</a>
                             <hr style="border: 2px black">
                         @endcan
-                        <a class="dropdown-item py-2" href="/profilpengguna" style="text-decoration: none">Profil Pengguna</a>
-                        <a class="dropdown-item py-2" href="/ubahpassword" style="text-decoration: none">Ubah Password</a>
+                        <a class="dropdown-item py-2" href="/profilpengguna" style="text-decoration: none">Profil
+                            Pengguna</a>
+                        <a class="dropdown-item py-2" href="/ubahpassword" style="text-decoration: none">Ubah
+                            Password</a>
                         <form action="/logout" method="post">
                             @csrf
                             <button class="dropdown-item py-2" style="color: black">Logout</button>

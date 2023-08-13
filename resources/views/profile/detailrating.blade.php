@@ -1,4 +1,21 @@
 @extends('layouts.profilelayout')
+@section('css')
+    <style>
+        .scroll-container {
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .produk {
+            display: inline-block;
+        }
+
+        .produk li {
+            display: inline-block;
+            margin-right: 10px;
+        }
+    </style>
+@endsection
 @section('kontent')
     <div id="snippetContent">
         <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js'></script>
@@ -26,9 +43,9 @@
                         </div>
 
                         <ul class="nav nav-pills nav-stacked">
-                            <li class="active" style="width: 100%;">
+                            <li style="width: 100%;">
                                 <a class="d-flex align-items-center" style="padding: 10px 15px 10px 15px"
-                                    href="#"><i class="fa fa-user"></i>
+                                    href="/profilpengguna"><i class="fa fa-user"></i>
                                     Profil
                                 </a>
                             </li>
@@ -46,9 +63,10 @@
                                     </span>
                                 </a>
                             </li>
-                            <li style="width: 100%">
+                            <li class="active" style="width: 100%">
                                 <a class="d-flex align-items-center justify-content-between" href="/penilaiansaya"
-                                    style="padding: 0px 15px 0px 15px"><i class="fa fa-star-o" style="color: #89817F"> Penilaian Saya</i>
+                                    style="padding: 0px 15px 0px 15px"><i class="fa fa-star-o" style="color: #89817F">
+                                        Penilaian Saya</i>
                                     <span class="label pull-right r-activity m-2"
                                         style="background: #5B8C51; color: white; padding: 1px 10px 1px 10px;">
                                         @php
@@ -61,7 +79,8 @@
                             </li>
                             <li style="width: 100%">
                                 <a class="d-flex align-items-center" href="/editprofile"
-                                    style="padding: 10px 15px 10px 15px"><i class="fa fa-edit" style="color: #89817F"></i>Edit Profile
+                                    style="padding: 10px 15px 10px 15px"><i class="fa fa-edit"
+                                        style="color: #89817F"></i>Edit Profile
                                 </a>
                             </li>
                         </ul>
@@ -70,56 +89,63 @@
                 <div class="profile-info col-md-9">
                     <div class="panel">
                         <div class="bio-graph-heading" style="font-style: normal; font-weight: 900">
-                            DATA DIRI
+                            DATA PENILAIAN SAYA
                         </div>
                         <div class="panel-body bio-graph-info container py-3" style="background-color: white">
-                            <h1>Biografi</h1>
-                            <div class="row" style="font-size: 14px">
-                                <div class="bio-row">
-                                    <p><span style="font-weight: 900">Nama </span>: {{ auth()->user()->name }}</p>
-                                </div>
-                                <div class="bio-row">
-                                    <p><span style="font-weight: 900">Username </span>:
-                                        {{ auth()->user()->username }}</p>
-                                </div>
-                                <div class="bio-row">
-                                    @if (auth()->user()->notelp)
-                                        <p><span style="font-weight: 900">No Telepon </span>: +62
-                                            {{ auth()->user()->notelp }}</p>
-                                    @else
-                                        <p><span style="font-weight: 900">No Telepon </span>: -</p>
-                                    @endif
+                            <section id="listproduk">
+                                <div class="container-xxl py-5">
+                                    <div class="container portofolio">
+                                        <h4>Penilaian Pesanan #{{ $hayo->pesanan->nomer }}</h4>
 
+                                        @foreach ($hayo->rate()->where('status', 1)->get() as $well)
+                                            <div class="card my-3" style="border: 2px solid black">
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col-2">
+                                                            <img src="{{ asset('storage/' . $well->barang->gambar) }}"
+                                                                style="height: 77px; width: 77px" alt="">
+                                                        </div>
+                                                        <div class="col-10">
+                                                            <span
+                                                                style="color:black; 500; font-size: 20px font-family: Verdana, Geneva, Tahoma, sans-serif;">{{ ucwords($well->barang->nama) }}
+                                                            </span> <br>
+
+                                                            <div class="form-group row">
+                                                                <form action="/rating" method="POST">
+                                                                    @csrf
+                                                                    <input type="hidden" name="detail" value="{{ $well->id }}">
+                                                                    <input type="hidden" name="id" value="{{ $well->barang->id }}">
+                                                                    <div class="col">
+                                                                        <div class="rate">
+                                                                            <input type="radio" id="star5" class="rate" name="rating" value="5" />
+                                                                            <label for="star5" title="Sangat Baik">5 stars</label>
+                                                                            <input type="radio" id="star4" class="rate" name="rating"
+                                                                                value="4" />
+                                                                            <label for="star4" title="Cukup Baik">4 stars</label>
+                                                                            <input type="radio" id="star3" class="rate" name="rating" value="3" />
+                                                                            <label for="star3" title="Baik">3 stars</label>
+                                                                            <input type="radio" id="star2" class="rate" name="rating" value="2">
+                                                                            <label for="star2" title="Kurang">2 stars</label>
+                                                                            <input type="radio" id="star1" class="rate" name="rating" value="1" />
+                                                                            <label for="star1" title="Sangat Kurang">1 star</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <textarea name="komentar" id="" class="form-control" placeholder="berikan komentar anda" cols="5" rows="3"></textarea>
+
+                                                                    <div class="sub text-end mt-3">
+                                                                        <button class="btn px-5" type="submit" style="background-color: #5B8C51; color: white">Simpan</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
                                 </div>
-                                <div class="bio-row">
-                                    @if (auth()->user()->tgllahir)
-                                        <p><span style="font-weight: 900">Tanggal Lahir </span>:
-                                            {{ \Carbon\Carbon::parse(auth()->user()->tgllahir)->translatedFormat('d F Y') }}
-                                        </p>
-                                    @else
-                                        <p><span style="font-weight: 900">Tanggal Lahir </span>: -</p>
-                                    @endif
-                                </div>
-                                <div class="bio-row">
-                                    @if (auth()->user()->gender === null)
-                                        <p><span style="font-weight: 900">Jenis Kelamin </span>: -</p>
-                                    @else
-                                        @if (auth()->user()->gender == true)
-                                            <p><span style="font-weight: 900">Jenis Kelamin </span>: Pria</p>
-                                        @else
-                                            <p><span style="font-weight: 900">Jenis Kelamin </span>: Wanita</p>
-                                        @endif
-                                    @endif
-                                </div>
-                                <div class="bio-row">
-                                    @if (auth()->user()->alamat === null)
-                                        <p><span style="font-weight: 900">Alamat </span>: -</p>
-                                    @else
-                                        <p><span style="font-weight: 900">Alamat </span>: {{ auth()->user()->alamat }}
-                                        </p>
-                                    @endif
-                                </div>
-                            </div>
+                            </section>
                         </div>
                     </div>
                 </div>
@@ -151,5 +177,4 @@
         </style>
     </div>
 @endsection
-
 

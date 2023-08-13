@@ -95,11 +95,17 @@
                                 </a>
                             </li>
                             <li style="width: 100%">
-                                <a class="d-flex align-items-center justify-content-between" href=""
+                                <a class="d-flex align-items-center justify-content-between" href="/penilaiansaya"
                                     style="padding: 0px 15px 0px 15px"><i class="fa fa-star-o" style="color: #89817F">
                                         Penilaian Saya</i>
                                     <span class="label pull-right r-activity m-2"
-                                        style="background: #5B8C51; color: white; padding: 1px 10px 1px 10px;">0</span>
+                                        style="background: #5B8C51; color: white; padding: 1px 10px 1px 10px;">
+                                        @php
+                                            use App\Models\Rating;
+                                            $rating = Rating::where('user_id', auth()->user()->id)->get();
+                                            echo $rating->count();
+                                        @endphp
+                                    </span>
                                 </a>
                             </li>
                             <li class="active" style="width: 100%">
@@ -262,7 +268,7 @@
                                                     <input type="hidden" name="oldImage"
                                                         value="{{ auth()->user()->gambar }}">
                                                     <input class="input--style-4 @error('gambar') is-invalid @enderror"
-                                                        type="file" id="gambar" name="gambar"
+                                                        type="file" id="fileInput" name="gambar"
                                                         value="{{ old('gambar') }}" onchange="previewImage()">
                                                 </div>
                                                 <small style="color: red">* Abaikan bila tidak ingin mengubah foto
@@ -275,14 +281,13 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-row">
+                                        <img class="img-preview img-fluid mb-3 rounded-circle"
+                                            style="height: 125px; width: 125px; display: none" id="gambar">
+
+                                        <div class="form-row d-flex justify-content-center">
                                             <div class="row">
-                                                <div class="col-6">
-                                                    <img class="img-preview img-fluid mb-3 rounded-circle"
-                                                        style="height: 125px; width: 250px">
-                                                </div>
-                                                <div class="col-6">
-                                                    <div class="input-group d-flex justify-content-center">
+                                                <div class="col-12">
+                                                    <div class="input-group">
                                                         <button class="btn btn--radius-2"
                                                             style="background-color: #5B8C51; color: white; font-family: sans-serif"
                                                             type="submit">Simpan</button>
@@ -327,18 +332,24 @@
 @section('js')
     <script>
         function previewImage() {
-            const gambar = document.querySelector('#gambar');
+            const gambar = document.querySelector('#fileInput');
             const imgPreview = document.querySelector('.img-preview');
 
-            imgPreview.style.display = 'block';
+            // Pastikan ada file yang dipilih sebelum menampilkan gambar
+            if (gambar.files && gambar.files[0]) {
+                const oFReader = new FileReader();
+                oFReader.readAsDataURL(gambar.files[0]);
 
-            const oFReader = new FileReader();
-            oFReader.readAsDataURL(gambar.files[0]);
+                oFReader.onload = function(oFREvent) {
+                    imgPreview.src = oFREvent.target.result;
+                }
 
-            oFReader.onload = function(oFREvent) {
-                imgPreview.src = oFREvent.target.result;
+                // Tampilkan gambar
+                imgPreview.style.display = 'block';
+            } else {
+                // Sembunyikan gambar jika tidak ada file yang dipilih
+                imgPreview.style.display = 'none';
             }
-
         }
     </script>
     <script src="form/vendor/jquery/jquery.min.js"></script>

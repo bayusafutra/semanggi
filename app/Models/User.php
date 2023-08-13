@@ -9,6 +9,7 @@ use App\Models\Cart;
 use App\Models\Pesanan;
 use App\Models\Alamat;
 use App\Models\Pembayaran;
+use App\Models\Rating;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -41,5 +42,9 @@ class User extends Authenticatable
 
     public function pembayaran(){
         return $this->hasMany(Pembayaran::class, 'user_id');
+    }
+
+    public function rating(){
+        return $this->hasMany(Rating::class, 'user_id');
     }
 }

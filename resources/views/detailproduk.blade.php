@@ -14,21 +14,21 @@
                 <div class="col-lg-6" data-wow-delay="0.1s">
                     <div class="rounded overflow-hidden">
                         <div class="row g-0" data-wow-delay="0.1s">
-                            @if ($produk[0]->gambar)
-                                <a data-wow-delay="0.1s"><img src="{{ asset('storage/' . $produk[0]->gambar) }}"
+                            @if ($produk->gambar)
+                                <a data-wow-delay="0.1s"><img src="{{ asset('storage/' . $produk->gambar) }}"
                                         width="500" height="500" data-wow-delay="0.1s" alt=""></a>
                             @else
                                 <a data-wow-delay="0.1s"><img src="{{ asset('img/food.png') }}" width="500"
-                                        height="500" data-wow-delay="0.1s" alt="{{ $produk[0]->nama }}"></a>
+                                        height="500" data-wow-delay="0.1s" alt="{{ $produk->nama }}"></a>
                             @endif
                         </div>
                     </div>
                 </div>
 
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <h1 class="mb-2">{{ ucwords($produk[0]->nama) }}</h1>
-                    <p class="bg-white text-start text-primary ">Kategori {{ ucwords($produk[0]->kategori->nama) }}</p>
-                    <h4 class="mb-4"><b>Rp {{ number_format($produk[0]->harga, 2, ',', '.') }}</b></h4>
+                    <h1 class="mb-2">{{ ucwords($produk->nama) }}</h1>
+                    <p class="bg-white text-start text-primary ">Kategori {{ ucwords($produk->kategori->nama) }}</p>
+                    <h4 class="mb-4"><b>Rp {{ number_format($produk->harga, 2, ',', '.') }}</b></h4>
                     <p class="py-2">
                         <i class="fa fa-star text-warning"></i>
                         <i class="fa fa-star text-warning"></i>
@@ -39,13 +39,13 @@
                     </p>
                     <h6>Rincian Produk :</h6>
                     <ul class="list-unstyled pb-1">
-                        <li>Berat Bersih {{ $produk[0]->berat }}</li>
-                        <li>Minimum Pembelian {{ $produk[0]->minim }} {{ $produk[0]->quantity }}</li>
-                        <li>Stok Produk {{ $produk[0]->stok }} {{ $produk[0]->quantity }}</li>
+                        <li>Berat Bersih {{ $produk->berat }}</li>
+                        <li>Minimum Pembelian {{ $produk->minim }} {{ $produk->quantity }}</li>
+                        <li>Stok Produk {{ $produk->stok }} {{ $produk->quantity }}</li>
                     </ul>
 
                     <h6>Deskripsi Produk :</h6>
-                    <p class="pb-2"><i class="bi bi-quote" style="color: #F68037"></i> {{ $produk[0]->deskripsi }}
+                    <p class="pb-2"><i class="bi bi-quote" style="color: #F68037"></i> {{ $produk->deskripsi }}
                         <i
                             class="bi bi-quote" id="bi-quote" style="color: #F68037">
                         </i>
@@ -66,28 +66,28 @@
                                         <div class="modal-header d-flex align-items-start">
                                             <div class="row" style="width: 100%">
                                                 <div class="col-3">
-                                                    @if ($produk[0]->gambar)
+                                                    @if ($produk->gambar)
                                                         <a data-wow-delay="0.1s"><img
-                                                                src="{{ asset('storage/' . $produk[0]->gambar) }}"
+                                                                src="{{ asset('storage/' . $produk->gambar) }}"
                                                                 width="150" height="150" data-wow-delay="0.1s"
                                                                 alt=""></a>
                                                     @else
                                                         <a data-wow-delay="0.1s"><img src="{{ asset('img/food.png') }}"
                                                                 width="150" height="150" data-wow-delay="0.1s"
-                                                                alt="{{ $produk[0]->nama }}"></a>
+                                                                alt="{{ $produk->nama }}"></a>
                                                     @endif
                                                 </div>
                                                 <div class="col-9">
                                                     <div class="nama">
-                                                        <h5 class="modal-title">{{ ucwords($produk[0]->nama) }}</h5>
+                                                        <h5 class="modal-title">{{ ucwords($produk->nama) }}</h5>
                                                     </div>
                                                     <div class="rincian" style="margin-top: 9%">
                                                         <span style="font-size: 18px; font-weight: 600; color: #5E9D7B">Rp
-                                                            {{ number_format($produk[0]->harga, 2, ',', '.') }}</span><br>
-                                                        <strong>Minimum Pembelian : </strong>{{ $produk[0]->minim }}
-                                                        {{ $produk[0]->quantity }} <br>
-                                                        <strong>Stok : </strong>{{ $produk[0]->stok }}
-                                                        {{ $produk[0]->quantity }}
+                                                            {{ number_format($produk->harga, 2, ',', '.') }}</span><br>
+                                                        <strong>Minimum Pembelian : </strong>{{ $produk->minim }}
+                                                        {{ $produk->quantity }} <br>
+                                                        <strong>Stok : </strong>{{ $produk->stok }}
+                                                        {{ $produk->quantity }}
                                                     </div>
                                                 </div>
                                             </div>
@@ -109,17 +109,17 @@
                                                                         <input type="text"
                                                                             style="background-color: white"
                                                                             class="form-control numeric-input text-center fs-5"
-                                                                            min="{{ $produk[0]->minim }}"
-                                                                            max="{{ $produk[0]->stok }}" name="quantity"
-                                                                            value="{{ $produk[0]->minim }}" readonly>
+                                                                            min="{{ $produk->minim }}"
+                                                                            max="{{ $produk->stok }}" name="quantity"
+                                                                            value="{{ $produk->minim }}" readonly>
                                                                         <button class="btn btn-outline-secondary plus-btn"
                                                                             type="button"
                                                                             style="border-radius: 0 7px 7px 0">+</button>
                                                                         <input type="hidden" class="stok-produk"
-                                                                            value="{{ $produk[0]->stok }}">
+                                                                            value="{{ $produk->stok }}">
                                                                         <input type="hidden" class="minim-produk"
-                                                                            value="{{ $produk[0]->minim }}"
-                                                                            data-item-id="{{ $produk[0]->id }}">
+                                                                            value="{{ $produk->minim }}"
+                                                                            data-item-id="{{ $produk->id }}">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -128,12 +128,12 @@
                                                             <h5 class="card-text mb-5" style="color: #5E9D7B">Total :
                                                                 <span class="subtotal"
                                                                     style="border: none; color: #5E9D7B">Rp
-                                                                    {{ number_format($produk[0]->harga * $produk[0]->minim, 2, ',', '.') }}</span>
+                                                                    {{ number_format($produk->harga * $produk->minim, 2, ',', '.') }}</span>
                                                             </h5>
-                                                            <input type="hidden" name="barang" value="{{ $produk[0]->id }}">
-                                                            <input type="hidden" class="price" value="{{ $produk[0]->harga }}">
+                                                            <input type="hidden" name="barang" value="{{ $produk->id }}">
+                                                            <input type="hidden" class="price" value="{{ $produk->harga }}">
                                                             <input type="hidden" class="harga" id="harga"
-                                                                name="hayo" value="{{ $produk[0]->harga }}">
+                                                                name="hayo" value="{{ $produk->harga*$produk->minim }}">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -153,9 +153,9 @@
                             <form action="/cart" method="POST">
                                 @csrf
                                 <input type="hidden" name="total"
-                                    value="{{ $produk[0]->harga * $produk[0]->minim }}">
-                                <input type="hidden" name="barang" value="{{ $produk[0]->id }}">
-                                <input type="hidden" name="quantity" value="{{ $produk[0]->minim }}">
+                                    value="{{ $produk->harga * $produk->minim }}">
+                                <input type="hidden" name="barang" value="{{ $produk->id }}">
+                                <input type="hidden" name="quantity" value="{{ $produk->minim }}">
                                 <button type="submit" class="btn btn-warning"
                                     style="padding-left: 82px; padding-right: 82px">Tambahkan ke keranjang</button>
                             </form>
@@ -174,93 +174,28 @@
             </div>
 
             <div class="row text-center">
-                <div class="col-md-4 mb-4 mb-md-0">
-                    <div class="card">
-                        <div class="card-body py-4 mt-2">
-                            <h6 class="font-weight-bold">Teresa May</h6>
-                            <ul class="list-unstyled d-flex justify-content-center">
-                                <li>
-                                    <i class="fas fa-star fa-sm text-warning"></i>
-                                </li>
-                                <li>
-                                    <i class="fas fa-star fa-sm text-warning"></i>
-                                </li>
-                                <li>
-                                    <i class="fas fa-star fa-sm text-warning"></i>
-                                </li>
-                                <li>
-                                    <i class="fas fa-star fa-sm text-warning"></i>
-                                </li>
-                                <li>
-                                    <i class="fas fa-star-half-alt fa-sm text-warning"></i>
-                                </li>
-                            </ul>
-                            <p class="mb-2">
-                                <i class="fas fa-quote-left pe-2"></i>Lorem ipsum dolor sit amet,
-                                consectetur adipisicing elit. Quod eos id officiis hic tenetur quae quaerat
-                                ad velit ab hic tenetur.
-                            </p>
+                @foreach ($rate as $ra)
+                    <div class="col-md-4 mb-4 mb-md-0">
+                        <div class="card">
+                            <div class="card-body py-4 mt-2">
+                                <h6 class="font-weight-bold">{{ ucwords($ra->rating->user->name) }}</h6>
+                                <ul class="list-unstyled d-flex justify-content-center">
+                                    @for ($i=1; $i<=$ra->nilai; $i++)
+                                        <li>
+                                            <i class="fas fa-star fa-sm text-warning"></i>
+                                        </li>
+                                    @endfor
+                                    {{-- <li>
+                                        <i class="fas fa-star-half-alt fa-sm text-warning"></i>
+                                    </li> --}}
+                                </ul>
+                                <p class="mb-2">
+                                    <i class="fas fa-quote-left pe-2"></i>{{ $ra->komentar }} <i class="fas fa-quote-left pe-2"></i>
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4 mb-4 mb-md-0">
-                    <div class="card">
-                        <div class="card-body py-4 mt-2">
-                            <h6 class="font-weight-bold">Maggie McLoan</h6>
-                            <ul class="list-unstyled d-flex justify-content-center">
-                                <li>
-                                    <i class="fas fa-star fa-sm text-warning"></i>
-                                </li>
-                                <li>
-                                    <i class="fas fa-star fa-sm text-warning"></i>
-                                </li>
-                                <li>
-                                    <i class="fas fa-star fa-sm text-warning"></i>
-                                </li>
-                                <li>
-                                    <i class="fas fa-star fa-sm text-warning"></i>
-                                </li>
-                                <li>
-                                    <i class="fas fa-star fa-sm text-warning"></i>
-                                </li>
-                            </ul>
-                            <p class="mb-2">
-                                <i class="fas fa-quote-left pe-2"></i>Autem, totam debitis suscipit saepe
-                                sapiente magnam officiis quaerat necessitatibus odio assumenda perferendis
-                                labore laboriosam.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-0">
-                    <div class="card">
-                        <div class="card-body py-4 mt-2">
-                            <h6 class="font-weight-bold">Alexa Horwitz</h6>
-                            <ul class="list-unstyled d-flex justify-content-center">
-                                <li>
-                                    <i class="fas fa-star fa-sm text-warning"></i>
-                                </li>
-                                <li>
-                                    <i class="fas fa-star fa-sm text-warning"></i>
-                                </li>
-                                <li>
-                                    <i class="fas fa-star fa-sm text-warning"></i>
-                                </li>
-                                <li>
-                                    <i class="fas fa-star fa-sm text-warning"></i>
-                                </li>
-                                <li>
-                                    <i class="far fa-star fa-sm text-warning"></i>
-                                </li>
-                            </ul>
-                            <p class="mb-2">
-                                <i class="fas fa-quote-left pe-2"></i>Cras sit amet nibh libero, in gravida
-                                nulla metus scelerisque ante sollicitudin commodo cras purus odio,
-                                vestibulum in tempus viverra turpis.
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     @endsection

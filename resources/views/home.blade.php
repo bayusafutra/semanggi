@@ -33,7 +33,7 @@
                     <div class="row g-2">
                         <div class="col-6 position-relative wow fadeIn" data-wow-delay="0.7s">
                             <div class="about-experience bg-secondary rounded">
-                                <small class="fs-5 fw-bold">Srikandi Semanggi</small>
+                                <small class="fs-5 fw-bold" style="font-family: Goudy Bookletter 1911">Srikandi Semanggi</small>
                             </div>
                         </div>
                         <div class="col-6 wow fadeIn" data-wow-delay="0.1s">
@@ -49,7 +49,7 @@
                 </div>
                 <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
                     <p class="section-title bg-white text-start text-primary pe-3">Tentang Kami</p>
-                    <h1 class="mb-4">Ketahui mengenai sejarah kampung semanggi</h1>
+                    <h1 class="mb-4">Ketahui Mengenai Sejarah Kampung Semanggi</h1>
                     <p class="mb-4">Kampung ini dikenal dengan nama kampung semanggi sejak tahun 2016. Branding kampung semanggi dilakukan oleh bapak muslik selaku camat kecamatan benowo. Kampung Semanggi dikenal karena sebagian besar penduduknya terutama ibu-ibu yang berprofesi sebagai penjual semanggi.
                         Sebagian besar penjual semanggi berasal dari Kendung, namun sebelum tahun 2016, banyak orang-orang yang mencari daun semanggi sampai ke daerah Sidoarjo, Mojokerto, Krian, Lamongan, bahkan sampai daerah Kediri hingga Bojonegoro.
                         Kemudian pada tahun 2017, mereka memiliki inisiatif untuk membudidayakan semanggi di lahan kavlingan dan lahan aset kota yang belum dibangun. Mereka juga memanfaatkan lahan-lahan kosong yang ada di belakang rumah sebagai tempat untuk menanam semanggi.

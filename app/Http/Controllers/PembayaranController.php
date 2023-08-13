@@ -41,7 +41,6 @@ class PembayaranController extends Controller
         $pesanan = Pesanan::where('id', $request->pesanan)->first();
         $update["status"] = 3;
         $update["paidTime"] = now();
-        $update["deadlinePaid"] = null;
         $pesanan->update($update);
 
         return redirect('/pesanansaya');
@@ -64,7 +63,6 @@ class PembayaranController extends Controller
         $pesanan = Pesanan::where('id', $request->pesanan)->first();
         $update["status"] = 3;
         $update["paidTime"] = now();
-        $update["deadlinePaid"] = null;
         $pesanan->update($update);
 
         return redirect('/pesanansaya');

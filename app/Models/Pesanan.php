@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\User;
 use App\Models\Alamat;
 use App\Models\Payment;
+use App\Models\Rating;
 use App\Models\DetailPesananan;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -32,6 +33,10 @@ class Pesanan extends Model
 
     public function pembayaran(){
         return $this->hasOne(Pembayaran::class, 'pesanan_id');
+    }
+
+    public function rating(){
+        return $this->hasOne(Rating::class, 'pesanan_id');
     }
 
 }

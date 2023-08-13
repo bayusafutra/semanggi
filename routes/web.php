@@ -10,6 +10,7 @@ use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\SignupController;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DetailRatingController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LupaPasswordController;
 use App\Http\Controllers\PaymentController;
@@ -37,11 +38,14 @@ Route::get('/profilkampungsemanggi', function () {
     return view('profile');
 });
 
+
 Route::get('/profilpengguna', [ProfileController::class, 'index'])->middleware('auth');
 Route::get('/editprofile', [ProfileController::class, 'edit'])->middleware('auth');
 Route::post('/editprofile', [ProfileController::class, 'update'])->middleware('auth');
 Route::get('/pesanansaya', [ProfileController::class, 'pesanan'])->middleware('auth');
 Route::post('/hapuspp', [ProfileController::class, 'hapuspp'])->middleware('auth');
+Route::get('/penilaiansaya', [ProfileController::class, 'penilaian'])->middleware('auth');
+Route::get('/detailpenilaian/{slug}', [ProfileController::class, 'detail'])->middleware('auth');
 
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate'])->middleware('guest');
@@ -74,10 +78,11 @@ Route::post('/update-cart', [CartController::class, 'updateCart'])->middleware('
 
 Route::post('/pesan', [PesananController::class, 'store'])->middleware('auth');
 Route::post('/pesanproduk', [PesananController::class, 'create'])->middleware('auth');
-Route::get('/detailpesanan/{slug}', [PesananController::class, 'index'])->middleware(['auth', 'checkout']);
+Route::get('/checkout/{slug}', [PesananController::class, 'index'])->middleware(['auth', 'checkout']);
 Route::post('/checkout', [PesananController::class, 'checkout'])->middleware('auth');
 Route::post('/pesananbatal', [PesananController::class, 'batal'])->middleware('auth');
 Route::post('/waktuhabis', [PesananController::class, 'waktuhabis'])->middleware('auth');
+Route::post('/terimapesanan', [PesananController::class, 'terimapesanan'])->middleware('auth');
 
 Route::get('inputProvinsi', [AlamatController::class, 'provinsi'])->name('pilihProv');
 Route::get('inputKota/{id}', [AlamatController::class, 'regency'])->name('pilihKota');
@@ -98,6 +103,8 @@ Route::get('/revisipembayaran/{slug}', [PembayaranController::class, 'revisi'])-
 Route::post('/unggahbukti', [PembayaranController::class, 'unggah'])->middleware('auth');
 Route::post('/revisiunggahbukti', [PembayaranController::class, 'unggahrevisi'])->middleware('auth');
 
+Route::post('/rating', [DetailRatingController::class, 'rating'])->middleware('auth');
+
 Route::get('/pembayaran/kode-unik', function () {
     return view('kodepembayaran');
 });
@@ -110,6 +117,12 @@ Route::post('/dash-tolakaudit', [PesananController::class, 'tolakaudit'])->middl
 Route::get('/dash-dikemas', [DashboardController::class, 'dikemas'])->middleware('admin');
 Route::post('/dash-dikemas', [DashboardController::class, 'dikemaspost'])->middleware('admin');
 Route::post('/dash-jaskir', [DashboardController::class, 'jaskir'])->middleware('admin');
+Route::get('/dash-dikirim', [DashboardController::class, 'dikirim'])->middleware('admin');
+Route::get('/dash-diambil', [DashboardController::class, 'diambil'])->middleware('admin');
+Route::get('/dash-batal', [DashboardController::class, 'batal'])->middleware('admin');
+Route::get('/dash-selesai', [DashboardController::class, 'selesai'])->middleware('admin');
+Route::get('/dash-pesanan', [DashboardController::class, 'pesanan'])->middleware('admin');
+Route::get('/dash-pembayaran', [DashboardController::class, 'pembayaran'])->middleware('admin');
 
 Route::get('/dash-kategori', [KategoriController::class, 'index'])->middleware('admin');
 Route::get('/dash-buatkategori', [KategoriController::class, 'create'])->middleware('admin');

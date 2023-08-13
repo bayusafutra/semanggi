@@ -28,7 +28,7 @@ class AlamatController extends Controller
         $pesanan = Pesanan::where('id', $request->pesanan)->first();
         $validatedData["alamat_id"] = $request->alamat;
         $pesanan->update($validatedData);
-        return redirect("/detailpesanan/$pesanan->slug");
+        return redirect("/checkout/$pesanan->slug");
     }
 
     public function create($slug){

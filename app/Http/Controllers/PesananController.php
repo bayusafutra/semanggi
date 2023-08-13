@@ -10,8 +10,10 @@ use App\Http\Requests\UpdatePesananRequest;
 use App\Models\Alamat;
 use App\Models\Cart;
 use App\Models\DetailPesananan;
+use App\Models\DetailRating;
 use App\Models\Payment;
 use App\Models\Pembayaran;
+use App\Models\Rating;
 use Illuminate\Support\Facades\Log;
 
 
@@ -53,7 +55,7 @@ class PesananController extends Controller
             $rules["qtyitem"] = $ker->quantity;
             DetailPesananan::create($rules);
         }
-        return redirect("/detailpesanan/$pesanan->slug");
+        return redirect("/checkout/$pesanan->slug");
     }
 
     public function create(Request $request)
@@ -76,7 +78,7 @@ class PesananController extends Controller
         $rules["qtyitem"] = $request->quantity;
         DetailPesananan::create($rules);
 
-        return redirect("/detailpesanan/$pesanan->slug");
+        return redirect("/checkout/$pesanan->slug");
     }
 
     public function checkout(Request $request)
@@ -131,6 +133,7 @@ class PesananController extends Controller
         $capek["status"] = 8;
         $capek["deadlinePaid"] = null;
         $capek["pesanbatal"] = $request->batal;
+        $capek["timebatal"] = now();
         $pesanan->update($capek);
 
         return redirect('/pesanansaya');
@@ -139,11 +142,11 @@ class PesananController extends Controller
     public function waktuhabis(Request $request)
     {
         $orderId = $request->input('orderId');
-        // Temukan pesanan berdasarkan orderId dan perbarui status menjadi 8
         $order = Pesanan::where('id', $orderId)->first();
         if ($order) {
-            $update = ['status' => 8]; // Perubahan ini
-            $order->update($update);   // Menggunakan variabel $update
+            $update["status"] = 8;
+            $update["timebatal"] = now();
+            $order->update($update);
 
             $bayar = Pembayaran::where('id', $order->pembayaran->id)->first();
             $hayo["status"] = 4;
@@ -153,6 +156,28 @@ class PesananController extends Controller
         } else {
             return response()->json(['message' => 'Pesanan tidak ditemukan'], 404);
         }
+    }
+
+    public function terimapesanan(Request $request){
+        $pesanan = Pesanan::where('id', $request->id)->first();
+        $update["status"] = 7;
+        $update["timeterima"] = now();
+        $update["timebatasnilai"] = now()->addDays(7);
+        $pesanan->update($update);
+
+        $validatedData["slug"] = Str::random(40);
+        $validatedData["pesanan_id"] = $pesanan->id;
+        $validatedData["user_id"] = $pesanan->user->id;
+        $rating = Rating::create($validatedData);
+
+        foreach($pesanan->detail()->get() as $well){
+            $tambah["rating_id"] = $rating->id;
+            $tambah["barang_id"] = $well->barang->id;
+            DetailRating::create($tambah);
+        }
+
+        return back();
+
     }
 
     ////////////////////////admin/////////////////
