@@ -60,9 +60,20 @@ class BarangController extends Controller
     {
         $barang = Barang::where('slug', $slug)->first();
         $rate = DetailRating::where('barang_id', $barang->id)->get();
+        if($rate->count()){
+            $skor = 0;
+            foreach($rate as $ra){
+                $skor =+ $ra->nilai;
+            }
+            $hasil = $skor/$rate->count();
+            $fix = number_format($hasil, 1);
+        }else{
+            $fix = 0;
+        }
         return view('detailproduk', [
             "produk" => $barang,
-            "rate" => $rate
+            "rate" => $rate,
+            "fix" => $fix
         ]);
     }
 

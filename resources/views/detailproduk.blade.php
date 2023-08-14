@@ -5,6 +5,26 @@
             transform: rotate(180deg);
         }
     </style>
+
+    <style>
+        .horizontal-scroll-container {
+            overflow-x: hidden;
+            white-space: nowrap;
+            display: flex;
+            animation: scrollAnimation 20s linear infinite;
+            /* Adjust animation duration as needed */
+        }
+
+        @keyframes scrollAnimation {
+            0% {
+                transform: translateX(calc(-100% + 100vw));
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+    </style>
 @endsection
 @section('content')
     <!-- Features Start -->
@@ -15,8 +35,8 @@
                     <div class="rounded overflow-hidden">
                         <div class="row g-0" data-wow-delay="0.1s">
                             @if ($produk->gambar)
-                                <a data-wow-delay="0.1s"><img src="{{ asset('storage/' . $produk->gambar) }}"
-                                        width="500" height="500" data-wow-delay="0.1s" alt=""></a>
+                                <a data-wow-delay="0.1s"><img src="{{ asset('storage/' . $produk->gambar) }}" width="500"
+                                        height="500" data-wow-delay="0.1s" alt=""></a>
                             @else
                                 <a data-wow-delay="0.1s"><img src="{{ asset('img/food.png') }}" width="500"
                                         height="500" data-wow-delay="0.1s" alt="{{ $produk->nama }}"></a>
@@ -30,12 +50,13 @@
                     <p class="bg-white text-start text-primary ">Kategori {{ ucwords($produk->kategori->nama) }}</p>
                     <h4 class="mb-4"><b>Rp {{ number_format($produk->harga, 2, ',', '.') }}</b></h4>
                     <p class="py-2">
-                        <i class="fa fa-star text-warning"></i>
-                        <i class="fa fa-star text-warning"></i>
-                        <i class="fa fa-star text-warning"></i>
-                        <i class="fa fa-star text-warning"></i>
-                        <i class="fa fa-star text-secondary"></i>
-                        <span class="list-inline-item text-dark">Rating 4.8 | 36 Comments</span>
+                        @for ($i=1; $i<=round($fix); $i++)
+                            <i class="fa fa-star text-warning"></i>
+                        @endfor
+                        @for ($a=1; $a<=5-round($fix); $a++)
+                            <i class="fa fa-star" style="color: #dedfdf"></i>
+                        @endfor
+                        <span class="list-inline-item text-dark">Rating {{ $fix }} | {{ $rate->count() }} Ulasan</span>
                     </p>
                     <h6>Rincian Produk :</h6>
                     <ul class="list-unstyled pb-1">
@@ -46,8 +67,7 @@
 
                     <h6>Deskripsi Produk :</h6>
                     <p class="pb-2"><i class="bi bi-quote" style="color: #F68037"></i> {{ $produk->deskripsi }}
-                        <i
-                            class="bi bi-quote" id="bi-quote" style="color: #F68037">
+                        <i class="bi bi-quote" id="bi-quote" style="color: #F68037">
                         </i>
                     </p>
 
@@ -130,10 +150,13 @@
                                                                     style="border: none; color: #5E9D7B">Rp
                                                                     {{ number_format($produk->harga * $produk->minim, 2, ',', '.') }}</span>
                                                             </h5>
-                                                            <input type="hidden" name="barang" value="{{ $produk->id }}">
-                                                            <input type="hidden" class="price" value="{{ $produk->harga }}">
+                                                            <input type="hidden" name="barang"
+                                                                value="{{ $produk->id }}">
+                                                            <input type="hidden" class="price"
+                                                                value="{{ $produk->harga }}">
                                                             <input type="hidden" class="harga" id="harga"
-                                                                name="hayo" value="{{ $produk->harga*$produk->minim }}">
+                                                                name="hayo"
+                                                                value="{{ $produk->harga * $produk->minim }}">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -152,8 +175,7 @@
                         <div class="col d-grid">
                             <form action="/cart" method="POST">
                                 @csrf
-                                <input type="hidden" name="total"
-                                    value="{{ $produk->harga * $produk->minim }}">
+                                <input type="hidden" name="total" value="{{ $produk->harga * $produk->minim }}">
                                 <input type="hidden" name="barang" value="{{ $produk->id }}">
                                 <input type="hidden" name="quantity" value="{{ $produk->minim }}">
                                 <button type="submit" class="btn btn-warning"
@@ -174,29 +196,59 @@
             </div>
 
             <div class="row text-center">
-                @foreach ($rate as $ra)
-                    <div class="col-md-4 mb-4 mb-md-0">
-                        <div class="card">
-                            <div class="card-body py-4 mt-2">
-                                <h6 class="font-weight-bold">{{ ucwords($ra->rating->user->name) }}</h6>
-                                <ul class="list-unstyled d-flex justify-content-center">
-                                    @for ($i=1; $i<=$ra->nilai; $i++)
-                                        <li>
-                                            <i class="fas fa-star fa-sm text-warning"></i>
-                                        </li>
-                                    @endfor
-                                    {{-- <li>
-                                        <i class="fas fa-star-half-alt fa-sm text-warning"></i>
-                                    </li> --}}
-                                </ul>
-                                <p class="mb-2">
-                                    <i class="fas fa-quote-left pe-2"></i>{{ $ra->komentar }} <i class="fas fa-quote-left pe-2"></i>
-                                </p>
-                            </div>
+                @if ($rate->count())
+                    @if ($rate->count() > 3)
+                        <div class="horizontal-scroll-container">
+                            @foreach ($rate as $ra)
+                                <div class="col-md-4 mb-4 mb-md-0">
+                                    <div class="card" style="flex: 0 0 auto; margin-right: 10px;">
+                                        <div class="card-body py-4 mt-2">
+                                            <h6 class="font-weight-bold">{{ ucwords($ra->rating->user->name) }}</h6>
+                                            <ul class="list-unstyled d-flex justify-content-center">
+                                                @for ($i = 1; $i <= $ra->nilai; $i++)
+                                                    <li>
+                                                        <i class="fas fa-star fa-sm text-warning"></i>
+                                                    </li>
+                                                @endfor
+                                            </ul>
+                                            <p class="mb-2">
+                                                <i class="fas fa-quote-left pe-2" style="color: #5B8C51"></i>{{ $ra->komentar }} <i
+                                                    class="fas fa-quote-right ps-2" style="color: #5B8C51"></i>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
                         </div>
+                    @else
+                        @foreach ($rate as $ra)
+                            <div class="col-md-4 mb-4 mb-md-0">
+                                <div class="card" style="flex: 0 0 auto; margin-right: 10px;">
+                                    <div class="card-body py-4 mt-2">
+                                        <h6 class="font-weight-bold">{{ ucwords($ra->rating->user->name) }}</h6>
+                                        <ul class="list-unstyled d-flex justify-content-center">
+                                            @for ($i = 1; $i <= $ra->nilai; $i++)
+                                                <li>
+                                                    <i class="fas fa-star fa-sm text-warning"></i>
+                                                </li>
+                                            @endfor
+                                        </ul>
+                                        <p class="mb-2">
+                                            <i class="fas fa-quote-left pe-2" style="color: #5B8C51"></i>{{ $ra->komentar }}<i
+                                                class="fas fa-quote-right ps-2" style="color: #5B8C51"></i>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
+                @else
+                    <div class="penilan d-flex justify-content-center">
+                        <span>Belum Ada Ulasan Pada Produk Ini</span>
                     </div>
-                @endforeach
+                @endif
             </div>
+
         </div>
     @endsection
     @section('js')

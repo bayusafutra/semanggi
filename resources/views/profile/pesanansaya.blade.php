@@ -170,9 +170,11 @@
                                                                     <div class="card-body">
                                                                         <div class="row">
                                                                             <div class="col-2">
-                                                                                <img src="{{ asset('storage/' . $bel->detail[0]->barang->gambar) }}"
-                                                                                    style="height: 77px; width: 77px"
-                                                                                    alt="">
+                                                                                <a href="/detailproduk/{{ $bel->detail[0]->barang->slug }}">
+                                                                                    <img src="{{ asset('storage/' . $bel->detail[0]->barang->gambar) }}"
+                                                                                        style="height: 77px; width: 77px"
+                                                                                        alt="">
+                                                                                </a>
                                                                             </div>
                                                                             <div class="col-10">
                                                                                 <span
@@ -231,9 +233,11 @@
                                                                                                                     class="row my-2">
                                                                                                                     <div
                                                                                                                         class="col-2">
-                                                                                                                        <img src="{{ asset('storage/' . $well->barang->gambar) }}"
-                                                                                                                            style="height: 77px; width: 77px"
-                                                                                                                            alt="">
+                                                                                                                        <a href="/detailproduk/{{ $well->barang->slug }}">
+                                                                                                                            <img src="{{ asset('storage/' . $well->barang->gambar) }}"
+                                                                                                                                style="height: 77px; width: 77px"
+                                                                                                                                alt="">
+                                                                                                                        </a>
                                                                                                                     </div>
                                                                                                                     <div
                                                                                                                         class="col-10 text-start">
@@ -351,9 +355,11 @@
                                                                     <div class="card-body">
                                                                         <div class="row">
                                                                             <div class="col-2">
-                                                                                <img src="{{ asset('storage/' . $bel->detail[0]->barang->gambar) }}"
-                                                                                    style="height: 77px; width: 77px"
-                                                                                    alt="">
+                                                                                <a href="/detailproduk/{{ $bel->detail[0]->barang->slug }}">
+                                                                                    <img src="{{ asset('storage/' . $bel->detail[0]->barang->gambar) }}"
+                                                                                        style="height: 77px; width: 77px"
+                                                                                        alt="">
+                                                                                </a>
                                                                             </div>
                                                                             <div class="col-10">
                                                                                 <span
@@ -412,9 +418,11 @@
                                                                                                                     class="row my-2">
                                                                                                                     <div
                                                                                                                         class="col-2">
-                                                                                                                        <img src="{{ asset('storage/' . $well->barang->gambar) }}"
-                                                                                                                            style="height: 77px; width: 77px"
-                                                                                                                            alt="">
+                                                                                                                        <a href="/detailproduk/{{ $well->barang->slug }}">
+                                                                                                                            <img src="{{ asset('storage/' . $well->barang->gambar) }}"
+                                                                                                                                style="height: 77px; width: 77px"
+                                                                                                                                alt="">
+                                                                                                                        </a>
                                                                                                                     </div>
                                                                                                                     <div
                                                                                                                         class="col-10 text-start">
@@ -541,9 +549,11 @@
                                                                     <div class="card-body">
                                                                         <div class="row">
                                                                             <div class="col-2">
-                                                                                <img src="{{ asset('storage/' . $bel->detail[0]->barang->gambar) }}"
-                                                                                    style="height: 77px; width: 77px"
-                                                                                    alt="">
+                                                                                <a href="/detailproduk/{{ $bel->detail[0]->barang->slug }}">
+                                                                                    <img src="{{ asset('storage/' . $bel->detail[0]->barang->gambar) }}"
+                                                                                        style="height: 77px; width: 77px"
+                                                                                        alt="">
+                                                                                </a>
                                                                             </div>
                                                                             <div class="col-10">
                                                                                 <span
@@ -602,9 +612,11 @@
                                                                                                                     class="row my-2">
                                                                                                                     <div
                                                                                                                         class="col-2">
-                                                                                                                        <img src="{{ asset('storage/' . $well->barang->gambar) }}"
-                                                                                                                            style="height: 77px; width: 77px"
-                                                                                                                            alt="">
+                                                                                                                        <a href="/detailproduk/{{ $well->barang->slug }}">
+                                                                                                                            <img src="{{ asset('storage/' . $well->barang->gambar) }}"
+                                                                                                                                style="height: 77px; width: 77px"
+                                                                                                                                alt="">
+                                                                                                                        </a>
                                                                                                                     </div>
                                                                                                                     <div
                                                                                                                         class="col-10 text-start">
@@ -722,9 +734,11 @@
                                                                     <div class="card-body">
                                                                         <div class="row">
                                                                             <div class="col-2">
-                                                                                <img src="{{ asset('storage/' . $bel->detail[0]->barang->gambar) }}"
-                                                                                    style="height: 77px; width: 77px"
-                                                                                    alt="">
+                                                                                <a href="/detailproduk/{{ $bel->detail[0]->barang->slug }}">
+                                                                                    <img src="{{ asset('storage/' . $bel->detail[0]->barang->gambar) }}"
+                                                                                        style="height: 77px; width: 77px"
+                                                                                        alt="">
+                                                                                </a>
                                                                             </div>
                                                                             <div class="col-10">
                                                                                 <span
@@ -783,9 +797,11 @@
                                                                                                                     class="row my-2">
                                                                                                                     <div
                                                                                                                         class="col-2">
-                                                                                                                        <img src="{{ asset('storage/' . $well->barang->gambar) }}"
-                                                                                                                            style="height: 77px; width: 77px"
-                                                                                                                            alt="">
+                                                                                                                        <a href="/detailproduk/{{ $well->barang->slug }}">
+                                                                                                                            <img src="{{ asset('storage/' . $well->barang->gambar) }}"
+                                                                                                                                style="height: 77px; width: 77px"
+                                                                                                                                alt="">
+                                                                                                                        </a>
                                                                                                                     </div>
                                                                                                                     <div
                                                                                                                         class="col-10 text-start">
@@ -898,9 +914,11 @@
                                                                     <div class="card-body">
                                                                         <div class="row">
                                                                             <div class="col-2">
-                                                                                <img src="{{ asset('storage/' . $bel->detail[0]->barang->gambar) }}"
-                                                                                    style="height: 77px; width: 77px"
-                                                                                    alt="">
+                                                                                <a href="/detailproduk/{{ $bel->detail[0]->barang->slug }}">
+                                                                                    <img src="{{ asset('storage/' . $bel->detail[0]->barang->gambar) }}"
+                                                                                        style="height: 77px; width: 77px"
+                                                                                        alt="">
+                                                                                </a>
                                                                             </div>
                                                                             <div class="col-10">
                                                                                 <span
@@ -959,9 +977,11 @@
                                                                                                                     class="row my-2">
                                                                                                                     <div
                                                                                                                         class="col-2">
-                                                                                                                        <img src="{{ asset('storage/' . $well->barang->gambar) }}"
-                                                                                                                            style="height: 77px; width: 77px"
-                                                                                                                            alt="">
+                                                                                                                        <a href="/detailproduk/{{ $well->barang->slug }}">
+                                                                                                                            <img src="{{ asset('storage/' . $well->barang->gambar) }}"
+                                                                                                                                style="height: 77px; width: 77px"
+                                                                                                                                alt="">
+                                                                                                                        </a>
                                                                                                                     </div>
                                                                                                                     <div
                                                                                                                         class="col-10 text-start">
@@ -1086,9 +1106,11 @@
                                                                     <div class="card-body">
                                                                         <div class="row">
                                                                             <div class="col-2">
-                                                                                <img src="{{ asset('storage/' . $bel->detail[0]->barang->gambar) }}"
-                                                                                    style="height: 77px; width: 77px"
-                                                                                    alt="">
+                                                                                <a href="/detailproduk/{{ $bel->detail[0]->barang->slug }}">
+                                                                                    <img src="{{ asset('storage/' . $bel->detail[0]->barang->gambar) }}"
+                                                                                        style="height: 77px; width: 77px"
+                                                                                        alt="">
+                                                                                </a>
                                                                             </div>
                                                                             <div class="col-10">
                                                                                 <span
@@ -1147,9 +1169,11 @@
                                                                                                                     class="row my-2">
                                                                                                                     <div
                                                                                                                         class="col-2">
-                                                                                                                        <img src="{{ asset('storage/' . $well->barang->gambar) }}"
-                                                                                                                            style="height: 77px; width: 77px"
-                                                                                                                            alt="">
+                                                                                                                        <a href="/detailproduk/{{ $well->barang->slug }}">
+                                                                                                                            <img src="{{ asset('storage/' . $well->barang->gambar) }}"
+                                                                                                                                style="height: 77px; width: 77px"
+                                                                                                                                alt="">
+                                                                                                                        </a>
                                                                                                                     </div>
                                                                                                                     <div
                                                                                                                         class="col-10 text-start">
@@ -1275,9 +1299,11 @@
                                                                     <div class="card-body">
                                                                         <div class="row">
                                                                             <div class="col-2">
-                                                                                <img src="{{ asset('storage/' . $bel->detail[0]->barang->gambar) }}"
-                                                                                    style="height: 77px; width: 77px"
-                                                                                    alt="">
+                                                                                <a href="/detailproduk/{{ $bel->detail[0]->barang->slug }}">
+                                                                                    <img src="{{ asset('storage/' . $bel->detail[0]->barang->gambar) }}"
+                                                                                        style="height: 77px; width: 77px"
+                                                                                        alt="">
+                                                                                </a>
                                                                             </div>
                                                                             <div class="col-10">
                                                                                 <span
@@ -1336,9 +1362,11 @@
                                                                                                                     class="row my-2">
                                                                                                                     <div
                                                                                                                         class="col-2">
-                                                                                                                        <img src="{{ asset('storage/' . $well->barang->gambar) }}"
-                                                                                                                            style="height: 77px; width: 77px"
-                                                                                                                            alt="">
+                                                                                                                        <a href="/detailproduk/{{ $well->barang->slug }}">
+                                                                                                                            <img src="{{ asset('storage/' . $well->barang->gambar) }}"
+                                                                                                                                style="height: 77px; width: 77px"
+                                                                                                                                alt="">
+                                                                                                                        </a>
                                                                                                                     </div>
                                                                                                                     <div
                                                                                                                         class="col-10 text-start">
@@ -1473,9 +1501,11 @@
                                                                     <div class="card-body">
                                                                         <div class="row">
                                                                             <div class="col-2">
-                                                                                <img src="{{ asset('storage/' . $bel->detail[0]->barang->gambar) }}"
-                                                                                    style="height: 77px; width: 77px"
-                                                                                    alt="">
+                                                                                <a href="/detailproduk/{{ $bel->detail[0]->barang->slug }}">
+                                                                                    <img src="{{ asset('storage/' . $bel->detail[0]->barang->gambar) }}"
+                                                                                        style="height: 77px; width: 77px"
+                                                                                        alt="">
+                                                                                </a>
                                                                             </div>
                                                                             <div class="col-10">
                                                                                 <span
@@ -1534,9 +1564,11 @@
                                                                                                                     class="row my-2">
                                                                                                                     <div
                                                                                                                         class="col-2">
-                                                                                                                        <img src="{{ asset('storage/' . $well->barang->gambar) }}"
-                                                                                                                            style="height: 77px; width: 77px"
-                                                                                                                            alt="">
+                                                                                                                        <a href="/detailproduk/{{ $well->barang->slug }}">
+                                                                                                                            <img src="{{ asset('storage/' . $well->barang->gambar) }}"
+                                                                                                                                style="height: 77px; width: 77px"
+                                                                                                                                alt="">
+                                                                                                                        </a>
                                                                                                                     </div>
                                                                                                                     <div
                                                                                                                         class="col-10 text-start">

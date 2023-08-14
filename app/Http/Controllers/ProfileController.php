@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Alamat;
+use App\Models\DetailRating;
 use App\Models\Pembayaran;
 use App\Models\Pesanan;
 use App\Models\Rating;
@@ -100,6 +101,12 @@ class ProfileController extends Controller
     public function penilaian(){
         $aktif = Rating::where('user_id', auth()->user()->id)->where('status', 1)->get();
         $nonaktif = Rating::where('user_id', auth()->user()->id)->where('status', 2)->get();
+        foreach($aktif as $ak){
+            if(now() > $aktif->pesanan->timebatasnilai){
+                $update["status"] = 2;
+                $ak->update($update);
+            }
+        }
         return view('profile.penilaiansaya', [
             "aktif" => $aktif,
             "nonaktif" => $nonaktif
@@ -107,8 +114,17 @@ class ProfileController extends Controller
     }
 
     public function detail($slug){
-        return view('profile.detailrating', [
-            "hayo" => Rating::where('slug', $slug)->first()
-        ]);
+        $supermen = Rating::where('slug', $slug)->first();
+        $nomer = $supermen->pesanan->nomer;
+        $batman = DetailRating::where('rating_id', $supermen->id)->where('status', 1)->get();
+        if($batman->count() > 0){
+            return view('profile.detailrating', [
+                "hayo" => Rating::where('slug', $slug)->first()
+            ]);
+        }else{
+            $update["status"] = 2;
+            $supermen->update($update);
+            return redirect('/penilaiansaya')->with('success', "Semua penilaian produk pada Pesanan #$nomer berhasil dilakukan");
+        }
     }
 }

@@ -117,20 +117,19 @@
                                                                     <input type="hidden" name="id" value="{{ $well->barang->id }}">
                                                                     <div class="col">
                                                                         <div class="rate">
-                                                                            <input type="radio" id="star5" class="rate" name="rating" value="5" />
+                                                                            <input type="radio" required id="star5" class="rate" name="rating" value="5" />
                                                                             <label for="star5" title="Sangat Baik">5 stars</label>
-                                                                            <input type="radio" id="star4" class="rate" name="rating"
-                                                                                value="4" />
+                                                                            <input type="radio" required id="star4" class="rate" name="rating" value="4" />
                                                                             <label for="star4" title="Cukup Baik">4 stars</label>
-                                                                            <input type="radio" id="star3" class="rate" name="rating" value="3" />
+                                                                            <input type="radio" required id="star3" class="rate" name="rating" value="3" />
                                                                             <label for="star3" title="Baik">3 stars</label>
-                                                                            <input type="radio" id="star2" class="rate" name="rating" value="2">
+                                                                            <input type="radio" required id="star2" class="rate" name="rating" value="2">
                                                                             <label for="star2" title="Kurang">2 stars</label>
-                                                                            <input type="radio" id="star1" class="rate" name="rating" value="1" />
+                                                                            <input type="radio" required id="star1" class="rate" name="rating" value="1" />
                                                                             <label for="star1" title="Sangat Kurang">1 star</label>
                                                                         </div>
                                                                     </div>
-                                                                    <textarea name="komentar" id="" class="form-control" placeholder="berikan komentar anda" cols="5" rows="3"></textarea>
+                                                                    <textarea name="komentar" id="" class="form-control" placeholder="berikan komentar anda" cols="5" rows="3" required></textarea>
 
                                                                     <div class="sub text-end mt-3">
                                                                         <button class="btn px-5" type="submit" style="background-color: #5B8C51; color: white">Simpan</button>

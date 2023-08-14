@@ -124,64 +124,68 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <button data-bs-toggle="modal" data-bs-target="#alamat{{ $kat->id }}"
-                                        style="border-radius: 5px; background-color: rgb(15, 127, 84); color: white; padding: 12px 27px 12px 27px">
-                                        Lihat Detail
-                                    </button>
+                                    @if ($kat->alamat_id)
+                                        <button data-bs-toggle="modal" data-bs-target="#alamat{{ $kat->id }}"
+                                            style="border-radius: 5px; background-color: rgb(15, 127, 84); color: white; padding: 12px 27px 12px 27px">
+                                            Lihat Detail
+                                        </button>
 
-                                    <div class="modal fade" id="alamat{{ $kat->id }}" tabindex="-1"
-                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content"
-                                                style="background-color: #2A3038; color:white; border-radius: 1rem; width: max-content;">
-                                                <div class="modal-header">
-                                                    <h3 class="modal-title fs-1" id="exampleModalLabel">
-                                                        Detail Pengiriman Pesanan #{{ ucwords($kat->nomer) }}
-                                                    </h3>
-                                                </div>
-                                                <div class="modal-body  d-flex justify-content-start" style="text-align: start" style="width: 500px">
-                                                    <p>
-                                                    <div class="row">
-                                                        <div class="col-3 mb-2">
-                                                            Nama Penerima
-                                                        </div>
-                                                        <div class="col-9 mb-2">
-                                                            : {{ ucwords($kat->alamat->nama )}}
-                                                        </div>
-
-                                                        <div class="col-3 mb-2">
-                                                            No telpon
-                                                        </div>
-                                                        <div class="col-9 mb-2">
-                                                            : {{ $kat->alamat->notelp }}
-                                                        </div>
-
-                                                        <div class="col-3 mb-2">
-                                                            Alamat
-                                                        </div>
-                                                        <div class="col-9 mb-2">
-                                                            : {{ $kat->alamat->alamat }}
-                                                            @if ($kat->alamat->detail)
-                                                                ({{ $kat->alamat->detail }})
-                                                            @endif
-                                                            ,Kelurahan {{ $kat->alamat->kelurahan }}
-                                                            ,<br>
-                                                            Kecamatan {{ $kat->alamat->kecamatan }}
-                                                            ,{{ $kat->alamat->kota }}
-                                                            ,{{ $kat->alamat->provinsi }}
-                                                            ,{{ $kat->alamat->kodepos }}
-                                                        </div>
+                                        <div class="modal fade" id="alamat{{ $kat->id }}" tabindex="-1"
+                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content"
+                                                    style="background-color: #2A3038; color:white; border-radius: 1rem; width: max-content;">
+                                                    <div class="modal-header">
+                                                        <h3 class="modal-title fs-1" id="exampleModalLabel">
+                                                            Detail Pengiriman Pesanan #{{ ucwords($kat->nomer) }}
+                                                        </h3>
                                                     </div>
-                                                    </p>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-light" data-bs-dismiss="modal"
-                                                        style="margin-right: 5px; border-radius: 5px; background-color: rgb(13, 105, 30); color: white; padding: 12px 27px 12px 27px">Tutup
-                                                    </button>
+                                                    <div class="modal-body  d-flex justify-content-start" style="text-align: start" style="width: 500px">
+                                                        <p>
+                                                        <div class="row">
+                                                            <div class="col-3 mb-2">
+                                                                Nama Penerima
+                                                            </div>
+                                                            <div class="col-9 mb-2">
+                                                                : {{ ucwords($kat->alamat->nama )}}
+                                                            </div>
+
+                                                            <div class="col-3 mb-2">
+                                                                No telpon
+                                                            </div>
+                                                            <div class="col-9 mb-2">
+                                                                : {{ $kat->alamat->notelp }}
+                                                            </div>
+
+                                                            <div class="col-3 mb-2">
+                                                                Alamat
+                                                            </div>
+                                                            <div class="col-9 mb-2">
+                                                                : {{ $kat->alamat->alamat }}
+                                                                @if ($kat->alamat->detail)
+                                                                    ({{ $kat->alamat->detail }})
+                                                                @endif
+                                                                ,Kelurahan {{ $kat->alamat->kelurahan }}
+                                                                ,<br>
+                                                                Kecamatan {{ $kat->alamat->kecamatan }}
+                                                                ,{{ $kat->alamat->kota }}
+                                                                ,{{ $kat->alamat->provinsi }}
+                                                                ,{{ $kat->alamat->kodepos }}
+                                                            </div>
+                                                        </div>
+                                                        </p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal"
+                                                            style="margin-right: 5px; border-radius: 5px; background-color: rgb(13, 105, 30); color: white; padding: 12px 27px 12px 27px">Tutup
+                                                        </button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    @else
+                                        -
+                                    @endif
                                 </td>
                                 <td>
                                     @if ($kat->catatan)

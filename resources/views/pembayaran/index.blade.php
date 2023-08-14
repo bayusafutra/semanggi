@@ -97,7 +97,7 @@
                                         </p>
 
                                         <p>
-                                        <div class="spedah p-3" style="max-height: 250px; overflow-y: auto">
+                                        <div class="spedah p-3">
                                             <div class="row d-flex align-items-center">
                                                 <div class="col-5">
                                                     Nama Metode Pembayaran
@@ -139,13 +139,15 @@
                                             id="gambar" onchange="previewImage()">
                                         </p>
 
-                                        <div class="batal d-flex justify-content-center">
-                                            <a href="#confirmationModal" class="btn"
-                                                style="background-color: #F68037; color: white; width: 100%; padding: 12px 12px"
-                                                data-bs-toggle="modal" data-bs-target="#confirmationModal">Batalkan
-                                                Pesanan
-                                            </a>
+                                        <div class="container mt-4">
+                                            <div class="row">
+                                                <div class="col text-center">
+                                                    <button type="submit" class="btn" style="background-color: #5B8C51; color: white; width: 92%; padding: 12px 12px" role="button">Kirim Bukti
+                                                        Pembayaran</button>
+                                                </div>
+                                            </div>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -226,13 +228,12 @@
                                     </div>
                                 </div>
 
-                                <div class="container mt-4">
-                                    <div class="row">
-                                        <div class="col text-center">
-                                            <button type="submit" class="site-btn" role="button">Kirim Bukti
-                                                Pembayaran</button>
-                                        </div>
-                                    </div>
+                                <div class="batal d-flex justify-content-center mt-3">
+                                    <a href="#confirmationModal" class="btn"
+                                        style="background-color: #F68037; color: white; width: 92%; padding: 12px 12px"
+                                        data-bs-toggle="modal" data-bs-target="#confirmationModal">Batalkan
+                                        Pesanan
+                                    </a>
                                 </div>
 
                             </div>

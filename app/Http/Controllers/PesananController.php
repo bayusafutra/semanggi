@@ -176,7 +176,7 @@ class PesananController extends Controller
             DetailRating::create($tambah);
         }
 
-        return back();
+        return redirect("/detailpenilaian/$rating->slug");
 
     }
 

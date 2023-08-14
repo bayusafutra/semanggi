@@ -81,7 +81,6 @@
                                     <img class="img-fluid" src="img/google.png" style="height: 30px; width: 30px; margin-right: 5px" alt="">
                                     Masuk dengan Google
                                 </a>
-
                             </div>
                         </div>
                     </div>

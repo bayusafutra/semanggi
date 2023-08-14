@@ -93,6 +93,17 @@
                         </div>
                         <div class="panel-body bio-graph-info container py-3" style="background-color: white">
                             <section id="listproduk">
+                                @if (session()->has('success'))
+                                    <div class="row justify-content-center">
+                                        <div class="alert alert-success alert-dismissible text-center col-lg-9 fade show"
+                                            role="alert">
+                                            {{ session('success') }}
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                aria-label="Close"></button>
+                                        </div>
+                                    </div>
+
+                                @endif
                                 <div class="container-xxl py-5">
                                     <div class="container portofolio">
                                         <div class="row g-0 gx-5 d-flex justify-content-center mb-5">
@@ -139,9 +150,11 @@
                                                                     <div class="card-body">
                                                                         <div class="row">
                                                                             <div class="col-2">
-                                                                                <img src="{{ asset('storage/' . $bel->pesanan->detail[0]->barang->gambar) }}"
-                                                                                    style="height: 77px; width: 77px"
-                                                                                    alt="">
+                                                                                <a href="/detailproduk/{{ $bel->pesanan->detail[0]->barang->slug }}">
+                                                                                    <img src="{{ asset('storage/' . $bel->pesanan->detail[0]->barang->gambar) }}"
+                                                                                        style="height: 77px; width: 77px"
+                                                                                        alt="">
+                                                                                </a>
                                                                             </div>
                                                                             <div class="col-10">
                                                                                 <span
@@ -200,9 +213,11 @@
                                                                                                                     class="row my-2">
                                                                                                                     <div
                                                                                                                         class="col-2">
-                                                                                                                        <img src="{{ asset('storage/' . $well->barang->gambar) }}"
-                                                                                                                            style="height: 77px; width: 77px"
-                                                                                                                            alt="">
+                                                                                                                        <a href="/detailproduk/{{ $well->barang->slug }}">
+                                                                                                                            <img src="{{ asset('storage/' . $well->barang->gambar) }}"
+                                                                                                                                style="height: 77px; width: 77px"
+                                                                                                                                alt="">
+                                                                                                                        </a>
                                                                                                                     </div>
                                                                                                                     <div
                                                                                                                         class="col-10 text-start">
@@ -337,9 +352,11 @@
                                                                     <div class="card-body">
                                                                         <div class="row">
                                                                             <div class="col-2">
-                                                                                <img src="{{ asset('storage/' . $bel->pesanan->detail[0]->barang->gambar) }}"
-                                                                                    style="height: 77px; width: 77px"
-                                                                                    alt="">
+                                                                                <a href="/detailproduk/{{ $bel->pesanan->detail[0]->barang->slug }}">
+                                                                                    <img src="{{ asset('storage/' . $bel->pesanan->detail[0]->barang->gambar) }}"
+                                                                                        style="height: 77px; width: 77px"
+                                                                                        alt="">
+                                                                                </a>
                                                                             </div>
                                                                             <div class="col-10">
                                                                                 <span
@@ -398,9 +415,11 @@
                                                                                                                     class="row my-2">
                                                                                                                     <div
                                                                                                                         class="col-2">
-                                                                                                                        <img src="{{ asset('storage/' . $well->barang->gambar) }}"
-                                                                                                                            style="height: 77px; width: 77px"
-                                                                                                                            alt="">
+                                                                                                                        <a href="/detailproduk/{{ $well->barang->slug }}">
+                                                                                                                            <img src="{{ asset('storage/' . $well->barang->gambar) }}"
+                                                                                                                                style="height: 77px; width: 77px"
+                                                                                                                                alt="">
+                                                                                                                        </a>
                                                                                                                     </div>
                                                                                                                     <div
                                                                                                                         class="col-10 text-start">
@@ -462,31 +481,27 @@
                                                                                         style="border: 1px solid rgb(91, 91, 91)">
                                                                                     <div
                                                                                         class="col-7 d-flex align-items-center">
-                                                                                        <span style="color: black">Nilai
-                                                                                            produk
-                                                                                            sebelum
-                                                                                            <strong>{{ \Carbon\Carbon::parse($bel->pesanan->timebatasnilai)->translatedFormat('l, d F Y') }}</strong></span>
+                                                                                        @if ($bel->rate()->where('status', 1)->count() == 0)
+                                                                                            <span style="color: black">
+                                                                                                Telah Dinilai
+                                                                                            </span>
+                                                                                        @else
+                                                                                            <span style="color: black">
+                                                                                                Tidak ada penilaian diterima
+                                                                                            </span>
+                                                                                        @endif
                                                                                     </div>
                                                                                     <div class="col-5 text-end">
-                                                                                        @if (now() < $bel->pesanan->timebatasnilai)
-                                                                                            <a href=""
-                                                                                                class="btn"
-                                                                                                style="background-color: #5B8C51; color: white">Beri
-                                                                                                Penilaian</a>
+                                                                                        @if ($bel->pesanan->detail()->count() > 1)
+                                                                                            <a href="/cart"
+                                                                                                class="btn px-5"
+                                                                                                style="background-color: #5B8C51; color: white">Beli Lagi
+                                                                                            </a>
                                                                                         @else
-                                                                                            @if ($bel->pesanan->detail()->count() > 1)
-                                                                                                <a href="/cart"
-                                                                                                    class="btn px-5"
-                                                                                                    style="background-color: #5B8C51; color: white">Beli
-                                                                                                    Lagi
-                                                                                                </a>
-                                                                                            @else
-                                                                                                <a href="/detailproduk/{{ $bel->pesanan->detail[0]->barang->slug }}"
-                                                                                                    class="btn px-5"
-                                                                                                    style="background-color: #5B8C51; color: white">Beli
-                                                                                                    Lagi
-                                                                                                </a>
-                                                                                            @endif
+                                                                                            <a href="/detailproduk/{{ $bel->pesanan->detail[0]->barang->slug }}"
+                                                                                                class="btn px-5"
+                                                                                                style="background-color: #5B8C51; color: white">Beli Lagi
+                                                                                            </a>
                                                                                         @endif
                                                                                     </div>
                                                                                 </div>
