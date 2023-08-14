@@ -117,30 +117,54 @@
                                         <div class="card-body">
                                             <h4 class="card-title">Pilih Metode Pembayaran</h4>
 
-                                            @foreach ($payment as $pay)
-                                                <div class="col-sm-9 mb-2">
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <div class="form-check form">
-                                                                <input class="form-check-input" type="radio"
-                                                                    name="payment" value="{{ $pay->id }}"
-                                                                    onsubmit="return validateForm()"
-                                                                    @if ($pesanan->payment_id)
-                                                                        {{ $pay->id == $pesanan->payment->id ? 'checked' : '' }}
-                                                                    @endif
-                                                                required>
-                                                                <label class="form-check-label" for="pembayaran1">
-                                                                    <span
-                                                                        class="text-success fw-bold">{{ ucwords($pay->nama) }}</span><br>
-                                                                    <img class="img-fluid"
-                                                                        src="{{ asset('storage/' . $pay->logo) }}"
-                                                                        style="height: 60px; width: 100px" alt="">
-                                                                </label>
+                                            @if ($payment->count() == 1)
+                                                @foreach ($payment as $pay)
+                                                    <div class="col-sm-9 mb-2">
+                                                        <div class="card">
+                                                            <div class="card-body">
+                                                                <div class="form-check form">
+                                                                    <input class="form-check-input" type="radio"
+                                                                        name="payment" value="{{ $pay->id }}"
+                                                                        onsubmit="return validateForm()" checked
+                                                                        required>
+                                                                    <label class="form-check-label" for="pembayaran1">
+                                                                        <span
+                                                                            class="text-success fw-bold">{{ ucwords($pay->nama) }}</span><br>
+                                                                        <img class="img-fluid"
+                                                                            src="{{ asset('storage/' . $pay->logo) }}"
+                                                                            style="height: 60px; width: 100px"
+                                                                            alt="">
+                                                                    </label>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            @endforeach
+                                                @endforeach
+                                            @else
+                                                @foreach ($payment as $pay)
+                                                    <div class="col-sm-9 mb-2">
+                                                        <div class="card">
+                                                            <div class="card-body">
+                                                                <div class="form-check form">
+                                                                    <input class="form-check-input" type="radio"
+                                                                        name="payment" value="{{ $pay->id }}"
+                                                                        onsubmit="return validateForm()"
+                                                                        @if ($pesanan->payment_id) {{ $pay->id == $pesanan->payment->id ? 'checked' : '' }} @endif
+                                                                        required>
+                                                                    <label class="form-check-label" for="pembayaran1">
+                                                                        <span
+                                                                            class="text-success fw-bold">{{ ucwords($pay->nama) }}</span><br>
+                                                                        <img class="img-fluid"
+                                                                            src="{{ asset('storage/' . $pay->logo) }}"
+                                                                            style="height: 60px; width: 100px"
+                                                                            alt="">
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                            @endif
 
                                         </div>
                                     </div>

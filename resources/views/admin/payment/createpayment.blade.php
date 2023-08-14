@@ -45,6 +45,16 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="atasnama">Nama Pemilik Rekening</label>
+                            <input type="text" class="form-control @error('atasnama') is-invalid @enderror" name="atasnama" id="atasnama" placeholder="Nama Pemilik Rekening" required value="{{ old('atasnama') }}"/>
+                            @error('atasnama')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
                             <label>Logo</label>
                             <div class="input-group col-xs-12">
                                 <input type="file" name="logo"

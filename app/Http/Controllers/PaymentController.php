@@ -28,6 +28,7 @@ class PaymentController extends Controller
     public function store(Request $request){
         $validatedData = $request->validate([
             "nama" => "required|max:255",
+            "atasnama" => "required|max:255",
             "nomer" => "required|max:255",
             "gambar" => 'image|file|max:10240',
             "logo" => 'image|file|max:10240'
@@ -55,6 +56,7 @@ class PaymentController extends Controller
         $payment = Payment::where('id', $request->id)->first();
         $validatedData = $request->validate([
             "nama" => "required|max:255",
+            "atasnama" => "required|max:255",
             "nomer" => "required|max:255",
             "gambar" => 'image|file|max:10240',
             "logo" => 'image|file|max:10240'

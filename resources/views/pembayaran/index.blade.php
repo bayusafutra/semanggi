@@ -108,7 +108,7 @@
                                                         style="height: 50px; width: 75px" alt="">
                                                 </div>
                                             </div>
-                                            <div class="row mb-4">
+                                            <div class="row">
                                                 <div class="col-5">
                                                     Nomer Metode Pembayaran
                                                 </div>
@@ -116,9 +116,17 @@
                                                     <strong>{{ $bayar->pesanan->payment->nomer }}</strong>
                                                 </div>
                                             </div>
+                                            <div class="row mb-4">
+                                                <div class="col-5">
+                                                    Atas Nama
+                                                </div>
+                                                <div class="col-7">:
+                                                    <strong>{{ $bayar->pesanan->payment->atasnama }}</strong>
+                                                </div>
+                                            </div>
                                             <div class="row">
                                                 <img class="img-fluid" style="height: 500px; 50px"
-                                                    src="/payment/barcode.png" alt="">
+                                                    src="{{ asset('storage/'.$bayar->pesanan->payment->gambar) }}" alt="">
                                             </div>
                                         </div>
                                         </p>

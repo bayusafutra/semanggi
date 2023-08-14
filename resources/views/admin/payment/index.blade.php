@@ -68,9 +68,39 @@
                                 </td>
                                 <td> {{ $kat->nomer }} </td>
                                 <td>
-                                    <img class="img-fluid" src="{{ asset('storage/'.$kat->logo) }}" style="height: 40px; width: 65px; background: white" alt="">
+                                    <img class="img-fluid" src="{{ asset('storage/'.$kat->logo) }}" style="height: 40px; width: 65px; background: white" style="border-radius: 0" alt="">
                                 </td>
-                                <td> - </td>
+                                <td>
+                                    <button title="Lihat Barcode" data-bs-toggle="modal"
+                                        data-bs-target="#{{ $kat->id }}" style="background: none; border: none">
+                                        <img src="{{ asset('storage/' . $kat->gambar) }}"
+                                            style="border-radius: 0; height: 75px; width: 50px; " alt="">
+                                    </button>
+                                    <div class="modal fade" id="{{ $kat->id }}" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content"
+                                                style="background-color: #2A3038; color:white; border-radius: 1rem; width: 1150px;">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-1" id="exampleModalLabel">
+                                                        {{ ucwords($kat->nama) }}</h1>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="bukti d-flex justify-content-center">
+                                                        <img src="{{ asset('storage/' . $kat->gambar) }}"
+                                                            style="height: 550px; width: 400px; border-radius: 0"
+                                                            alt="">
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-light" data-bs-dismiss="modal"
+                                                        style="margin-right: 5px; border-radius: 5px; background-color: rgb(13, 105, 30); color: white; padding: 12px 27px 12px 27px">Tutup
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
                                 <td>
                                     @if ($kat->status == 1)
                                         <div class="badge badge-outline-success"
