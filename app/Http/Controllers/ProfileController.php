@@ -102,7 +102,7 @@ class ProfileController extends Controller
         $aktif = Rating::where('user_id', auth()->user()->id)->where('status', 1)->get();
         $nonaktif = Rating::where('user_id', auth()->user()->id)->where('status', 2)->get();
         foreach($aktif as $ak){
-            if(now() > $aktif->pesanan->timebatasnilai){
+            if(now() > $ak->pesanan->timebatasnilai){
                 $update["status"] = 2;
                 $ak->update($update);
             }

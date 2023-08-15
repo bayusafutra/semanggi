@@ -488,7 +488,7 @@
                                                                                             sebelum
                                                                                             {{ \Carbon\Carbon::parse($bel->deadlinePaid)->translatedFormat('l, d F Y H:i') }}</span>
                                                                                     </div>
-                                                                                    @if ($bel->pembayaran->status == 2)
+                                                                                    @if ($bel->pembayaran->status == 1)
                                                                                         <div class="col-4 text-end">
                                                                                             <a href="/pembayaran/{{ $bel->pembayaran->slug }}"
                                                                                                 class="btn"
