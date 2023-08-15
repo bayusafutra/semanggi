@@ -48,7 +48,8 @@
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
                     <h1 class="mb-2">{{ ucwords($produk->nama) }}</h1>
                     <p class="bg-white text-start text-primary ">Kategori {{ ucwords($produk->kategori->nama) }}</p>
-                    <h4 class="mb-4"><b>Rp {{ number_format($produk->harga, 2, ',', '.') }}</b></h4>
+                    <h4 class=""><b>Rp {{ number_format($produk->harga, 2, ',', '.') }}</b></h4>
+                    <small class="mb-3">{{ $produk->terjual }} {{ $produk->quantity }} terjual</small>
                     <p class="py-2">
                         @for ($i=1; $i<=round($fix); $i++)
                             <i class="fa fa-star text-warning"></i>

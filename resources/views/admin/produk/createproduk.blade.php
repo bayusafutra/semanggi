@@ -73,7 +73,7 @@
                         <div class="form-group">
                             <label for="quantity">Jenis Satuan Produk</label>
                             <input type="text" class="form-control @error('quantity') is-invalid @enderror"
-                                id="quantity" name="quantity" placeholder="quantity Produk" required
+                                id="quantity" name="quantity" placeholder="cth: pcs, porsi, toples, dll..." required
                                 value="{{ old('quantity') }}">
                             @error('quantity')
                                 <div class="invalid-feedback">
@@ -85,7 +85,7 @@
                         <div class="form-group">
                             <label for="berat">Berat Satuan Produk</label>
                             <input type="text" class="form-control @error('berat') is-invalid @enderror"
-                            id="berat" name="berat" placeholder="berat produk"
+                            id="berat" name="berat" placeholder="cth: 100ml, 100gram, dll..."
                                 value="{{ old('berat') }}">
                             @error('berat')
                                 <div class="invalid-feedback">
@@ -109,7 +109,7 @@
                         <div class="form-group">
                             <label for="deskripsi">Deskripsi Produk</label>
                             <input type="text" class="form-control @error('deskripsi') is-invalid @enderror"
-                                name="deskripsi" id="deskripsi" placeholder="Deskripsi program"
+                                name="deskripsi" id="deskripsi" placeholder="Deskripsi Produk"
                                 value="{{ old('deskripsi') }}">
                             @error('deskripsi')
                                 <div class="invalid-feedback">

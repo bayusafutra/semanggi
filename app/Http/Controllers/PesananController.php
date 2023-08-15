@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StorePesananRequest;
 use App\Http\Requests\UpdatePesananRequest;
 use App\Models\Alamat;
+use App\Models\Barang;
 use App\Models\Cart;
 use App\Models\DetailPesananan;
 use App\Models\DetailRating;
@@ -187,6 +188,14 @@ class PesananController extends Controller
         $update["status"] = 4;
         $update["timebataskirim"] = now()->addDays(3);
         $pesanan->update($update);
+
+        $detail = DetailPesananan::where('pesanan_id', $pesanan->id)->get();
+        foreach($detail as $det){
+            $barang = Barang::where('id', $det->barang_id)->first();
+            $hayolo["stok"] = $barang->stok - $det->qtyitem;
+            $hayolo["terjual"] = $barang->terjual + $det->qtyitem;
+            $barang->update($hayolo);
+        }
 
         $pembayaran = Pembayaran::where('pesanan_id', $request->terima)->first();
         $update2["status"] = 3;

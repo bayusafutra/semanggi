@@ -58,7 +58,7 @@
                                 <span class="count bg-success"></span>
                             </div>
                             <div class="profile-name">
-                                <h5 class="mb-0 font-weight-normal">{{ auth()->user()->name }}</h5>
+                                <h5 class="mb-0 font-weight-normal">{{ ucwords(auth()->user()->name) }}</h5>
                                 <span>{{ auth()->user()->username }}</span>
                             </div>
                         </div>
@@ -189,7 +189,7 @@
                                         <img class="img-xs rounded-circle"
                                             src="https://cdn-icons-png.flaticon.com/512/21/21104.png">
                                     @endif
-                                    <p class="mb-0 d-none d-sm-block navbar-profile-name">{{ auth()->user()->name }}
+                                    <p class="mb-0 d-none d-sm-block navbar-profile-name">{{ ucwords(auth()->user()->name) }}
                                     </p>
                                     <i class="mdi mdi-menu-down d-none d-sm-block"></i>
                                 </div>

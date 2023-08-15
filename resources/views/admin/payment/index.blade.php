@@ -117,11 +117,11 @@
                                         </a>
                                         @if ($kat->status == 1)
                                             <button type="button" class="btn btn-light" data-bs-toggle="modal"
-                                                data-bs-target="#{{ $kat->id }}"
+                                                data-bs-target="#ki{{ $kat->id }}"
                                                 style="margin-right: 5px; border-radius: 5px; background-color: rgb(125, 26, 19); color: white; padding: 12px 27px 12px 27px">Non
                                                 Aktif
                                             </button>
-                                            <div class="modal fade" id="{{ $kat->id }}" tabindex="-1"
+                                            <div class="modal fade" id="ki{{ $kat->id }}" tabindex="-1"
                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered">
                                                     <div class="modal-content"
